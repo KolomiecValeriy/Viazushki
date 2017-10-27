@@ -1,0 +1,3 @@
+viazushki_homepage:
+    path:     /
+    defaults: { _controller: ViazushkiBundle:Default:index }

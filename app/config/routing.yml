@@ -1,0 +1,3 @@
+viazushki:
+    resource: "@ViazushkiBundle/Resources/config/routing.yml"
+    prefix:   /
