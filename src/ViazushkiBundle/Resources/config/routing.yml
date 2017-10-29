@@ -1,3 +1,25 @@
 viazushki_homepage:
     path:     /
     defaults: { _controller: ViazushkiBundle:Default:index }
+
+viazushki_add_new_toy:
+    path:       /addToy
+    defaults:   { _controller: ViazushkiBundle:Toy:addToy }
+
+viazushki_show_toy:
+    path:       /showToy/{toyId}
+    defaults:   { _controller: ViazushkiBundle:Toy:showToy, toyId: '1' }
+    requirements:
+        toyId:  '\d+'
+
+viazushki_update_toy:
+    path:       /updateToy/{toyId}
+    defaults:   { _controller: ViazushkiBundle:Toy:updateToy }
+    requirements:
+        toyId:  '\d+'
+
+viazushki_delete_toy:
+    path:       /deleteToy/{toyId}
+    defaults:   { _controller: ViazushkiBundle:Toy:deleteToy }
+    requirements:
+        toyId:  '\d+'

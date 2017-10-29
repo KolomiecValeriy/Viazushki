@@ -37,7 +37,7 @@ class Toy
 
     /**
 	 * One Toy have many Images
-	 * @ORM\OneToMany(targetEntity="Image", mappedBy="toy")
+	 * @ORM\OneToMany(targetEntity="Image", mappedBy="toy", cascade={"remove"})
      */
     private $images;
 

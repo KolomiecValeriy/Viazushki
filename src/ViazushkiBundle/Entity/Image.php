@@ -37,7 +37,7 @@ class Image
 
     /**
 	 * Many Images have one Toy
-     * @ORM\ManyToOne(targetEntity="Toy", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="Toy", inversedBy="images", cascade={"persist"})
 	 * @ORM\JoinColumn(name="toy_id", referencedColumnName="id")
      */
     private $toy;
