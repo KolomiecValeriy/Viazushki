@@ -23,3 +23,27 @@ viazushki_delete_toy:
     defaults:   { _controller: ViazushkiBundle:Toy:deleteToy }
     requirements:
         toyId:  '\d+'
+
+viazushki_add_image:
+    path:       /addImage/{toyId}
+    defaults:   { _controller: ViazushkiBundle:Image:addImage }
+    requirements:
+        toyId:  '\d+'
+
+viazushki_show_image:
+    path:       /showImage/{imageId}
+    defaults:   { _controller: ViazushkiBundle:Image:showImage, imageId: '1' }
+    requirements:
+        imageId:  '\d+'
+
+viazushki_update_image:
+    path:       /updateImage/{imageId}
+    defaults:   { _controller: ViazushkiBundle:Image:updateImage }
+    requirements:
+        imageId:  '\d+'
+
+viazushki_delete_image:
+    path:       /deleteImage/{imageId}
+    defaults:   { _controller: ViazushkiBundle:Image:deleteImage }
+    requirements:
+        imageId:  '\d+'

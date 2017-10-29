@@ -63,6 +63,7 @@ class ToyController extends Controller
 	public function updateToyAction($toyId)
 	{
 		$em = $this->getDoctrine()->getManager();
+
 		$toy = $em->getRepository('ViazushkiBundle:Toy')
 			->find($toyId);
 
@@ -79,6 +80,7 @@ class ToyController extends Controller
 	public function deleteToyAction($toyId)
 	{
 		$em = $this->getDoctrine()->getManager();
+		
 		$toy = $em->getRepository('ViazushkiBundle:Toy')
 			->find($toyId);
 
