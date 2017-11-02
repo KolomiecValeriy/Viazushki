@@ -3,7 +3,6 @@
 namespace ViazushkiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use ViazushkiBundle\Entity\Toy;
 
 /**
  * Image
@@ -37,7 +36,7 @@ class Image
 
     /**
 	 * Many Images have one Toy
-     * @ORM\ManyToOne(targetEntity="Toy", inversedBy="images", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Toy", inversedBy="image", cascade={"persist"})
 	 * @ORM\JoinColumn(name="toy_id", referencedColumnName="id")
      */
     private $toy;

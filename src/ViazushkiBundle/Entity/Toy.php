@@ -5,7 +5,6 @@ namespace ViazushkiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
-use ViazushkiBundle\Entity\Image;
 
 /**
  * @ORM\Table(name="Toy")
@@ -14,6 +13,8 @@ use ViazushkiBundle\Entity\Image;
 class Toy
 {
     /**
+     * @var int
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -21,16 +22,22 @@ class Toy
     private $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
 
     /**
+	 * @var string
+	 *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="author", type="string", length=50, nullable=true)
      */
     private $author;
@@ -39,28 +46,40 @@ class Toy
 	 * One Toy have many Images
 	 * @ORM\OneToMany(targetEntity="Image", mappedBy="toy", cascade={"remove"})
      */
-    private $images;
+    private $image;
 
     /**
+	 * @var \DateTime
+	 *
 	 * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
-     * @ORM\Column(name="tag", type="integer", nullable=true)
+	 * @var \DateTime
+	 *
+	 * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="toy")
+	 * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
      */
     private $tag;
 
     /**
-     * @ORM\Column(name="category", type="integer", nullable=true)
+	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="toy")
+	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
 
 
     public function __construct()
 	{
-		$this->images = new ArrayCollection();
+		$this->image = new ArrayCollection();
 	}
 
 	/**
@@ -185,7 +204,7 @@ class Toy
      */
     public function addImage(Image $image)
     {
-        $this->images[] = $image;
+        $this->image[] = $image;
 
         return $this;
     }
@@ -195,14 +214,30 @@ class Toy
      */
     public function removeImage(Image $image)
     {
-        $this->images->removeElement($image);
+        $this->image->removeElement($image);
     }
 
     /**
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
-    public function getImages()
+    public function getImage()
     {
-        return $this->images;
+        return $this->image;
     }
+
+	/**
+	 * @return mixed
+	 */
+	public function getUpdatedAt()
+	{
+		return $this->updatedAt;
+	}
+
+	/**
+	 * @param mixed $updatedAt
+	 */
+	public function setUpdatedAt($updatedAt)
+	{
+		$this->updatedAt = $updatedAt;
+	}
 }
