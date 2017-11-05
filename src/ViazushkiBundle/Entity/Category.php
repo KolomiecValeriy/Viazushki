@@ -75,13 +75,13 @@ class Category
     }
 
     /**
-     * @param integer $toy
+     * @param Toy $toy
      *
      * @return Category
      */
-    public function setToy($toy)
+    public function setToy(Toy $toy)
     {
-        $this->toy = $toy;
+        $this->toy[] = $toy;
 
         return $this;
     }
@@ -89,7 +89,7 @@ class Category
     /**
      * @return ArrayCollection
      */
-    public function getToy()
+    public function getToys()
     {
         return $this->toy;
     }

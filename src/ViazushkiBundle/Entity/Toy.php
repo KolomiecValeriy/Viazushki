@@ -158,11 +158,11 @@ class Toy
     }
 
     /**
-     * @param integer $tag
+     * @param Tag $tag
      *
      * @return Toy
      */
-    public function setTag($tag)
+    public function setTag(Tag $tag)
     {
         $this->tag = $tag;
 
@@ -178,11 +178,11 @@ class Toy
     }
 
     /**
-     * @param integer $category
+     * @param Category $category
      *
      * @return Toy
      */
-    public function setCategory($category)
+    public function setCategory(Category $category)
     {
         $this->category = $category;
 
@@ -220,7 +220,7 @@ class Toy
     /**
      * @return ArrayCollection
      */
-    public function getImage()
+    public function getImages()
     {
         return $this->image;
     }
