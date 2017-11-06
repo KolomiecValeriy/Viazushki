@@ -3,10 +3,9 @@
 namespace ViazushkiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Image
- *
  * @ORM\Table(name="Image")
  * @ORM\Entity(repositoryClass="ViazushkiBundle\Repository\ImageRepository")
  */
@@ -45,6 +44,14 @@ class Image
      * @ORM\Column(name="main", type="boolean", nullable=true)
      */
     private $main;
+
+    /**
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
 
 
     /**
@@ -153,5 +160,13 @@ class Image
     public function getToy()
     {
         return $this->toy;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 }

@@ -2,8 +2,9 @@
 
 namespace ViazushkiBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="Tag")
@@ -36,7 +37,8 @@ class Tag
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
@@ -92,18 +94,6 @@ class Tag
     public function getToys()
     {
         return $this->toy;
-    }
-
-    /**
-     * @param \DateTime $createdAt
-     *
-     * @return Tag
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**

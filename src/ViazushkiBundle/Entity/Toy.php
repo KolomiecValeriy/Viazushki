@@ -149,13 +149,6 @@ class Toy
     {
         return $this->author;
     }
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
 
     /**
      * @param Tag $tag
@@ -225,19 +218,19 @@ class Toy
         return $this->image;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
 	/**
 	 * @return mixed
 	 */
 	public function getUpdatedAt()
 	{
 		return $this->updatedAt;
-	}
-
-	/**
-	 * @param mixed $updatedAt
-	 */
-	public function setUpdatedAt($updatedAt)
-	{
-		$this->updatedAt = $updatedAt;
 	}
 }
