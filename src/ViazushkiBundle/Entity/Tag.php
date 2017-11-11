@@ -5,6 +5,7 @@ namespace ViazushkiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ViazushkiBundle\Entity\Toy;
 
 /**
  * @ORM\Table(name="Tag")
@@ -29,8 +30,9 @@ class Tag
     private $name;
 
     /**
-	 * One Tag have many Toys
-	 * @ORM\OneToMany(targetEntity="Toy", mappedBy="tag")
+	 * Many Tag have many Toys
+	 * @ORM\ManyToMany(targetEntity="Toy", mappedBy="tag", cascade={"persist"})
+     * @ORM\JoinColumn(name="toys", onDelete="SET NULL")
      */
     private $toy;
 
@@ -42,14 +44,23 @@ class Tag
      */
     private $createdAt;
 
-
+    /**
+     * Constructor
+     */
     public function __construct()
-	{
-		$this->toy = new ArrayCollection();
-	}
+    {
+        $this->toy = new ArrayCollection();
+    }
 
-	/**
-     * @return int
+    public function __toString()
+    {
+        return (string) $this->getName();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
      */
     public function getId()
     {
@@ -57,6 +68,8 @@ class Tag
     }
 
     /**
+     * Set name
+     *
      * @param string $name
      *
      * @return Tag
@@ -69,6 +82,8 @@ class Tag
     }
 
     /**
+     * Get name
+     *
      * @return string
      */
     public function getName()
@@ -77,31 +92,61 @@ class Tag
     }
 
     /**
-     * @param Toy $toy
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
      *
      * @return Tag
      */
-    public function setToy(Toy $toy)
+    public function setCreatedAt($createdAt)
     {
-        $this->toy[] = $toy;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * @return ArrayCollection
-     */
-    public function getToys()
-    {
-        return $this->toy;
-    }
-
-    /**
+     * Get createdAt
+     *
      * @return \DateTime
      */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
-}
 
+    /**
+     * Add toy
+     *
+     * @param Toy $toy
+     *
+     * @return Tag
+     */
+    public function addToy(Toy $toy)
+    {
+        $this->toy[] = $toy;
+        $toy->addTag($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove toy
+     *
+     * @param Toy $toy
+     */
+    public function removeToy(Toy $toy)
+    {
+        $this->toy->removeElement($toy);
+    }
+
+    /**
+     * Get toy
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getToy()
+    {
+        return $this->toy;
+    }
+}

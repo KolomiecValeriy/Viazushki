@@ -5,6 +5,9 @@ namespace ViazushkiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ViazushkiBundle\Entity\Tag;
+use ViazushkiBundle\Entity\Category;
+use ViazushkiBundle\Entity\Image;
 
 /**
  * @ORM\Table(name="Toy")
@@ -65,25 +68,37 @@ class Toy
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Tag", inversedBy="toy")
-	 * @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
+     * Many Toys have many tags
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="toy", cascade={"persist"})
+	 * @ORM\JoinTable(name="ToyTags")
      */
     private $tag;
 
     /**
-	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="toy")
-	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * Many Toys have one category
+	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="toys", cascade={"persist"})
+	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $category;
-
-
+    
+    /**
+     * Constructor
+     */
     public function __construct()
-	{
-		$this->image = new ArrayCollection();
-	}
+    {
+        $this->image = new ArrayCollection();
+        $this->tag = new ArrayCollection();
+    }
 
-	/**
-     * @return int
+    public function __toString()
+    {
+        return (string) $this->getName();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
      */
     public function getId()
     {
@@ -91,6 +106,8 @@ class Toy
     }
 
     /**
+     * Set name
+     *
      * @param string $name
      *
      * @return Toy
@@ -103,6 +120,8 @@ class Toy
     }
 
     /**
+     * Get name
+     *
      * @return string
      */
     public function getName()
@@ -111,6 +130,8 @@ class Toy
     }
 
     /**
+     * Set description
+     *
      * @param string $description
      *
      * @return Toy
@@ -123,6 +144,8 @@ class Toy
     }
 
     /**
+     * Get description
+     *
      * @return string
      */
     public function getDescription()
@@ -131,6 +154,8 @@ class Toy
     }
 
     /**
+     * Set author
+     *
      * @param string $author
      *
      * @return Toy
@@ -143,6 +168,8 @@ class Toy
     }
 
     /**
+     * Get author
+     *
      * @return string
      */
     public function getAuthor()
@@ -151,46 +178,56 @@ class Toy
     }
 
     /**
-     * @param Tag $tag
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
      *
      * @return Toy
      */
-    public function setTag(Tag $tag)
+    public function setCreatedAt($createdAt)
     {
-        $this->tag = $tag;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * @return int
+     * Get createdAt
+     *
+     * @return \DateTime
      */
-    public function getTag()
+    public function getCreatedAt()
     {
-        return $this->tag;
+        return $this->createdAt;
     }
 
     /**
-     * @param Category $category
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
      *
      * @return Toy
      */
-    public function setCategory(Category $category)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->category = $category;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-	/**
-	 * @return int
-	 */
-    public function getCategory()
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
     {
-        return $this->category;
+        return $this->updatedAt;
     }
 
     /**
+     * Add image
+     *
      * @param Image $image
      *
      * @return Toy
@@ -203,7 +240,9 @@ class Toy
     }
 
     /**
-     * @param Image $image
+     * Remove image
+     *
+     * @param \ViazushkiBundle\Entity\Image $image
      */
     public function removeImage(Image $image)
     {
@@ -211,26 +250,71 @@ class Toy
     }
 
     /**
-     * @return ArrayCollection
+     * Get image
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getImages()
+    public function getImage()
     {
         return $this->image;
     }
 
     /**
-     * @return \DateTime
+     * Add tag
+     *
+     * @param Tag $tag
+     *
+     * @return Toy
      */
-    public function getCreatedAt()
+    public function addTag(Tag $tag)
     {
-        return $this->createdAt;
+        $this->tag[] = $tag;
+        $tag->addToy($this);
+
+        return $this;
     }
 
-	/**
-	 * @return mixed
-	 */
-	public function getUpdatedAt()
-	{
-		return $this->updatedAt;
-	}
+    /**
+     * Remove tag
+     *
+     * @param Tag $tag
+     */
+    public function removeTag(Tag $tag)
+    {
+        $this->tag->removeElement($tag);
+    }
+
+    /**
+     * Get tag
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTag()
+    {
+        return $this->tag;
+    }
+
+    /**
+     * Set category
+     *
+     * @param Category $category
+     *
+     * @return Toy
+     */
+    public function setCategory(Category $category)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }

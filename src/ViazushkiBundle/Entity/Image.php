@@ -4,6 +4,7 @@ namespace ViazushkiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use ViazushkiBundle\Entity\Toy;
 
 /**
  * @ORM\Table(name="Image")
@@ -36,7 +37,7 @@ class Image
     /**
 	 * Many Images have one Toy
      * @ORM\ManyToOne(targetEntity="Toy", inversedBy="image", cascade={"persist"})
-	 * @ORM\JoinColumn(name="toy_id", referencedColumnName="id")
+	 * @ORM\JoinColumn(name="toy_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $toy;
 
@@ -54,8 +55,11 @@ class Image
     private $createdAt;
 
 
+
     /**
-     * @return int
+     * Get id
+     *
+     * @return integer
      */
     public function getId()
     {
@@ -63,6 +67,8 @@ class Image
     }
 
     /**
+     * Set name
+     *
      * @param string $name
      *
      * @return Image
@@ -75,6 +81,8 @@ class Image
     }
 
     /**
+     * Get name
+     *
      * @return string
      */
     public function getName()
@@ -83,6 +91,8 @@ class Image
     }
 
     /**
+     * Set src
+     *
      * @param string $src
      *
      * @return Image
@@ -95,6 +105,8 @@ class Image
     }
 
     /**
+     * Get src
+     *
      * @return string
      */
     public function getSrc()
@@ -103,6 +115,8 @@ class Image
     }
 
     /**
+     * Set type
+     *
      * @param string $type
      *
      * @return Image
@@ -115,6 +129,8 @@ class Image
     }
 
     /**
+     * Get type
+     *
      * @return string
      */
     public function getType()
@@ -123,6 +139,8 @@ class Image
     }
 
     /**
+     * Set main
+     *
      * @param boolean $main
      *
      * @return Image
@@ -135,7 +153,9 @@ class Image
     }
 
     /**
-     * @return bool
+     * Get main
+     *
+     * @return boolean
      */
     public function getMain()
     {
@@ -143,6 +163,32 @@ class Image
     }
 
     /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Image
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set toy
+     *
      * @param Toy $toy
      *
      * @return Image
@@ -155,18 +201,12 @@ class Image
     }
 
     /**
+     * Get toy
+     *
      * @return Toy
      */
     public function getToy()
     {
         return $this->toy;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
     }
 }

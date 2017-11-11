@@ -22,11 +22,25 @@ services:
             - [ setAnnotationReader, [ '@annotation_reader' ] ]
 
     admin.category:
-            class: ViazushkiBundle\Admin\CategoryAdmin
-            arguments: [~, ViazushkiBundle\Entity\Category, ~]
-            tags:
-                - { name: sonata.admin, manager_type: orm, label: Category }
-            public: true
+        class: ViazushkiBundle\Admin\CategoryAdmin
+        arguments: [~, ViazushkiBundle\Entity\Category, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Categories }
+        public: true
+
+    admin.tag:
+        class: ViazushkiBundle\Admin\TagAdmin
+        arguments: [~, ViazushkiBundle\Entity\Tag, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Tags }
+        public: true
+
+    admin.toy:
+        class: ViazushkiBundle\Admin\ToyAdmin
+        arguments: [~, ViazushkiBundle\Entity\Toy, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Toys }
+        public: true
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
