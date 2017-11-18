@@ -1,0 +1,32 @@
+a {
+    text-decoration: none !important;
+}
+/* Logo */
+.logo {
+    position: absolute;
+}
+.logo a {
+    left: 15px;
+    top: 40px;
+    display: inline;
+    width: auto;
+    position: relative;
+    z-index: 20;
+    font-family: 'Rouge Script', cursive;
+    font-size: 80px;
+    color: #ffffff;
+    text-decoration: none;
+}
+p.site-slogan {
+    color: #ffffff;
+    font-size: 11px;
+    letter-spacing: 5px;
+    margin: 0;
+    padding: 0;
+    right: 15px;
+    text-align: right;
+    top: 68px;
+    position: absolute;
+    z-index: 20;
+    white-space: nowrap;
+}

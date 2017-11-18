@@ -15,5 +15,8 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+/web/assets/*
+!/web/assets/css/
+!/web/assets/js/
 *~
 bower_components/

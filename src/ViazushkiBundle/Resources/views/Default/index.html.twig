@@ -1,1 +1,182 @@
-Hello World!
+{% extends '@Viazushki/layers.html.twig' %}
+
+
+{% block topMenu %}
+    <ul id="hornavmenu" class="nav navbar-nav">
+        <li>
+            <a href="{{ url('viazushki_homepage') }}">Домашняя</a>
+        </li>
+        <li>
+            <a href="contact.html">Контакты</a>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <!-- Main Column -->
+    <div class="col-md-9">
+        <div class="blog-post">
+            <div class="blog-item-header">
+                <div class="blog-post-date pull-left">
+                    <span class="day">14</span>
+                    <span class="month">Dec</span>
+                </div>
+                <h2>
+                    <a href="#">A Sample Blog Title</a>
+                </h2>
+                <div class="blog-post-details">
+                    <div class="blog-post-details-item blog-post-details-item-left user-icon">
+                        <i class="fa fa-user"></i>
+                        <a href="#">Admin</a>
+                    </div>
+                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
+                        <i class="fa fa-tag"></i>
+                        <a href="#">HTML</a>,
+                        <a href="#">CSS</a>,
+                        <a href="#">Grunt</a>
+                    </div>
+                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
+                        <a href="">
+                            <i class="fa fa-comments"></i>
+                            3 Comments
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="blog">
+                <div class="clearfix"></div>
+                <div class="blog-post-body row margin-top-15">
+                    <div class="col-md-5">
+                        <img class="pull-left" src="{{ asset('img/blog/image1.jpg') }}" alt="thumb1">
+                    </div>
+                    <div class="col-md-7">
+                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+                            et justo duo dolores et ea rebum.</p>
+                    </div>
+                </div>
+                <div class="blog-item-footer">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <hr>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="blog-post-details-item blog-post-details-item-right pull-right">
+                                <a href="#" class="btn btn-primary">
+                                    Read More
+                                    <i class="icon-chevron-right readmore-icon"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="pagination">
+            <li>
+                <a href="#">&laquo;</a>
+            </li>
+            <li class="active">
+                <a href="#">1</a>
+            </li>
+            <li class="disabled">
+                <a href="#">2</a>
+            </li>
+            <li>
+                <a href="#">3</a>
+            </li>
+            <li>
+                <a href="#">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+    <!-- End Main Column -->
+    <!-- Side Column -->
+    <div class="col-md-3 margin-top-30">
+        <div class="blog-tags">
+            <h3>Tags</h3>
+            <ul class="blog-tags">
+                <li>
+                    <a href="#" class="blog-tag">HTML</a>
+                </li>
+            </ul>
+        </div>
+        <div class="recent-posts">
+            <h3>Recent Posts</h3>
+            <ul class="posts-list margin-top-10">
+                <li>
+                    <div class="recent-post">
+                        <a href="">
+                            <img class="pull-left" src="{{ asset('img/blog/thumbs/thumb1.jpg') }}" alt="thumb1">
+                        </a>
+                        <a href="#" class="posts-list-title">Sidebar post example</a>
+                        <br>
+                        <span class="recent-post-date">July 30, 2013</span>
+                    </div>
+                    <div class="clearfix"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- End Side Column -->
+{% endblock %}
+
+{% block footer %}
+    <div class="col-md-6">
+        <h3 class="margin-bottom-10">Disclaimer</h3>
+        <p>All stock images on this template demo are for presentation purposes only, intended to represent a live site
+            and are not included with this template.</p>
+        <p>Most of the images used here are available from
+            <a class="nobold" href="#" target="_blank">shutterstock.com</a>. Links are provided if you wish to purchase
+            them from their copyright owners.</p>
+        <div class="clearfix"></div>
+    </div>
+    <div class="col-md-3">
+        <h3 class="margin-bottom-10">Contact Details</h3>
+        <p>Quay View,
+            <br/>Mullaghmore,
+            <br/>Co. Sligo,
+            <br/>Ireland
+        </p>
+        <p>Email:
+            <a href="mailto:info@website.com">info@website.com</a>
+            <br/>Website:
+            <a href="http://www.website.com">www.website.com</a>
+        </p>
+    </div>
+    <div class="col-md-3">
+        <h3 class="margin-bottom-10">Sample Menu</h3>
+        <ul class="menu">
+            <li>
+                <a class="fa-tasks" href="#">Placerat facer possim</a>
+            </li>
+            <li>
+                <a class="fa-users" href="#">Quam nunc putamus</a>
+            </li>
+            <li>
+                <a class="fa-signal" href="#">Velit esse molestie</a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+{% endblock %}
+
+{% block footerMenu %}
+    <ul class="list-unstyled list-inline">
+        <li>
+            <a href="#" target="_blank">Sample Link</a>
+        </li>
+        <li>
+            <a href="#" target="_blank">Sample Link</a>
+        </li>
+        <li>
+            <a href="#" target="_blank">Sample Link</a>
+        </li>
+        <li>
+            <a class="fa-shopping-cart" href="#" target="_blank">Sample Link</a>
+        </li>
+    </ul>
+    <div class="clearfix"></div>
+{% endblock %}
