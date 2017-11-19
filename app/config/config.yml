@@ -30,9 +30,7 @@ framework:
         save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
     fragments: ~
     http_method_override: true
-    assets:
-        version: 1
-        base_path: '/assets'
+    assets: ~
     php_errors:
         log: true
 
@@ -149,7 +147,7 @@ vich_uploader:
     mappings:
         toy_image:
             uri_prefix:         /images
-            upload_destination: '%kernel.root_dir%/../web/bundles/viazushki/images'
+            upload_destination: '%kernel.root_dir%/../web/assets/images'
             inject_on_load:     false
             delete_on_update:   true
             delete_on_remove:   true
