@@ -2,6 +2,10 @@ viazushki_homepage:
     path:     /
     defaults: { _controller: ViazushkiBundle:Default:index }
 
+viazushki_contacts:
+    path:     /contacts
+    defaults: { _controller: ViazushkiBundle:Contact:contact }
+
 viazushki_add_new_toy:
     path:       /addToy
     defaults:   { _controller: ViazushkiBundle:Toy:addToy }
