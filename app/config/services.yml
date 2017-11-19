@@ -42,6 +42,13 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Toys }
         public: true
 
+    admin.image:
+        class: ViazushkiBundle\Admin\ImageAdmin
+        arguments: [~, ViazushkiBundle\Entity\Image, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Images }
+        public: true
+
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
 
