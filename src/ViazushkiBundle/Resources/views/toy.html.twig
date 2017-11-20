@@ -1,9 +1,0 @@
-<h1>{{ toy.name }}</h1>
-<p>{{ toy.description }}</p>
-<p>{{ toy.author }}</p>
-<p>{{ toy.createdAt|date }}</p>
-<ul>
-    {% for image in images %}
-        <li>{{ image.name }}.{{ image.type }}</li>
-    {% endfor %}
-</ul>
