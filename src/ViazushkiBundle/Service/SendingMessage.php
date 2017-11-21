@@ -43,6 +43,7 @@ class SendingMessage
     public function send()
     {
         $message = new \Swift_Message();
+        $message->setContentType('text/html');
         $message->setSubject($this->getViazuskiContactEmailSubject());
         $message->setFrom($this->getviazushkiEmail());
         $message->setTo($this->getEmail());
