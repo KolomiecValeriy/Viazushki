@@ -8,7 +8,8 @@
     <!-- Main Column -->
     <div class="col-md-9">
         <div class="headline">
-            <h2>Свяжитесь с нами</h2>
+            {#<h2>Свяжитесь с нами</h2>#}
+            {{ 'Свяжитесь с нами'|header(2)|raw }}
         </div>
         {{ form_start(contactForm) }}
         {{ form_label(contactForm.name, 'Ваше имя') }}

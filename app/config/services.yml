@@ -15,13 +15,6 @@ services:
         # if you need to do this, you can override this setting on individual services
         public: false
 
-    viazushki.sending_message:
-        class: ViazushkiBundle\Service\SendingMessage
-        public: true
-        arguments:
-            $viazushkiEmail: '%viazushki_email%'
-            $viazuskiContactEmailSubject: '%viazuski_contact_email_subject%'
-
     gedmo.listener.timestampable:
         class: Gedmo\Timestampable\TimestampableListener
         tags:
@@ -55,4 +48,15 @@ services:
         arguments: [~, ViazushkiBundle\Entity\Image, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Images }
+        public: true
+
+    viazushki.sending_message:
+        class: ViazushkiBundle\Service\SendingMessage
+        public: true
+        arguments:
+            $viazushkiEmail: '%viazushki_email%'
+            $viazuskiContactEmailSubject: '%viazuski_contact_email_subject%'
+
+    viazushki.viazushki_extension:
+        class: ViazushkiBundle\Twig\ViazushkiExtenson
         public: true
