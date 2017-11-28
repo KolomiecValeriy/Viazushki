@@ -47,9 +47,17 @@ class Toy
 
     /**
 	 * One Toy have many Images
-	 *
+     *
+     * @ORM\OneToMany(targetEntity="Image", mappedBy="toy")
      */
-    private $image;
+    private $images;
+
+    /**
+     * One Toy have one main Image
+     *
+     * @ORM\OneToOne(targetEntity="ViazushkiBundle\Entity\Image")
+     */
+    private $mainImage;
 
     /**
 	 * @var \DateTime
@@ -69,13 +77,15 @@ class Toy
 
     /**
      * Many Toys have many tags
-     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="toy", cascade={"persist"})
+     *
+     * @ORM\ManyToMany(targetEntity="Tag", inversedBy="toys", cascade={"persist"})
 	 * @ORM\JoinTable(name="ToyTags")
      */
-    private $tag;
+    private $tags;
 
     /**
      * Many Toys have one category
+     *
 	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="toys", cascade={"persist"})
 	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      */
@@ -86,8 +96,8 @@ class Toy
      */
     public function __construct()
     {
-        $this->image = new ArrayCollection();
-        $this->tag = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     public function __toString()
@@ -226,62 +236,28 @@ class Toy
     }
 
     /**
-     * Add image
-     *
-     * @param Image $image
-     *
-     * @return Toy
-     */
-    public function addImage(Image $image)
-    {
-        $this->image[] = $image;
-
-        return $this;
-    }
-
-    /**
-     * Remove image
-     *
-     * @param \ViazushkiBundle\Entity\Image $image
-     */
-    public function removeImage(Image $image)
-    {
-        $this->image->removeElement($image);
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
      * Add tag
      *
      * @param Tag $tag
      *
      * @return Toy
      */
-    public function addTag(Tag $tag)
+    public function addTags(Tag $tag)
     {
-        $this->tag[] = $tag;
+        $this->tags[] = $tag;
         $tag->addToy($this);
 
         return $this;
     }
 
     /**
-     * Remove tag
+     * Remove tags
      *
      * @param Tag $tag
      */
-    public function removeTag(Tag $tag)
+    public function removeTags(Tag $tag)
     {
-        $this->tag->removeElement($tag);
+        $this->tags->removeElement($tag);
     }
 
     /**
@@ -289,9 +265,9 @@ class Toy
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTag()
+    public function getTags()
     {
-        return $this->tag;
+        return $this->tags;
     }
 
     /**
@@ -316,5 +292,37 @@ class Toy
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param ArrayCollection $images
+     */
+    public function setImages($images)
+    {
+        $this->images = $images;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMainImage()
+    {
+        return $this->mainImage;
+    }
+
+    /**
+     * @param mixed $mainImage
+     */
+    public function setMainImage($mainImage)
+    {
+        $this->mainImage = $mainImage;
     }
 }

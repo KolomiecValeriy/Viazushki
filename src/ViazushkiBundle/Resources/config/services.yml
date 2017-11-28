@@ -2,3 +2,14 @@ services:
 #    viazushki.example:
 #        class: ViazushkiBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    viazushki.sending_message:
+        class: ViazushkiBundle\Service\SendingMessage
+        arguments:
+            $viazushkiEmail: '%viazushki_email%'
+            $viazuskiContactEmailSubject: '%viazuski_contact_email_subject%'
+            $mailer: '@mailer'
+
+    viazushki.viazushki_extension:
+        class: ViazushkiBundle\Twig\ViazushkiExtenson
+        tags: [twig.extension]

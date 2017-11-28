@@ -31,10 +31,10 @@ class Tag
 
     /**
 	 * Many Tag have many Toys
-	 * @ORM\ManyToMany(targetEntity="Toy", mappedBy="tag", cascade={"persist"})
+	 * @ORM\ManyToMany(targetEntity="Toy", mappedBy="tags", cascade={"persist"})
      * @ORM\JoinColumn(name="toys", onDelete="SET NULL")
      */
-    private $toy;
+    private $toys;
 
     /**
      * @var \DateTime
@@ -49,7 +49,7 @@ class Tag
      */
     public function __construct()
     {
-        $this->toy = new ArrayCollection();
+        $this->toys = new ArrayCollection();
     }
 
     public function __toString()
@@ -122,10 +122,10 @@ class Tag
      *
      * @return Tag
      */
-    public function addToy(Toy $toy)
+    public function addToys(Toy $toy)
     {
-        $this->toy[] = $toy;
-        $toy->addTag($this);
+        $this->toys[] = $toy;
+        $toy->addTags($this);
 
         return $this;
     }
@@ -135,9 +135,9 @@ class Tag
      *
      * @param Toy $toy
      */
-    public function removeToy(Toy $toy)
+    public function removeToys(Toy $toy)
     {
-        $this->toy->removeElement($toy);
+        $this->toys->removeElement($toy);
     }
 
     /**
@@ -145,8 +145,8 @@ class Tag
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getToy()
+    public function getToys()
     {
-        return $this->toy;
+        return $this->toys;
     }
 }

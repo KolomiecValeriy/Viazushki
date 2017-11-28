@@ -17,6 +17,11 @@ class ToyAdmin extends AbstractAdmin
                 ->add('name', 'text')
                 ->add('description', 'textarea')
                 ->add('author', 'text')
+                ->add('mainImage', 'sonata_type_model', [
+                    'class' => 'ViazushkiBundle\Entity\Image',
+                    'required' => false,
+                    'expanded' => true,
+                ])
             ->end()
             ->with('Settings', ['class' => 'col-md-4'])
                 ->add('category', 'sonata_type_model',
@@ -25,7 +30,7 @@ class ToyAdmin extends AbstractAdmin
                         'required' => false,
                     ]
                 )
-                ->add('tag', 'sonata_type_model',
+                ->add('tags', 'sonata_type_model',
                     [
                         'required' => false,
                         'multiple' => true,
@@ -48,7 +53,9 @@ class ToyAdmin extends AbstractAdmin
             ->addIdentifier('name')
             ->add('description')
             ->add('author')
-            ->add('tag')
-            ->add('category');
+            ->add('tags')
+            ->add('category')
+            ->add('mainImage')
+        ;
     }
 }

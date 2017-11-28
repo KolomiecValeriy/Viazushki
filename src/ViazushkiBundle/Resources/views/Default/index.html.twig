@@ -7,63 +7,68 @@
 {% block content %}
     <!-- Main Column -->
     <div class="col-md-9">
-        <div class="blog-post">
-            <div class="blog-item-header">
-                <div class="blog-post-date pull-left">
-                    <span class="day">14</span>
-                    <span class="month">Dec</span>
-                </div>
-                <h2>
-                    <a href="#">A Sample Blog Title</a>
-                </h2>
-                <div class="blog-post-details">
-                    <div class="blog-post-details-item blog-post-details-item-left user-icon">
-                        <i class="fa fa-user"></i>
-                        <a href="#">Admin</a>
+        {% for toy in toys %}
+            <div class="blog-post">
+                <div class="blog-item-header">
+                    <div class="blog-post-date pull-left">
+                        <span class="day">{{ toy.createdAt|date('d') }}</span>
+                        <span class="month">{{ toy.createdAt|date('M') }}</span>
                     </div>
-                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
-                        <i class="fa fa-tag"></i>
-                        <a href="#">HTML</a>,
-                        <a href="#">CSS</a>,
-                        <a href="#">Grunt</a>
-                    </div>
-                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
-                        <a href="">
-                            <i class="fa fa-comments"></i>
-                            3 Comments
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="blog">
-                <div class="clearfix"></div>
-                <div class="blog-post-body row margin-top-15">
-                    <div class="col-md-5">
-                        <img class="pull-left" src="{{ asset('assets/img/blog/image1.jpg') }}" alt="thumb1">
-                    </div>
-                    <div class="col-md-7">
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                            invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-                            et justo duo dolores et ea rebum.</p>
-                    </div>
-                </div>
-                <div class="blog-item-footer">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <hr>
+                    <h2>
+                        <a href="#">{{ toy.name }}</a>
+                    </h2>
+                    <div class="blog-post-details">
+                        <div class="blog-post-details-item blog-post-details-item-left user-icon">
+                            <i class="fa fa-user"></i>
+                            <a href="#">{{ toy.author }}</a>
                         </div>
-                        <div class="col-md-2">
-                            <div class="blog-post-details-item blog-post-details-item-right pull-right">
-                                <a href="#" class="btn btn-primary">
-                                    Read More
-                                    <i class="icon-chevron-right readmore-icon"></i>
-                                </a>
+                        <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
+                            <i class="fa fa-tags"></i>
+                            {% for tag in toy.tags %}
+                                <a href="#">{{ tag.name }}</a>{% if not loop.last %},{% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
+                            <a href="">
+                                <i class="fa fa-comments"></i>
+                                3 Comments
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog">
+                    <div class="clearfix"></div>
+                    <div class="blog-post-body row margin-top-15">
+                        <div class="col-md-5">
+                            <img class="pull-left" src="
+                                {% if toy.mainImage %}
+                                    {{ asset('assets/images/') }}{{ toy.mainImage }}
+                                {% else %}
+                                    {{ asset('assets/images/no-image.png') }}
+                                {% endif %}" alt="thumb1">
+                        </div>
+                        <div class="col-md-7">
+                            <p>{{ toy.description }}</p>
+                        </div>
+                    </div>
+                    <div class="blog-item-footer">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <hr>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="blog-post-details-item blog-post-details-item-right pull-right">
+                                    <a href="#" class="btn btn-primary">
+                                        Read More
+                                        <i class="icon-chevron-right readmore-icon"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endfor %}
 
         <ul class="pagination">
             <li>
@@ -87,27 +92,46 @@
     <!-- Side Column -->
     <div class="col-md-3 margin-top-30">
         <div class="blog-tags">
-            <h3>Tags</h3>
+            <h3>Категории</h3>
             <ul class="blog-tags">
-                <li>
-                    <a href="#" class="blog-tag">HTML</a>
-                </li>
+                {% for category in categories %}
+                    <li>
+                        <a href="{{ path('viazushki_toy_by_category') }}/{{ category.id }}" class="blog-tag">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="blog-tags">
+            <h3>Теги</h3>
+            <ul class="blog-tags">
+                {% for tag in tags %}
+                    <li>
+                        <a href="{{ path('viazushki_toy_by_tag') }}/{{ tag.id }}" class="blog-tag">{{ tag.name }}</a>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
         <div class="recent-posts">
-            <h3>Recent Posts</h3>
+            <h4>Последние добавления</h4>
             <ul class="posts-list margin-top-10">
-                <li>
-                    <div class="recent-post">
-                        <a href="">
-                            <img class="pull-left" src="{{ asset('assets/img/blog/thumbs/thumb1.jpg') }}" alt="thumb1">
-                        </a>
-                        <a href="#" class="posts-list-title">Sidebar post example</a>
-                        <br>
-                        <span class="recent-post-date">July 30, 2013</span>
-                    </div>
-                    <div class="clearfix"></div>
-                </li>
+                {% for lastToy in lastToys %}
+                    <li>
+                        <div class="recent-post">
+                            <a href="">
+                                <img class="pull-left" src="
+                                    {% if lastToy.mainImage %}
+                                        {{ asset('assets/images/') }}{{ lastToy.mainImage }}
+                                    {% else %}
+                                        {{ asset('assets/images/no-image.png') }}
+                                    {% endif %}" alt="thumb1">
+                            </a>
+                            <a href="#" class="posts-list-title">Sidebar post example</a>
+                            <br>
+                            <span class="recent-post-date">July 30, 2013</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

@@ -20,7 +20,7 @@ class TagAdmin extends AbstractAdmin
     {
         $filter
             ->add('name')
-            ->add('toy')
+            ->add('toys')
         ;
     }
 
@@ -28,7 +28,7 @@ class TagAdmin extends AbstractAdmin
     {
         $list
             ->addIdentifier('name')
-            ->addIdentifier('toy')
+            ->addIdentifier('toys')
         ;
     }
 }

@@ -14,6 +14,9 @@ class ImageAdmin extends AbstractAdmin
     {
         $formMapper
             ->add('imageName', 'text')
+            ->add('toy', 'sonata_type_model', [
+                'class' => 'ViazushkiBundle\Entity\Toy'
+            ])
             ->add('imageFile', 'file',
                 [
                     'required' => false,
@@ -28,7 +31,9 @@ class ImageAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->add('imageName');
+            ->addIdentifier('imageName')
+            ->add('toy')
+        ;
     }
 
 }

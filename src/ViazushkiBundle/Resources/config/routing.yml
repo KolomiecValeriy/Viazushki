@@ -6,48 +6,14 @@ viazushki_contacts:
     path:     /contacts
     defaults: { _controller: ViazushkiBundle:Contact:contact }
 
-viazushki_add_new_toy:
-    path:       /addToy
-    defaults:   { _controller: ViazushkiBundle:Toy:addToy }
-
-viazushki_show_toy:
-    path:       /showToy/{toyId}
-    defaults:   { _controller: ViazushkiBundle:Toy:showToy, toyId: '1' }
+viazushki_toy_by_tag:
+    path:     /tag/{tagId}
+    defaults: { _controller: ViazushkiBundle:Default:index, tagId: ''}
     requirements:
-        toyId:  '\d+'
+        tagId:  '\d+'
 
-viazushki_update_toy:
-    path:       /updateToy/{toyId}
-    defaults:   { _controller: ViazushkiBundle:Toy:updateToy }
+viazushki_toy_by_category:
+    path:     /category/{categoryId}
+    defaults: { _controller: ViazushkiBundle:Default:index, categoryId: ''}
     requirements:
-        toyId:  '\d+'
-
-viazushki_delete_toy:
-    path:       /deleteToy/{toyId}
-    defaults:   { _controller: ViazushkiBundle:Toy:deleteToy }
-    requirements:
-        toyId:  '\d+'
-
-viazushki_add_image:
-    path:       /addImage/{toyId}
-    defaults:   { _controller: ViazushkiBundle:Image:addImage }
-    requirements:
-        toyId:  '\d+'
-
-viazushki_show_image:
-    path:       /showImage/{imageId}
-    defaults:   { _controller: ViazushkiBundle:Image:showImage, imageId: '1' }
-    requirements:
-        imageId:  '\d+'
-
-viazushki_update_image:
-    path:       /updateImage/{imageId}
-    defaults:   { _controller: ViazushkiBundle:Image:updateImage }
-    requirements:
-        imageId:  '\d+'
-
-viazushki_delete_image:
-    path:       /deleteImage/{imageId}
-    defaults:   { _controller: ViazushkiBundle:Image:deleteImage }
-    requirements:
-        imageId:  '\d+'
+        tagId:  '\d+'

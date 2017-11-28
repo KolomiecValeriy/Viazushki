@@ -8,9 +8,9 @@ services:
     # default configuration for services in *this* file
     _defaults:
         # automatically injects dependencies in your services
-        autowire: true
+#        autowire: true
         # automatically registers your services as commands, event subscribers, etc.
-        autoconfigure: true
+#        autoconfigure: true
         # this means you cannot fetch services directly from the container via $container->get()
         # if you need to do this, you can override this setting on individual services
         public: false
@@ -48,15 +48,4 @@ services:
         arguments: [~, ViazushkiBundle\Entity\Image, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Images }
-        public: true
-
-    viazushki.sending_message:
-        class: ViazushkiBundle\Service\SendingMessage
-        public: true
-        arguments:
-            $viazushkiEmail: '%viazushki_email%'
-            $viazuskiContactEmailSubject: '%viazuski_contact_email_subject%'
-
-    viazushki.viazushki_extension:
-        class: ViazushkiBundle\Twig\ViazushkiExtenson
         public: true

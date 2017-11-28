@@ -43,11 +43,25 @@ class Image
     private $imageSize;
 
     /**
+     * Many Images have one Toy
+     *
+     * @ORM\ManyToOne(targetEntity="Toy", inversedBy="images")
+     * @ORM\JoinColumn(name="toy_id", referencedColumnName="id")
+     */
+    private $toy;
+
+    /**
      * @ORM\Column(type="datetime")
      *
      * @var \DateTime
      */
     private $updatedAt;
+
+
+    public function __toString()
+    {
+        return (string) $this->getImageName();
+    }
 
     /**
      * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
@@ -124,10 +138,19 @@ class Image
     }
 
     /**
-     * @param int $id
+     * @return mixed
      */
-    public function setId($id)
+    public function getToy()
     {
-        $this->id = $id;
+        return $this->toy;
     }
+
+    /**
+     * @param mixed $toy
+     */
+    public function setToy($toy)
+    {
+        $this->toy = $toy;
+    }
+
 }
