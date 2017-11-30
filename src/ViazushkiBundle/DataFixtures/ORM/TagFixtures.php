@@ -17,5 +17,7 @@ class TagFixtures extends Fixture
 
         $manager->persist($tag);
         $manager->flush();
+
+        $this->addReference('tag', $tag);
     }
 }

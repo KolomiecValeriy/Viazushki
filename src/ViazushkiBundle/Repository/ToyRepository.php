@@ -8,7 +8,7 @@ use ViazushkiBundle\Entity\Tag;
 
 class ToyRepository extends EntityRepository
 {
-    public function getLastAdded($limit)
+    public function findLastAdded($limit)
     {
         $query = $this->createQueryBuilder('t')
             ->orderBy('t.createdAt', 'DESC')
@@ -19,7 +19,7 @@ class ToyRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function getByTag(Tag $tag)
+    public function findByTag(Tag $tag)
     {
         $query = $this->createQueryBuilder('t')
             ->leftJoin('t.tags', 'tg')
@@ -31,7 +31,7 @@ class ToyRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function getByCategory(Category $category)
+    public function findByCategory(Category $category)
     {
         $query = $this->createQueryBuilder('t')
             ->leftJoin('t.category', 'tc')

@@ -12,17 +12,22 @@ class ToyFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $categoryRepository = $manager->getRepository('ViazushkiBundle:Category');
-        $category = $categoryRepository->find(1);
-
-
         $toy = new Toy();
         $toy->setName('Toy 1');
         $toy->setAuthor('Author');
         $toy->setDescription('Some description');
-        $toy->setCategory($category);
+        $toy->setCategory($this->getReference('category'));
+        $toy->addTags($this->getReference('tag'));
 
         $manager->persist($toy);
         $manager->flush();
+    }
+
+    public function getDependencies()
+    {
+        return [
+            CategoryFixtures::class,
+            TagFixtures::class,
+        ];
     }
 }

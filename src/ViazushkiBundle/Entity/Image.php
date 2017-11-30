@@ -46,7 +46,7 @@ class Image
      * Many Images have one Toy
      *
      * @ORM\ManyToOne(targetEntity="Toy", inversedBy="images")
-     * @ORM\JoinColumn(name="toy_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="toy_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $toy;
 

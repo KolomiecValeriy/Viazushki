@@ -18,12 +18,12 @@ class DefaultController extends Controller
         if ($categoryId) $category = $categoryRepository->find($categoryId);
 
         $toys = $toyRepository->findAll();
-        if ($tagId) $toys = $toyRepository->getByTag($tag);
-        if ($categoryId) $toys = $toyRepository->getByCategory($category);
+        if ($tagId) $toys = $toyRepository->findByTag($tag);
+        if ($categoryId) $toys = $toyRepository->findByCategory($category);
 
 		return $this->render('@Viazushki/Default/index.html.twig', [
 		    'toys' => $toys,
-		    'lastToys' => $toyRepository->getLastAdded(2),
+		    'lastToys' => $toyRepository->findLastAdded(2),
 		    'categories' => $categoryRepository->findAll(),
 		    'tags' => $tagRepository->findAll(),
         ]);

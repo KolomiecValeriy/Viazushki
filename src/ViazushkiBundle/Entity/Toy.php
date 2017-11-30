@@ -245,7 +245,7 @@ class Toy
     public function addTags(Tag $tag)
     {
         $this->tags[] = $tag;
-        $tag->addToy($this);
+        $tag->addToys($this);
 
         return $this;
     }

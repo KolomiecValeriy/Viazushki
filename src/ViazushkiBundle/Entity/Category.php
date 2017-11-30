@@ -2,6 +2,7 @@
 
 namespace ViazushkiBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -57,8 +58,6 @@ class Category
     }
 
     /**
-     * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -67,8 +66,6 @@ class Category
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Category
@@ -81,8 +78,6 @@ class Category
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -91,8 +86,6 @@ class Category
     }
 
     /**
-     * Set createdAt
-     *
      * @param \DateTime $createdAt
      *
      * @return Category
@@ -105,8 +98,6 @@ class Category
     }
 
     /**
-     * Get createdAt
-     *
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -115,8 +106,6 @@ class Category
     }
 
     /**
-     * Add toy
-     *
      * @param Toy $toy
      *
      * @return Category
@@ -129,19 +118,19 @@ class Category
     }
 
     /**
-     * Remove toy
-     *
      * @param Toy $toy
+     *
+     * @return $this
      */
     public function removeToy(Toy $toy)
     {
         $this->toys->removeElement($toy);
+
+        return $this;
     }
 
     /**
-     * Get toy
-     *
-     * @return Collection
+     * @return Collection|Toy[]
      */
     public function getToys()
     {
