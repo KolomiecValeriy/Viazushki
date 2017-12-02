@@ -51,7 +51,6 @@ class ToyAdmin extends AbstractAdmin
     {
         $list
             ->addIdentifier('name')
-            ->add('description')
             ->add('author')
             ->add('tags')
             ->add('category')

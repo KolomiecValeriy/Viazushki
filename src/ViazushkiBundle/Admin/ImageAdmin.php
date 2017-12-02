@@ -13,7 +13,6 @@ class ImageAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('imageName', 'text')
             ->add('toy', 'sonata_type_model', [
                 'class' => 'ViazushkiBundle\Entity\Toy'
             ])

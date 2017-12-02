@@ -12,12 +12,14 @@ class TagFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $tag = new Tag();
-        $tag->setName('Тег 1');
+        for ($i = 1; $i <= 10; $i++) {
+            $tag = new Tag();
+            $tag->setName('Тег '.$i);
 
-        $manager->persist($tag);
-        $manager->flush();
+            $manager->persist($tag);
+            $manager->flush();
 
-        $this->addReference('tag', $tag);
+            $this->addReference('tag'.$i, $tag);
+        }
     }
 }
