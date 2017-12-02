@@ -2,15 +2,16 @@
 
 namespace ViazushkiBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use ViazushkiBundle\Entity\Toy;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="Tag")
  * @ORM\Entity(repositoryClass="ViazushkiBundle\Repository\TagRepository")
+ * @UniqueEntity("name", message="Тег с таким именем уже существует")
  */
 class Tag
 {
@@ -124,7 +125,7 @@ class Tag
     }
 
     /**
-     * @return Collection|Toy[]
+     * @return ArrayCollection|Toy[]
      */
     public function getToys()
     {

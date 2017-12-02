@@ -10,28 +10,39 @@
         <div class="headline">
             <h2>Свяжитесь с нами</h2>
         </div>
-        {{ form_start(contactForm) }}
-        {{ form_label(contactForm.name, 'Ваше имя') }}
+        {{ form_start(contactForm, { 'attr': {'id': 'contact_form'} }) }}
         <div class="row margin-bottom-20">
             <div class="col-md-6 col-md-offset-0">
-                {{ form_widget(contactForm.name, { 'attr': {'class': 'form-control'}}) }}
+                <div class="form-group {% if form_errors(contactForm.name) %}has-error{% endif %}">
+                    {{ form_label(contactForm.name, 'Ваше имя') }}
+                    <span class="color-red">*</span>
+                    {{ form_widget(contactForm.name, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(contactForm.name) }}
+                </div>
             </div>
         </div>
-        {{ form_label(contactForm.email, 'Email') }}
-        <span class="color-red">*</span>
         <div class="row margin-bottom-20">
             <div class="col-md-6 col-md-offset-0">
-                {{ form_widget(contactForm.email, { 'attr': {'class': 'form-control'}}) }}
+                <div class="form-group {% if form_errors(contactForm.email) %}has-error{% endif %}">
+                    {{ form_label(contactForm.email, 'Email') }}
+                    <span class="color-red">*</span>
+                    {{ form_widget(contactForm.email, { 'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(contactForm.email) }}
+                </div>
             </div>
         </div>
-        {{ form_label(contactForm.text, 'Сообщение') }}
         <div class="row margin-bottom-20">
             <div class="col-md-8 col-md-offset-0">
-                {{ form_widget(contactForm.text, { 'attr': {'class': 'form-control', 'rows': '8'}}) }}
+                <div class="form-group {% if form_errors(contactForm.text) %}has-error{% endif %}">
+                    {{ form_label(contactForm.text, 'Сообщение') }}
+                    <span class="color-red">*</span>
+                    {{ form_widget(contactForm.text, { 'attr': {'class': 'form-control', 'rows': '8'} }) }}
+                    {{ form_errors(contactForm.text) }}
+                </div>
             </div>
         </div>
         <p>
-            {{ form_widget(contactForm.submit, { 'label': 'Отправить', 'attr': { 'class': 'btn btn-primary'}}) }}
+            {{ form_widget(contactForm.submit, { 'label': 'Отправить', 'attr': { 'class': 'btn btn-primary'} }) }}
         </p>
         {{ form_end(contactForm) }}
     </div>

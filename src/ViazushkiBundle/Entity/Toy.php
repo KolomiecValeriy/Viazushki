@@ -260,7 +260,7 @@ class Toy
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection|Image[]
      */
     public function getImages()
     {
@@ -280,7 +280,7 @@ class Toy
     }
 
     /**
-     * @return mixed
+     * @return $mainImage
      */
     public function getMainImage()
     {

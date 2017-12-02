@@ -6,10 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use ViazushkiBundle\Entity\Toy;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="Category")
  * @ORM\Entity(repositoryClass="ViazushkiBundle\Repository\CategoryRepository")
+ * @UniqueEntity("name", message="Категория с таким именем уже существует")
  */
 class Category
 {
@@ -48,17 +50,12 @@ class Category
         return (string) $this->getName();
     }
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->toys = new ArrayCollection();
     }
 
     /**
-     * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -67,8 +64,6 @@ class Category
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Category
@@ -81,8 +76,6 @@ class Category
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -91,8 +84,6 @@ class Category
     }
 
     /**
-     * Set createdAt
-     *
      * @param \DateTime $createdAt
      *
      * @return Category
@@ -105,8 +96,6 @@ class Category
     }
 
     /**
-     * Get createdAt
-     *
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -115,13 +104,11 @@ class Category
     }
 
     /**
-     * Add toy
-     *
      * @param Toy $toy
      *
      * @return Category
      */
-    public function addToys(Toy $toy)
+    public function addToy(Toy $toy)
     {
         $this->toys[] = $toy;
 
@@ -129,8 +116,6 @@ class Category
     }
 
     /**
-     * Remove toy
-     *
      * @param Toy $toy
      */
     public function removeToy(Toy $toy)
@@ -139,9 +124,7 @@ class Category
     }
 
     /**
-     * Get toy
-     *
-     * @return Collection
+     * @return ArrayCollection|Toy[]
      */
     public function getToys()
     {

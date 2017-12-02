@@ -51,11 +51,12 @@ class Image
     private $toy;
 
     /**
-     * @ORM\Column(type="datetime")
-     *
      * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $updatedAt;
+    private $createdAt;
 
 
     public function __toString()
@@ -73,7 +74,7 @@ class Image
         $this->imageFile = $image;
 
         if ($image) {
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->createdAt = new \DateTimeImmutable();
         }
 
         return $this;
