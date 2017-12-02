@@ -2,6 +2,7 @@
 
 namespace ViazushkiBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -44,9 +45,6 @@ class Tag
      */
     private $createdAt;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->toys = new ArrayCollection();
@@ -58,8 +56,6 @@ class Tag
     }
 
     /**
-     * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -68,8 +64,6 @@ class Tag
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Tag
@@ -82,8 +76,6 @@ class Tag
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -92,8 +84,6 @@ class Tag
     }
 
     /**
-     * Set createdAt
-     *
      * @param \DateTime $createdAt
      *
      * @return Tag
@@ -106,8 +96,6 @@ class Tag
     }
 
     /**
-     * Get createdAt
-     *
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -116,34 +104,27 @@ class Tag
     }
 
     /**
-     * Add toy
-     *
      * @param Toy $toy
      *
      * @return Tag
      */
-    public function addToys(Toy $toy)
+    public function addToy(Toy $toy)
     {
         $this->toys[] = $toy;
-        $toy->addTags($this);
 
         return $this;
     }
 
     /**
-     * Remove toy
-     *
      * @param Toy $toy
      */
-    public function removeToys(Toy $toy)
+    public function removeToy(Toy $toy)
     {
         $this->toys->removeElement($toy);
     }
 
     /**
-     * Get toy
-     *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|Toy[]
      */
     public function getToys()
     {

@@ -73,8 +73,6 @@ class Image
         $this->imageFile = $image;
 
         if ($image) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
         }
 
@@ -138,7 +136,7 @@ class Image
     }
 
     /**
-     * @return mixed
+     * @return Toy
      */
     public function getToy()
     {
@@ -146,9 +144,9 @@ class Image
     }
 
     /**
-     * @param mixed $toy
+     * @param Toy $toy
      */
-    public function setToy($toy)
+    public function setToy(Toy $toy)
     {
         $this->toy = $toy;
     }

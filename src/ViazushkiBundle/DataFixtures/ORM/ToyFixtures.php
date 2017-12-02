@@ -12,17 +12,27 @@ class ToyFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $categoryRepository = $manager->getRepository('ViazushkiBundle:Category');
-        $category = $categoryRepository->find(1);
+        $defaultToy = [
+            'name' => 'Игрушка',
+            'author' => 'Админ',
+            'description' => 'Мягкие плюшевые игрушки станут лучшими друзьями для ваших деток. 
+                Прекрасный вариант для подарка на выписку, день рождения, Новый год.
+                Можно сделать наборчик ( игрушка + пинетки,повязка на голову, шапочка, свитерок, варежки для новорожденных).',
+        ];
 
+        for ($i = 1, $j = 1; $i <= 10; $i++, $j++) {
 
-        $toy = new Toy();
-        $toy->setName('Toy 1');
-        $toy->setAuthor('Author');
-        $toy->setDescription('Some description');
-        $toy->setCategory($category);
+            if ($j > 5) $j = 1;
 
-        $manager->persist($toy);
-        $manager->flush();
+            $toy = new Toy();
+            $toy->setName($defaultToy['name'].' '.$i)
+                ->setAuthor($defaultToy['author'])
+                ->setDescription($defaultToy['description'])
+                ->setCategory($this->getReference('category'.$j))
+                ->addTag($this->getReference('tag'.$j));
+
+            $manager->persist($toy);
+            $manager->flush();
+        }
     }
 }

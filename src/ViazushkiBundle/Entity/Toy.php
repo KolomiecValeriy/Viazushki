@@ -48,7 +48,7 @@ class Toy
     /**
 	 * One Toy have many Images
      *
-     * @ORM\OneToMany(targetEntity="Image", mappedBy="toy")
+     * @ORM\OneToMany(targetEntity="ViazushkiBundle\Entity\Image", mappedBy="toy")
      */
     private $images;
 
@@ -90,10 +90,7 @@ class Toy
 	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $category;
-    
-    /**
-     * Constructor
-     */
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -106,8 +103,6 @@ class Toy
     }
 
     /**
-     * Get id
-     *
      * @return integer
      */
     public function getId()
@@ -116,8 +111,6 @@ class Toy
     }
 
     /**
-     * Set name
-     *
      * @param string $name
      *
      * @return Toy
@@ -130,8 +123,6 @@ class Toy
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -140,8 +131,6 @@ class Toy
     }
 
     /**
-     * Set description
-     *
      * @param string $description
      *
      * @return Toy
@@ -154,8 +143,6 @@ class Toy
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -164,8 +151,6 @@ class Toy
     }
 
     /**
-     * Set author
-     *
      * @param string $author
      *
      * @return Toy
@@ -178,8 +163,6 @@ class Toy
     }
 
     /**
-     * Get author
-     *
      * @return string
      */
     public function getAuthor()
@@ -188,8 +171,6 @@ class Toy
     }
 
     /**
-     * Set createdAt
-     *
      * @param \DateTime $createdAt
      *
      * @return Toy
@@ -202,8 +183,6 @@ class Toy
     }
 
     /**
-     * Get createdAt
-     *
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -212,8 +191,6 @@ class Toy
     }
 
     /**
-     * Set updatedAt
-     *
      * @param \DateTime $updatedAt
      *
      * @return Toy
@@ -226,8 +203,6 @@ class Toy
     }
 
     /**
-     * Get updatedAt
-     *
      * @return \DateTime
      */
     public function getUpdatedAt()
@@ -236,13 +211,11 @@ class Toy
     }
 
     /**
-     * Add tag
-     *
      * @param Tag $tag
      *
      * @return Toy
      */
-    public function addTags(Tag $tag)
+    public function addTag(Tag $tag)
     {
         $this->tags[] = $tag;
         $tag->addToy($this);
@@ -251,8 +224,6 @@ class Toy
     }
 
     /**
-     * Remove tags
-     *
      * @param Tag $tag
      */
     public function removeTags(Tag $tag)
@@ -261,8 +232,6 @@ class Toy
     }
 
     /**
-     * Get tag
-     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getTags()
@@ -271,8 +240,6 @@ class Toy
     }
 
     /**
-     * Set category
-     *
      * @param Category $category
      *
      * @return Toy
@@ -285,8 +252,6 @@ class Toy
     }
 
     /**
-     * Get category
-     *
      * @return category
      */
     public function getCategory()
@@ -303,11 +268,15 @@ class Toy
     }
 
     /**
-     * @param ArrayCollection $images
+     * @param Image $images
+     *
+     * @return Toy
      */
-    public function setImages($images)
+    public function setImages(Image $images)
     {
         $this->images = $images;
+
+        return $this;
     }
 
     /**
@@ -319,10 +288,14 @@ class Toy
     }
 
     /**
-     * @param mixed $mainImage
+     * @param Image $mainImage
+     *
+     * @return Toy
      */
-    public function setMainImage($mainImage)
+    public function setMainImage(Image $mainImage)
     {
         $this->mainImage = $mainImage;
+
+        return $this;
     }
 }

@@ -35,10 +35,14 @@ class Contact
 
     /**
      * @param string $name
+     *
+     * @return Contact
      */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -51,10 +55,14 @@ class Contact
 
     /**
      * @param string $email
+     *
+     * @return Contact
      */
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
     }
 
     /**
@@ -67,10 +75,14 @@ class Contact
 
     /**
      * @param string $text
+     *
+     * @return Contact
      */
     public function setText($text)
     {
         $this->text = $text;
+
+        return $this;
     }
 
     /**
@@ -83,10 +95,14 @@ class Contact
 
     /**
      * @param string $date
+     *
+     * @return Contact
      */
     public function setDate($date)
     {
         $this->date = $date;
+
+        return $this;
     }
 
 
