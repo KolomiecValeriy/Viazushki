@@ -1,5 +1,29 @@
-// Portfolio 
-$(window).load(function() {
+$(document).ready(function () {
+    //Отправка формы со страницы контактов
+    $('#contact_form').on('submit', function (event) {
+        event.preventDefault();
+
+        var form = $("#contact_form");
+        $.ajax({
+            url: form.attr('action'),
+            method: "POST",
+            data: form.serialize(),
+            success: function (result) {
+                $('.success-msg').fadeIn();
+                form[0].reset();
+                setTimeout(function () {
+                    $('.success-msg').fadeOut();
+                }, 3000);
+            },
+            error: function (error) {
+                alert('Сообщение не отправлено.');
+            }
+        })
+    });
+});
+
+// Portfolio
+$(window).load(function () {
     var $cont = $('.portfolio-group');
 
 
@@ -9,7 +33,7 @@ $(window).load(function() {
         filter: '*',
     });
 
-    $('.portfolio-filter-container a').click(function() {
+    $('.portfolio-filter-container a').click(function () {
         $cont.isotope({
             filter: this.getAttribute('data-filter')
         });
@@ -18,7 +42,7 @@ $(window).load(function() {
     });
 
     var lastClickFilter = null;
-    $('.portfolio-filter a').click(function() {
+    $('.portfolio-filter a').click(function () {
 
         //first clicked we don't know which element is selected last time
         if (lastClickFilter === null) {
@@ -36,6 +60,6 @@ $(window).load(function() {
 });
 
 // Mobile Menu
-$(function(){
+$(function () {
     $('#hornavmenu').slicknav();
 });

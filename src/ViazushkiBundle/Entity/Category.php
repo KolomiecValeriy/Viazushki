@@ -7,10 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use ViazushkiBundle\Entity\Toy;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="Category")
  * @ORM\Entity(repositoryClass="ViazushkiBundle\Repository\CategoryRepository")
+ * @UniqueEntity("name", message="Категория с таким именем уже существует")
  */
 class Category
 {
@@ -49,9 +51,6 @@ class Category
         return (string) $this->getName();
     }
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->toys = new ArrayCollection();
@@ -110,7 +109,7 @@ class Category
      *
      * @return Category
      */
-    public function addToys(Toy $toy)
+    public function addToy(Toy $toy)
     {
         $this->toys[] = $toy;
 
@@ -130,7 +129,7 @@ class Category
     }
 
     /**
-     * @return Collection|Toy[]
+     * @return ArrayCollection|Toy[]
      */
     public function getToys()
     {

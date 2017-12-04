@@ -2,21 +2,30 @@
 
 namespace ViazushkiBundle\Entity;
 
+use Symfony\Component\Validator\Constraints;
 
 class Contact
 {
     /**
      * @var string
+     *
+     * @Constraints\NotBlank(message="Это поле не может быть пустым")
      */
     private $name;
 
     /**
      * @var string
+     *
+     * @Constraints\NotBlank(message="Это поле не может быть пустым")
+     * @Constraints\Email(message="Вы допустили ошибку в email адрессе")
      */
     private $email;
 
     /**
      * @var string
+     *
+     * @Constraints\NotBlank(message="Необходимо ввести текст сообщения")
+     * @Constraints\Length(min="10", minMessage="Текст сообщения должен быть не меньше 10-ти символов")
      */
     private $text;
 

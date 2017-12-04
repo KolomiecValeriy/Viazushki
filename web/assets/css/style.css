@@ -35,3 +35,11 @@ p.site-slogan {
 .headline {
     margin-bottom: 20px;
 }
+
+.success-msg {
+    position: fixed;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
