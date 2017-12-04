@@ -33,8 +33,8 @@ class Category
     private $name;
 
     /**
-	 * One Category have many Toys
-	 * @ORM\OneToMany(targetEntity="Toy", mappedBy="category")
+     * One Category have many Toys
+     * @ORM\OneToMany(targetEntity="Toy", mappedBy="category")
      */
     private $toys;
 
@@ -48,7 +48,7 @@ class Category
 
     public function __toString()
     {
-        return (string) $this->getName();
+        return (string)$this->getName();
     }
 
     public function __construct()

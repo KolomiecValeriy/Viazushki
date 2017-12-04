@@ -61,7 +61,7 @@ class Image
 
     public function __toString()
     {
-        return (string) $this->getImageName();
+        return (string)$this->getImageName();
     }
 
     /**

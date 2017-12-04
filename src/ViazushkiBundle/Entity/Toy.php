@@ -32,8 +32,8 @@ class Toy
     private $name;
 
     /**
-	 * @var string
-	 *
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -46,7 +46,7 @@ class Toy
     private $author;
 
     /**
-	 * One Toy have many Images
+     * One Toy have many Images
      *
      * @ORM\OneToMany(targetEntity="ViazushkiBundle\Entity\Image", mappedBy="toy")
      */
@@ -60,17 +60,17 @@ class Toy
     private $mainImage;
 
     /**
-	 * @var \DateTime
-	 *
-	 * @Gedmo\Timestampable(on="create")
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
     /**
-	 * @var \DateTime
-	 *
-	 * @Gedmo\Timestampable(on="update")
+     * @var \DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
@@ -79,15 +79,15 @@ class Toy
      * Many Toys have many tags
      *
      * @ORM\ManyToMany(targetEntity="Tag", inversedBy="toys", cascade={"persist"})
-	 * @ORM\JoinTable(name="ToyTags")
+     * @ORM\JoinTable(name="ToyTags")
      */
     private $tags;
 
     /**
      * Many Toys have one category
      *
-	 * @ORM\ManyToOne(targetEntity="Category", inversedBy="toys", cascade={"persist"})
-	 * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="toys", cascade={"persist"})
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $category;
 
@@ -99,7 +99,7 @@ class Toy
 
     public function __toString()
     {
-        return (string) $this->getName();
+        return (string)$this->getName();
     }
 
     /**

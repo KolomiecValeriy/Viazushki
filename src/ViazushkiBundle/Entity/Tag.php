@@ -33,8 +33,8 @@ class Tag
     private $name;
 
     /**
-	 * Many Tag have many Toys
-	 * @ORM\ManyToMany(targetEntity="Toy", mappedBy="tags", cascade={"persist"})
+     * Many Tag have many Toys
+     * @ORM\ManyToMany(targetEntity="Toy", mappedBy="tags", cascade={"persist"})
      * @ORM\JoinColumn(name="toys", onDelete="SET NULL")
      */
     private $toys;
@@ -54,7 +54,7 @@ class Tag
 
     public function __toString()
     {
-        return (string) $this->getName();
+        return (string)$this->getName();
     }
 
     /**
