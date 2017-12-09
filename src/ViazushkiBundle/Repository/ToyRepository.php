@@ -19,7 +19,7 @@ class ToyRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findByTag($tag)
+    public function findByTag(Tag $tag)
     {
         $query = $this->createQueryBuilder('t')
             ->leftJoin('t.tags', 'tg')
@@ -31,7 +31,7 @@ class ToyRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function findByCategory($category)
+    public function findByCategory(Category $category)
     {
         $query = $this->createQueryBuilder('t')
             ->leftJoin('t.category', 'tc')
