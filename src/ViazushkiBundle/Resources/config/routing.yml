@@ -7,13 +7,9 @@ viazushki_contacts:
     defaults: { _controller: ViazushkiBundle:Contact:contact }
 
 viazushki_toy_by_tag:
-    path:     /tag/{tagId}
-    defaults: { _controller: ViazushkiBundle:Default:index, tagId: ''}
-    requirements:
-        tagId:  '\d+'
+    path:     /tag/{slug}
+    defaults: { _controller: ViazushkiBundle:Default:toyByTag, slug: ''}
 
 viazushki_toy_by_category:
-    path:     /category/{categoryId}
-    defaults: { _controller: ViazushkiBundle:Default:index, categoryId: ''}
-    requirements:
-        tagId:  '\d+'
+    path:     /category/{slug}
+    defaults: { _controller: ViazushkiBundle:Default:toyByCategory, slug: ''}

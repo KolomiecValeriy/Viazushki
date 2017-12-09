@@ -2,7 +2,6 @@
 
 namespace ViazushkiBundle\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -31,6 +30,14 @@ class Tag
      * @ORM\Column(name="name", type="string", length=100, unique=true)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(unique=true)
+     */
+    private $slug;
 
     /**
      * Many Tag have many Toys
@@ -131,5 +138,13 @@ class Tag
     public function getToys()
     {
         return $this->toys;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
