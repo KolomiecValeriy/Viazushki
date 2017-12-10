@@ -8,6 +8,11 @@ use ViazushkiBundle\Entity\Tag;
 
 class ToyRepository extends EntityRepository
 {
+    public function findAllQuery()
+    {
+        return $this->createQueryBuilder('t')->getQuery();
+    }
+
     public function findLastAdded($limit)
     {
         $query = $this->createQueryBuilder('t')
@@ -28,7 +33,7 @@ class ToyRepository extends EntityRepository
             ->getQuery()
         ;
 
-        return $query->getResult();
+        return $query;
     }
 
     public function findByCategory(Category $category)
@@ -40,6 +45,6 @@ class ToyRepository extends EntityRepository
             ->getQuery()
         ;
 
-        return $query->getResult();
+        return $query;
     }
 }

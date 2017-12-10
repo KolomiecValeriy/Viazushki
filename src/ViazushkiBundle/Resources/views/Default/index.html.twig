@@ -7,7 +7,7 @@
 {% block content %}
     <!-- Main Column -->
     <div class="col-md-9">
-        {% for toy in toys %}
+        {% for toy in pagination %}
             <div class="blog-post">
                 <div class="blog-item-header">
                     <div class="blog-post-date pull-left">
@@ -70,23 +70,7 @@
             </div>
         {% endfor %}
 
-        <ul class="pagination">
-            <li>
-                <a href="#">&laquo;</a>
-            </li>
-            <li class="active">
-                <a href="#">1</a>
-            </li>
-            <li class="disabled">
-                <a href="#">2</a>
-            </li>
-            <li>
-                <a href="#">3</a>
-            </li>
-            <li>
-                <a href="#">&raquo;</a>
-            </li>
-        </ul>
+        {{ knp_pagination_render(pagination) }}
     </div>
     <!-- End Main Column -->
     <!-- Side Column -->
