@@ -49,3 +49,10 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Images }
         public: true
+
+    admin.user:
+        class: ViazushkiBundle\Admin\UserAdmin
+        arguments: [~, ViazushkiBundle\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Users }
+        public: true
