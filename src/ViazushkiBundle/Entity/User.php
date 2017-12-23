@@ -2,8 +2,8 @@
 
 namespace ViazushkiBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints;
 
@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints;
  * @ORM\Entity(repositoryClass="ViazushkiBundle\Repository\UserRepository")
  * @ORM\Table(name="User")
  */
-class User implements UserInterface, \Serializable
+class User implements AdvancedUserInterface, \Serializable
 {
     /**
      * @var integer
@@ -43,7 +43,7 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="simple_array")
      */
     private $roles;
 
@@ -55,8 +55,12 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
-        $this->roles = 'USER';
         // $this->salt = md5(uniqid(null, true));
+    }
+
+    public function __toString()
+    {
+        return (string)$this->getUsername();
     }
 
     /**
@@ -124,17 +128,20 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return array
+     */
     public function getRoles()
     {
-        return ['ROLE_'.$this->roles];
+        return $this->roles;
     }
 
     /**
-     * @param string $roles
+     * @param array $roles
      *
      * @return User
      */
-    public function setRoles($roles)
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
 
@@ -188,5 +195,25 @@ class User implements UserInterface, \Serializable
             $this->password,
             // $this->salt
             ) = unserialize($serialized);
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function isEnabled()
+    {
+        return $this->getIsActive();
     }
 }

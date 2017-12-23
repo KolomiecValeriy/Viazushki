@@ -12,25 +12,33 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $user = new User();
-        $user
+        $admin = new User();
+        $admin
             ->setUsername('admin')
             ->setEmail('admin@gmail.com')
-            ->setPassword('111')
+            ->setPassword('admin')
             ->setIsActive(true)
-            ->setRoles('ADMIN')
+            ->setRoles(['ROLE_ADMIN'])
         ;
+        $manager->persist($admin);
 
-        $manager->persist($user);
+        $userManager = new User();
+        $userManager
+            ->setUsername('manager')
+            ->setEmail('manager@gmail.com')
+            ->setPassword('manager')
+            ->setIsActive(true)
+            ->setRoles(['ROLE_MANAGER'])
+        ;
+        $manager->persist($userManager);
 
         for ($i = 1; $i <= 10; $i++) {
             $user = new User();
             $user
                 ->setUsername('user'.$i)
                 ->setEmail('user'.$i.'@gmail.com')
-                ->setPassword('123')
-                ->setIsActive(true)
-                ->setRoles('USER')
+                ->setPassword('user'.$i)
+                ->setRoles(['ROLE_USER'])
             ;
 
             $manager->persist($user);

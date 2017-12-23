@@ -89,6 +89,10 @@ swiftmailer:
     password: '%mailer_password%'
     spool: { type: memory }
 
+sonata_admin:
+    templates:
+        dashboard: SonataAdminBundle:Core:dashboard.html.twig
+
 sonata_block:
     default_contexts: [cms]
     blocks:

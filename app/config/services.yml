@@ -26,33 +26,33 @@ services:
         class: ViazushkiBundle\Admin\CategoryAdmin
         arguments: [~, ViazushkiBundle\Entity\Category, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Categories }
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Categories }
         public: true
 
     admin.tag:
         class: ViazushkiBundle\Admin\TagAdmin
         arguments: [~, ViazushkiBundle\Entity\Tag, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Tags }
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Tags }
         public: true
 
     admin.toy:
         class: ViazushkiBundle\Admin\ToyAdmin
         arguments: [~, ViazushkiBundle\Entity\Toy, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Toys }
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Toys }
         public: true
 
     admin.image:
         class: ViazushkiBundle\Admin\ImageAdmin
         arguments: [~, ViazushkiBundle\Entity\Image, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Images }
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Images }
         public: true
 
     admin.user:
         class: ViazushkiBundle\Admin\UserAdmin
         arguments: [~, ViazushkiBundle\Entity\User, ~]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Viazushki, label: Users }
+            - { name: sonata.admin, manager_type: orm, group: Settings, label: Users }
         public: true

@@ -20,7 +20,7 @@
         ]
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": "=7.1.11",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "gedmo/doctrine-extensions": "^2.4",
@@ -37,7 +37,7 @@
         "symfony/symfony": "3.3.*",
         "twig/twig": "^1.0||^2.0",
         "vich/uploader-bundle": "^1.6"
-    },..
+    },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^2.4",
         "sensio/generator-bundle": "^3.0",
