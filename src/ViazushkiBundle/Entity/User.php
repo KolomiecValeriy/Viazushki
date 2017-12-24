@@ -4,7 +4,6 @@ namespace ViazushkiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints;
 
 /**
@@ -66,7 +65,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -183,6 +182,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->isActive,
             // $this->salt,
         ));
     }
@@ -193,6 +193,7 @@ class User implements AdvancedUserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
+            $this->isActive,
             // $this->salt
             ) = unserialize($serialized);
     }

@@ -1,8 +1,6 @@
 security:
     encoders:
-        ViazushkiBundle\Entity\User: plaintext
-#            algorithm: bcrypt
-#            cost: 12
+        ViazushkiBundle\Entity\User: bcrypt
 
     providers:
         my_db_provider:
@@ -24,9 +22,15 @@ security:
                 target_path_parameter: viazushki_homepage
                 username_parameter: login[email]
                 password_parameter: login[password]
+                remember_me: true
             logout:
                 path:   /logout
                 target: /
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 604800 # 1 week in seconds
+                path:     /
+                #always_remember_me: true
 
     access_control:
         - { path: ^/admin/viazushki/user, roles: ROLE_ADMIN }
@@ -34,5 +38,5 @@ security:
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
     role_hierarchy:
-        ROLE_MANAGER:       ROLE_USER
-        ROLE_ADMIN:       ROLE_MANAGER
+        ROLE_MANAGER:   ROLE_USER
+        ROLE_ADMIN:     ROLE_MANAGER

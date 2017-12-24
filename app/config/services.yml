@@ -56,3 +56,5 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: Settings, label: Users }
         public: true
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
