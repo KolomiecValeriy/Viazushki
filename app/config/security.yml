@@ -1,6 +1,8 @@
 security:
     encoders:
-        ViazushkiBundle\Entity\User: bcrypt
+        ViazushkiBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
 
     providers:
         my_db_provider:

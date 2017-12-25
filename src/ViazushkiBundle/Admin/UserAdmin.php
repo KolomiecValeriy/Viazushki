@@ -25,6 +25,7 @@ class UserAdmin extends AbstractAdmin
                         'User' => 'ROLE_USER',
                     ],
                     'multiple'=>true,
+                    'expanded' => true,
                 ]
             )
             ->add('isActive')
@@ -57,6 +58,16 @@ class UserAdmin extends AbstractAdmin
     }
 
     public function prePersist($user)
+    {
+        $factory = $this->container->get('security.encoder_factory');
+        $encoder = $factory->getEncoder($user);
+
+        $encoded = $encoder->encodePassword($user, $user->getPassword());
+
+        $user->setPassword($encoded);
+    }
+
+    public function preUpdate($user)
     {
         $factory = $this->container->get('security.encoder_factory');
         $encoder = $factory->getEncoder($user);
