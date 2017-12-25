@@ -1,0 +1,66 @@
+{% extends '@Viazushki/layers.html.twig' %}
+
+{% block topMenu %}
+    {% include '@Viazushki/Includes/_topMenu.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <!-- Login Box -->
+    <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
+        {{ form_start(registerForm, { 'attr': {'class': 'login-page'} }) }}
+        <div class="login-header margin-bottom-30">
+            <h2>Зарегистрируйтесь</h2>
+        </div>
+        <div class="group {% if form_errors(registerForm.username) %}has-error{% endif %}">
+            {{ form_errors(registerForm.username) }}
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon">
+                    <i class="fa fa-user"></i>
+                </span>
+                {{ form_widget(registerForm.username, { 'attr': {'placeholder': 'Имя'} }) }}
+            </div>
+        </div>
+        <div class="group {% if form_errors(registerForm.email) %}has-error{% endif %}">
+            {{ form_errors(registerForm.email) }}
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon">
+                    <i class="fa fa-envelope"></i>
+                </span>
+                {{ form_widget(registerForm.email, { 'attr': {'placeholder': 'E-mail'} }) }}
+            </div>
+        </div>
+        <div class="group {% if form_errors(registerForm.password.first) %}has-error{% endif %}">
+            {{ form_errors(registerForm.password.first) }}
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon">
+                    <i class="fa fa-lock"></i>
+                </span>
+                {{ form_widget(registerForm.password.first, { 'attr': {'placeholder': 'Введите пароль'} }) }}
+            </div>
+        </div>
+        <div class="group {% if form_errors(registerForm.password.second) %}has-error{% endif %}">
+            {{ form_errors(registerForm.password.second) }}
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon">
+                    <i class="fa fa-lock"></i>
+                </span>
+                {{ form_widget(registerForm.password.second, { 'attr': {'placeholder': 'Повторите пароль'} }) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_widget(registerForm.submit, { 'label': 'Регистрация', 'attr': { 'class': 'btn btn-primary pull-right'} }) }}
+            </div>
+        </div>
+        {{ form_end(registerForm) }}
+    </div>
+    <!-- End Login Box -->
+{% endblock %}
+
+{% block footer %}
+    {% include '@Viazushki/Includes/_footer.html.twig' %}
+{% endblock %}
+
+{% block footerMenu %}
+    {% include '@Viazushki/Includes/_footerMenu.html.twig' %}
+{% endblock %}

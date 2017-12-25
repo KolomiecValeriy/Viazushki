@@ -62,7 +62,7 @@ class UserAdmin extends AbstractAdmin
         $factory = $this->container->get('security.encoder_factory');
         $encoder = $factory->getEncoder($user);
 
-        $encoded = $encoder->encodePassword($user, $user->getPassword());
+        $encoded = $encoder->encodePassword($user->getPassword(), $user);
 
         $user->setPassword($encoded);
     }
@@ -72,7 +72,7 @@ class UserAdmin extends AbstractAdmin
         $factory = $this->container->get('security.encoder_factory');
         $encoder = $factory->getEncoder($user);
 
-        $encoded = $encoder->encodePassword($user, $user->getPassword());
+        $encoded = $encoder->encodePassword($user->getPassword(), $user);
 
         $user->setPassword($encoded);
     }

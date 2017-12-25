@@ -17,3 +17,7 @@ viazushki_toy_by_category:
 viazushki_login:
     path: /login
     defaults: { _controller: ViazushkiBundle:Security:login }
+
+viazushki_register:
+    path: /register
+    defaults: { _controller: ViazushkiBundle:Security:register }

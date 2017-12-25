@@ -28,7 +28,7 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
         $admin
             ->setUsername('admin')
             ->setEmail('admin@gmail.com')
-            ->setPassword($encoder->encodePassword($admin, 'admin'))
+            ->setPassword($encoder->encodePassword('admin', $admin))
             ->setIsActive(true)
             ->setRoles(['ROLE_ADMIN'])
         ;
@@ -38,7 +38,7 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
         $userManager
             ->setUsername('manager')
             ->setEmail('manager@gmail.com')
-            ->setPassword($encoder->encodePassword($userManager, 'manager'))
+            ->setPassword($encoder->encodePassword('manager', $userManager))
             ->setIsActive(true)
             ->setRoles(['ROLE_MANAGER'])
         ;
@@ -49,7 +49,7 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
             $user
                 ->setUsername('user'.$i)
                 ->setEmail( 'user'.$i.'@gmail.com')
-                ->setPassword($encoder->encodePassword($user, 'user'.$i))
+                ->setPassword($encoder->encodePassword('user'.$i, $user))
                 ->setRoles(['ROLE_USER'])
             ;
 
