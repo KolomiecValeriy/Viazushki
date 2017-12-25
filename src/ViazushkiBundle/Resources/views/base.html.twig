@@ -64,6 +64,13 @@
             <!-- === BEGIN CONTENT === -->
             <div class="container">
                 <div class="row margin-vert-30">
+                    {% if app.session.flashBag.has('success_register') %}
+                        <div id="success_register" class="alert alert-success">
+                            {% for msg in app.session.flashBag.get('success_register') %}
+                                {{ msg }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     {% block content %}{% endblock %}
                 </div>
             </div>

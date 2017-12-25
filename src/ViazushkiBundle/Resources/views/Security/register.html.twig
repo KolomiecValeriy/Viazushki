@@ -29,22 +29,22 @@
                 {{ form_widget(registerForm.email, { 'attr': {'placeholder': 'E-mail'} }) }}
             </div>
         </div>
-        <div class="group {% if form_errors(registerForm.password.first) %}has-error{% endif %}">
-            {{ form_errors(registerForm.password.first) }}
+        <div class="group {% if form_errors(registerForm.plainPassword.first) %}has-error{% endif %}">
+            {{ form_errors(registerForm.plainPassword.first) }}
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon">
                     <i class="fa fa-lock"></i>
                 </span>
-                {{ form_widget(registerForm.password.first, { 'attr': {'placeholder': 'Введите пароль'} }) }}
+                {{ form_widget(registerForm.plainPassword.first, { 'attr': {'placeholder': 'Введите пароль'} }) }}
             </div>
         </div>
-        <div class="group {% if form_errors(registerForm.password.second) %}has-error{% endif %}">
-            {{ form_errors(registerForm.password.second) }}
+        <div class="group {% if form_errors(registerForm.plainPassword.second) %}has-error{% endif %}">
+            {{ form_errors(registerForm.plainPassword.second) }}
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon">
                     <i class="fa fa-lock"></i>
                 </span>
-                {{ form_widget(registerForm.password.second, { 'attr': {'placeholder': 'Повторите пароль'} }) }}
+                {{ form_widget(registerForm.plainPassword.second, { 'attr': {'placeholder': 'Повторите пароль'} }) }}
             </div>
         </div>
         <div class="row">

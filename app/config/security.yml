@@ -18,6 +18,7 @@ security:
             pattern: ^/
             anonymous: ~
             provider: my_db_provider
+            switch_user: ~
             form_login:
                 login_path: viazushki_login
                 check_path: viazushki_login
@@ -25,6 +26,7 @@ security:
                 username_parameter: login[email]
                 password_parameter: login[password]
                 remember_me: true
+                csrf_token_generator: security.csrf.token_manager
             logout:
                 path:   /logout
                 target: /
@@ -41,4 +43,4 @@ security:
 
     role_hierarchy:
         ROLE_MANAGER:   ROLE_USER
-        ROLE_ADMIN:     ROLE_MANAGER
+        ROLE_ADMIN:     [ROLE_MANAGER, ROLE_ALLOWED_TO_SWITCH]

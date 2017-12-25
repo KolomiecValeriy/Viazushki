@@ -11,6 +11,7 @@
             <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
         {{ form_start(loginForm, { 'attr': {'class': 'login-page'} }) }}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <div class="login-header margin-bottom-30">
             <h2>Войдите</h2>
         </div>

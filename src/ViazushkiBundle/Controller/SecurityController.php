@@ -4,6 +4,7 @@ namespace ViazushkiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use ViazushkiBundle\Entity\User;
 use ViazushkiBundle\Form\Type\LoginType;
 use ViazushkiBundle\Form\Type\RegisterType;
@@ -35,11 +36,18 @@ class SecurityController extends Controller
         $registerForm->handleRequest($request);
         if ($registerForm->isSubmitted() && $registerForm->isValid()) {
 
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success_register', 'Добро пожаловать '.$registerForm->get('username')->getData().'!')
+            ;
+
             $user = new User();
             $user->setUsername($registerForm->get('username')->getData());
             $user->setEmail($registerForm->get('email')->getData());
-            $user->setPassword($this->encodePassword($user, $registerForm->get('password')->getData()));
+            $user->setPassword($this->encodePassword($user, $registerForm->get('plainPassword')->getData()));
             $user->setRoles(['ROLE_USER']);
+
+            $this->authenticateUser($user);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -60,5 +68,13 @@ class SecurityController extends Controller
         ;
 
         return $encoder->encodePassword($plainPassword, $user);
+    }
+
+    private function authenticateUser(User $user)
+    {
+        $providerKey = 'secured_area'; // your firewall name
+        $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
+
+        $this->container->get('security.token_storage')->setToken($token);
     }
 }

@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use ViazushkiBundle\Entity\User;
 
 class UserAdmin extends AbstractAdmin
 {
@@ -17,7 +18,7 @@ class UserAdmin extends AbstractAdmin
         $formMapper
             ->add('username', 'text')
             ->add('email', 'text')
-            ->add('password', 'text')
+            ->add('plainPassword', 'text')
             ->add('roles','choice', [
                     'choices'=>[
                         'Admin' => 'ROLE_ADMIN',
@@ -59,21 +60,20 @@ class UserAdmin extends AbstractAdmin
 
     public function prePersist($user)
     {
-        $factory = $this->container->get('security.encoder_factory');
-        $encoder = $factory->getEncoder($user);
-
-        $encoded = $encoder->encodePassword($user->getPassword(), $user);
-
-        $user->setPassword($encoded);
+        $user->setPassword($this->encodePassword($user, $user->getPlainPassword()));
     }
 
     public function preUpdate($user)
     {
-        $factory = $this->container->get('security.encoder_factory');
-        $encoder = $factory->getEncoder($user);
+        $user->setPassword($this->encodePassword($user, $user->getPlainPassword()));
+    }
 
-        $encoded = $encoder->encodePassword($user->getPassword(), $user);
+    private function encodePassword($user, $plainPassword)
+    {
+        $encoder = $this->container->get('security.encoder_factory')
+            ->getEncoder($user)
+        ;
 
-        $user->setPassword($encoded);
+        return $encoder->encodePassword($plainPassword, $user);
     }
 }

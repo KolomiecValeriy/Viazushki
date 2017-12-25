@@ -33,6 +33,7 @@ framework:
     assets: ~
     php_errors:
         log: true
+    csrf_protection: ~
 
 # Twig Configuration
 twig:

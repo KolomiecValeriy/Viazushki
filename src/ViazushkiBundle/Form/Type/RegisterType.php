@@ -4,6 +4,7 @@ namespace ViazushkiBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,8 +18,9 @@ class RegisterType extends AbstractType
         $builder
             ->add('username')
             ->add('email', EmailType::class)
-            ->add('password', RepeatedType::class, [
-                'type' => 'password',
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Пароли не совпадают',
             ])
             ->add('submit', SubmitType::class)
         ;
