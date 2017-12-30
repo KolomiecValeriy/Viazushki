@@ -8,6 +8,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use ViazushkiBundle\Entity\Category;
 use ViazushkiBundle\Entity\Tag;
+use ViazushkiBundle\Entity\Toy;
 
 class DefaultController extends Controller
 {
@@ -31,6 +32,26 @@ class DefaultController extends Controller
             'lastToys' => $toyRepository->findLastAdded(2),
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @ParamConverter("toy", class="ViazushkiBundle:Toy")
+     */
+    public function showToyAction(Toy $toy)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $categories = $em->getRepository('ViazushkiBundle:Category')->findAll();
+        $tags = $em->getRepository('ViazushkiBundle:Tag')->findAll();
+        $toyRepository = $em->getRepository('ViazushkiBundle:Toy');
+
+
+        return $this->render('@Viazushki/Default/showToy.html.twig', [
+            'toy' => $toyRepository->find($toy),
+            'lastToys' => $toyRepository->findLastAdded(2),
+            'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 

@@ -2,6 +2,14 @@ viazushki_homepage:
     path:     /
     defaults: { _controller: ViazushkiBundle:Default:index }
 
+viazushki_login:
+    path: /login
+    defaults: { _controller: ViazushkiBundle:Security:login }
+
+viazushki_register:
+    path: /register
+    defaults: { _controller: ViazushkiBundle:Security:register }
+
 viazushki_contacts:
     path:     /contacts
     defaults: { _controller: ViazushkiBundle:Contact:contact }
@@ -14,10 +22,6 @@ viazushki_toy_by_category:
     path:     /category/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByCategory, slug: ''}
 
-viazushki_login:
-    path: /login
-    defaults: { _controller: ViazushkiBundle:Security:login }
-
-viazushki_register:
-    path: /register
-    defaults: { _controller: ViazushkiBundle:Security:register }
+viazushki_toy:
+    path:   /{slug}
+    defaults: { _controller: ViazushkiBundle:Default:showToy }

@@ -1,0 +1,185 @@
+{% extends '@Viazushki/layers.html.twig' %}
+
+{% block topMenu %}
+    {% include '@Viazushki/Includes/_topMenu.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <!-- Main Column -->
+    <div class="col-md-9">
+        <div class="blog-post">
+            <div class="blog-item-header">
+                <div class="blog-post-date pull-left">
+                    <span class="day">14</span>
+                    <span class="month">Dec</span>
+                </div>
+                <h2>{{ toy.name }}</h2>
+                <div class="blog-post-details">
+                    <!-- Author Name -->
+                    <div class="blog-post-details-item blog-post-details-item-left user-icon">
+                        <i class="fa fa-user"></i>
+                        <a href="#">Admin</a>
+                    </div>
+                    <!-- End Author Name -->
+                    <!-- Tags -->
+                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
+                        <i class="fa fa-tag"></i>
+                        {% for tag in toy.tags %}
+                            <a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}">{{ tag.name }}</a>{% if not loop.last %},{% endif %}
+                        {% endfor %}
+                    </div>
+                    <!-- End Tags -->
+                    <!-- # of Comments -->
+                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
+                        <a href="">
+                            <i class="fa fa-comments"></i>
+                            3 Comments
+                        </a>
+                    </div>
+                    <!-- End # of Comments -->
+                </div>
+            </div>
+            <div class="blog-item">
+                <div class="clearfix"></div>
+                <div class="blog-post-body row margin-top-15">
+                    <div class="col-md-5">
+                        <img class="pull-left" src="{% if toy.mainImage %}
+                                    {{ asset('assets/images/') }}{{ toy.mainImage }}
+                                {% else %}
+                                    {{ asset('assets/images/no-image.png') }}
+                                {% endif %}" alt="image1">
+                    </div>
+                    <div class="col-md-7">
+                        <p>{{ toy.description }}</p>
+                    </div>
+                </div>
+                <div class="blog-item-footer">
+                    <!-- Comments -->
+                    <div class="blog-recent-comments panel panel-default margin-bottom-30">
+                        <div class="panel-heading">
+                            <h3>Comments</h3>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-2 profile-thumb">
+                                        <a href="#">
+                                            <img class="media-object" src="assets/img/profiles/99.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h4>Great Article</h4>
+                                        <p>Donec id erum quidem rerumd facilis est et expedita distinctio lorem ipsum dolorlit non mi portas sats eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
+                                            ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna..</p>
+                                        <span class="date">
+                                                                    <i class="fa fa-clock-o"></i>5 hours ago</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- Comment Form -->
+                            <li class="list-group-item">
+                                <div class="blog-comment-form">
+                                    <div class="row margin-top-20">
+                                        <div class="col-md-12">
+                                            <div class="pull-left">
+                                                <h3>Leave a Comment</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-top-20">
+                                        <div class="col-md-12">
+                                            <form>
+                                                <label>Name</label>
+                                                <div class="row margin-bottom-20">
+                                                    <div class="col-md-7 col-md-offset-0">
+                                                        <input class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <label>Email
+                                                    <span>*</span>
+                                                </label>
+                                                <div class="row margin-bottom-20">
+                                                    <div class="col-md-7 col-md-offset-0">
+                                                        <input class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <label>Message</label>
+                                                <div class="row margin-bottom-20">
+                                                    <div class="col-md-11 col-md-offset-0">
+                                                        <textarea class="form-control" rows="8"></textarea>
+                                                    </div>
+                                                </div>
+                                                <p>
+                                                    <button class="btn btn-primary" type="submit">Send Message</button>
+                                                </p>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- End Comment Form -->
+                        </ul>
+                    </div>
+                    <!-- End Comments -->
+                </div>
+            </div>
+        </div>
+        <!-- End Blog Post -->
+    </div>
+    <!-- End Main Column -->
+    <!-- Side Column -->
+    <div class="col-md-3 margin-top-30">
+        <div class="blog-tags">
+            <h3>Категории</h3>
+            <ul class="blog-tags">
+                {% for category in categories %}
+                    <li>
+                        <a href="{{ path('viazushki_toy_by_category') }}/{{ category.slug }}" class="blog-tag">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="blog-tags">
+            <h3>Теги</h3>
+            <ul class="blog-tags">
+                {% for tag in tags %}
+                    <li>
+                        <a href="{{ path('viazushki_toy_by_tag') }}/{{ tag.slug }}" class="blog-tag">{{ tag.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="recent-posts">
+            <h4>Последние добавления</h4>
+            <ul class="posts-list margin-top-10">
+                {% for lastToy in lastToys %}
+                    <li>
+                        <div class="recent-post">
+                            <a href="">
+                                <img class="pull-left" src="
+                                    {% if lastToy.mainImage %}
+                                        {{ asset('assets/images/') }}{{ lastToy.mainImage }}
+                                    {% else %}
+                                        {{ asset('assets/images/no-image.png') }}
+                                    {% endif %}" alt="thumb1">
+                            </a>
+                            <a href="#" class="posts-list-title">Sidebar post example</a>
+                            <br>
+                            <span class="recent-post-date">July 30, 2013</span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <!-- End Side Column -->
+{% endblock %}
+
+{% block footer %}
+    {% include '@Viazushki/Includes/_footer.html.twig' %}
+{% endblock %}
+
+{% block footerMenu %}
+    {% include '@Viazushki/Includes/_footerMenu.html.twig' %}
+{% endblock %}

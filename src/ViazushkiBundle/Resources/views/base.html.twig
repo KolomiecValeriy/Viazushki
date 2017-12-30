@@ -32,7 +32,7 @@
                     {% endif %}
                     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') %}
                     <div class="admin">
-                        <a href="{{ path('viazushki_homepage') }}admin" title="Админка"><i class="fa fa-user fa-2x"
+                        <a href="{{ path('sonata_admin_dashboard') }}" title="Админка"><i class="fa fa-user fa-2x"
                                                                                            aria-hidden="true"></i></a>
                     </div>
                     {% endif %}

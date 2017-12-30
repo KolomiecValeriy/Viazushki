@@ -34,6 +34,14 @@ class Toy
     /**
      * @var string
      *
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(unique=true)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -297,5 +305,13 @@ class Toy
         $this->mainImage = $mainImage;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

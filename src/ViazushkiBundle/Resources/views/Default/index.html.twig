@@ -15,7 +15,7 @@
                         <span class="month">{{ toy.createdAt|date('M') }}</span>
                     </div>
                     <h2>
-                        <a href="#">{{ toy.name }}</a>
+                        <a href="{{ path('viazushki_toy', {'slug': toy.slug}) }}">{{ toy.name }}</a>
                     </h2>
                     <div class="blog-post-details">
                         <div class="blog-post-details-item blog-post-details-item-left user-icon">
@@ -25,7 +25,7 @@
                         <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
                             <i class="fa fa-tags"></i>
                             {% for tag in toy.tags %}
-                                <a href="#">{{ tag.name }}</a>{% if not loop.last %},{% endif %}
+                                <a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}">{{ tag.name }}</a>{% if not loop.last %},{% endif %}
                             {% endfor %}
                         </div>
                         <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
@@ -80,7 +80,7 @@
             <ul class="blog-tags">
                 {% for category in categories %}
                     <li>
-                        <a href="{{ path('viazushki_toy_by_category') }}/{{ category.slug }}" class="blog-tag">{{ category.name }}</a>
+                        <a href="{{ path('viazushki_toy_by_category', {'slug': category.slug}) }}" class="blog-tag">{{ category.name }}</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -90,7 +90,7 @@
             <ul class="blog-tags">
                 {% for tag in tags %}
                     <li>
-                        <a href="{{ path('viazushki_toy_by_tag') }}/{{ tag.slug }}" class="blog-tag">{{ tag.name }}</a>
+                        <a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}" class="blog-tag">{{ tag.name }}</a>
                     </li>
                 {% endfor %}
             </ul>
