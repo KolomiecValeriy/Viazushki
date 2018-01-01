@@ -2,6 +2,7 @@
 
 namespace ViazushkiBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Validator\Constraints;
@@ -61,9 +62,15 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $plainPassword;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ViazushkiBundle\Entity\Comment", mappedBy="user")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->isActive = true;
+        $this->comments = new ArrayCollection();
         // $this->salt = md5(uniqid(null, true));
     }
 
@@ -245,6 +252,38 @@ class User implements AdvancedUserInterface, \Serializable
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection|Comment[]
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comment $comment
+     *
+     * @return $this
+     */
+    public function addComment(Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * @param Comment $comment
+     *
+     * @return $this
+     */
+    public function removeComment(Comment $comment)
+    {
+        $this->comments->removeElement($comment);
 
         return $this;
     }

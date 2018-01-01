@@ -33,7 +33,7 @@
                     <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
                         <a href="">
                             <i class="fa fa-comments"></i>
-                            3 Comments
+                            {{ toy.comments|length }} Комментария
                         </a>
                     </div>
                     <!-- End # of Comments -->
@@ -57,62 +57,48 @@
                     <!-- Comments -->
                     <div class="blog-recent-comments panel panel-default margin-bottom-30">
                         <div class="panel-heading">
-                            <h3>Comments</h3>
+                            <h3>Коментарии</h3>
                         </div>
                         <ul class="list-group">
+                            {% for comment in toy.comments %}
                             <li class="list-group-item">
                                 <div class="row">
-                                    <div class="col-md-2 profile-thumb">
-                                        <a href="#">
-                                            <img class="media-object" src="assets/img/profiles/99.jpg" alt="">
-                                        </a>
-                                    </div>
                                     <div class="col-md-10">
-                                        <h4>Great Article</h4>
-                                        <p>Donec id erum quidem rerumd facilis est et expedita distinctio lorem ipsum dolorlit non mi portas sats eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh,
-                                            ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna..</p>
+                                        <p>{{ comment.message }}</p>
                                         <span class="date">
-                                                                    <i class="fa fa-clock-o"></i>5 hours ago</span>
+                                        <i class="fa fa-user"></i>&nbsp;{{ comment.user.username }}</span>
+                                        <i class="fa fa-clock-o"></i>&nbsp;{{ comment.updatedAt|date('d-m-Y H:i') }}</span>
                                     </div>
                                 </div>
                             </li>
+                            {% endfor %}
                             <!-- Comment Form -->
                             <li class="list-group-item">
                                 <div class="blog-comment-form">
                                     <div class="row margin-top-20">
                                         <div class="col-md-12">
                                             <div class="pull-left">
-                                                <h3>Leave a Comment</h3>
+                                                <h3>Оставте комментарий</h3>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row margin-top-20">
                                         <div class="col-md-12">
-                                            <form>
-                                                <label>Name</label>
+                                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                                {{ form_start(commentForm, {'action': path('viazushki_comment_add', {'toyId': toy.id}), 'method': 'POST'}) }}
                                                 <div class="row margin-bottom-20">
-                                                    <div class="col-md-7 col-md-offset-0">
-                                                        <input class="form-control" type="text">
-                                                    </div>
-                                                </div>
-                                                <label>Email
-                                                    <span>*</span>
-                                                </label>
-                                                <div class="row margin-bottom-20">
-                                                    <div class="col-md-7 col-md-offset-0">
-                                                        <input class="form-control" type="text">
-                                                    </div>
-                                                </div>
-                                                <label>Message</label>
-                                                <div class="row margin-bottom-20">
-                                                    <div class="col-md-11 col-md-offset-0">
-                                                        <textarea class="form-control" rows="8"></textarea>
+                                                    <div class="col-md-11 col-md-offset-0 {% if form_errors(commentForm.message) %}has-error{% endif %}">
+                                                    {{ form_errors(commentForm.message) }}
+                                                    {{ form_widget(commentForm.message, { 'attr': {'rows': 4} }) }}
                                                     </div>
                                                 </div>
                                                 <p>
-                                                    <button class="btn btn-primary" type="submit">Send Message</button>
+                                                    {{ form_widget(commentForm.submit, { 'label': 'Комментировать', 'attr': { 'class': 'btn btn-primary'} }) }}
                                                 </p>
-                                            </form>
+                                                {{ form_end(commentForm) }}
+                                            {% else %}
+                                                <a href="{{ path('viazushki_login') }}">Войдите</a> чтоб оставить комментарий.
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

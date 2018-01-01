@@ -3,12 +3,15 @@
 namespace ViazushkiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use ViazushkiBundle\Entity\Category;
+use ViazushkiBundle\Entity\Comment;
 use ViazushkiBundle\Entity\Tag;
 use ViazushkiBundle\Entity\Toy;
+use ViazushkiBundle\Form\Type\CommentType;
 
 class DefaultController extends Controller
 {
@@ -38,20 +41,23 @@ class DefaultController extends Controller
     /**
      * @ParamConverter("toy", class="ViazushkiBundle:Toy")
      */
-    public function showToyAction(Toy $toy)
+    public function showToyAction(Request $request, Toy $toy)
     {
         $em = $this->getDoctrine()->getManager();
+        $comment = new Comment();
+        $commentForm = $this->createForm(CommentType::class, $comment);
 
         $categories = $em->getRepository('ViazushkiBundle:Category')->findAll();
         $tags = $em->getRepository('ViazushkiBundle:Tag')->findAll();
         $toyRepository = $em->getRepository('ViazushkiBundle:Toy');
 
-
+        $commentForm->handleRequest($request);
         return $this->render('@Viazushki/Default/showToy.html.twig', [
             'toy' => $toyRepository->find($toy),
             'lastToys' => $toyRepository->findLastAdded(2),
             'categories' => $categories,
             'tags' => $tags,
+            'commentForm' => $commentForm->createView(),
         ]);
     }
 

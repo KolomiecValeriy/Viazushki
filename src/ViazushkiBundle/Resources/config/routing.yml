@@ -1,5 +1,5 @@
 viazushki_homepage:
-    path:     /
+    path: /
     defaults: { _controller: ViazushkiBundle:Default:index }
 
 viazushki_login:
@@ -11,17 +11,23 @@ viazushki_register:
     defaults: { _controller: ViazushkiBundle:Security:register }
 
 viazushki_contacts:
-    path:     /contacts
+    path: /contacts
     defaults: { _controller: ViazushkiBundle:Contact:contact }
 
 viazushki_toy_by_tag:
-    path:     /tag/{slug}
+    path: /tag/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByTag, slug: ''}
 
 viazushki_toy_by_category:
-    path:     /category/{slug}
+    path: /category/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByCategory, slug: ''}
 
 viazushki_toy:
-    path:   /{slug}
+    path: /{slug}
     defaults: { _controller: ViazushkiBundle:Default:showToy }
+
+viazushki_comment_add:
+    path: /comment/add/{toyId}
+    defaults: { _controller: ViazushkiBundle:Comment:add, toyId: 0 }
+    requirements:
+        toyId: '\d+'
