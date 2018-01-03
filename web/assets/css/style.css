@@ -1,6 +1,9 @@
 a {
     text-decoration: none !important;
 }
+.hidd {
+    display: none;
+}
 /* Logo */
 .logo {
     position: absolute;
@@ -51,4 +54,59 @@ p.site-slogan {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+/* Comments */
+.blog-recent-comments li {
+}
+.comment {
+    margin-bottom: 10px;
+}
+.comment-body {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #f5f5f5;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+.comment-footer {
+    font-size: 12px;
+    color: #ccc;
+}
+.reply {
+    cursor: pointer;
+    transition: color 200ms;
+}
+.reply i {
+    margin-right: 5px;
+}
+.reply:hover {
+    color: #000;
+}
+.comment-reply li {
+    border: 1px solid #f5f5f5;
+    border-radius: 5px !important;
+    background-color: #f5f5f5;
+}
+.comment-reply li ~ li {
+    margin-top: 5px;
+}
+.comment-reply .comment {
+    margin-bottom: 0;
+}
+.comment-reply .comment-body {
+    border: 1px solid #fff;
+    background-color: #fff;
+}
+.comment-reply-form {
+    display: none;
+    z-index: 1;
+}
+.blog-item-footer .blog-recent-comments .list-group-item {
+    border-top: 0 !important;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.comment-footer span ~ span {
+    margin-left: 10px;
 }

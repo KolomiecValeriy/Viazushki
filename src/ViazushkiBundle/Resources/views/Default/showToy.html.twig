@@ -60,17 +60,56 @@
                             <h3>Коментарии</h3>
                         </div>
                         <ul class="list-group">
-                            {% for comment in toy.comments %}
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <p>{{ comment.message }}</p>
-                                        <span class="date">
-                                        <i class="fa fa-user"></i>&nbsp;{{ comment.user.username }}</span>
-                                        <i class="fa fa-clock-o"></i>&nbsp;{{ comment.updatedAt|date('d-m-Y H:i') }}</span>
+                            {% for comment in toy.comments if not comment.parent %}
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="comment">
+                                                <div class="comment-body">{{ comment.message }}</div>
+                                                <div class="comment-footer">
+                                                    <span><i class="fa fa-user"></i>&nbsp;{{ comment.user.username }}</span>
+                                                    <span><i class="fa fa-clock-o"></i>&nbsp;{{ comment.updatedAt|date('d-m-Y H:i') }}</span>
+                                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                                        <span data-comment-reply="{{ comment.id }}" class="pull-right reply"><i class="fa fa-reply"></i>Ответить</span>
+                                                    {% endif %}
+                                                    <span data-comment-reply-all class="pull-right {% if comment.children|length > 0 %}reply{% endif %}">Ответов: {{ comment.children|length }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
+                                    <div data-comment-reply-form="{{ comment.id }}" class="col-md-12 comment-reply-form">
+                                        {{ form_start(commentsForms[comment.id], {'action': path('viazushki_comment_addChild', {'toyId': toy.id, 'parentId': comment.id}), 'method': 'POST'}) }}
+                                        <div class="row margin-bottom-20">
+                                            <div class="col-md-12 col-md-offset-0 {% if form_errors(commentsForms[comment.id].message) %}has-error{% endif %}">
+                                                {{ form_errors(commentsForms[comment.id].message) }}
+                                                {{ form_widget(commentsForms[comment.id].message, { 'attr': {'rows': 4} }) }}
+                                            </div>
+                                        </div>
+                                        <p>
+                                            {{ form_widget(commentsForms[comment.id].submit, { 'label': 'Ответить', 'attr': { 'class': 'btn btn-primary'} }) }}
+                                        </p>
+                                        {{ form_end(commentsForms[comment.id]) }}
+                                    </div>
+                                    {% if comment.children|length > 0 %}
+                                        <ul class="list-group hidd comment-reply">
+                                        {% for commentChild in comment.children %}
+                                            <li class="list-group-item">
+                                                <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="comment">
+                                                        <div class="comment-body">{{ commentChild.message }}</div>
+                                                        <div class="comment-footer">
+                                                            <span><i class="fa fa-user"></i>&nbsp;{{ commentChild.user.username }}</span>
+                                                            <span><i class="fa fa-clock-o"></i>&nbsp;{{ commentChild.updatedAt|date('d-m-Y H:i') }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+                                        </ul>
+                                    {% endif %}
+                                </li>
                             {% endfor %}
                             <!-- Comment Form -->
                             <li class="list-group-item">
@@ -87,7 +126,7 @@
                                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                                 {{ form_start(commentForm, {'action': path('viazushki_comment_add', {'toyId': toy.id}), 'method': 'POST'}) }}
                                                 <div class="row margin-bottom-20">
-                                                    <div class="col-md-11 col-md-offset-0 {% if form_errors(commentForm.message) %}has-error{% endif %}">
+                                                    <div class="col-md-12 col-md-offset-0 {% if form_errors(commentForm.message) %}has-error{% endif %}">
                                                     {{ form_errors(commentForm.message) }}
                                                     {{ form_widget(commentForm.message, { 'attr': {'rows': 4} }) }}
                                                     </div>

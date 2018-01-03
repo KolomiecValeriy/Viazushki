@@ -7,8 +7,9 @@ use Symfony\Component\Validator\Constraints;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
+ * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="Comment")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="ViazushkiBundle\Repository\CommentRepository")
  */
 class Comment
 {
@@ -57,6 +58,44 @@ class Comment
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+
+    /**
+     * @Gedmo\TreeLeft
+     * @ORM\Column(name="lft", type="integer")
+     */
+    private $lft;
+
+    /**
+     * @Gedmo\TreeLevel
+     * @ORM\Column(name="lvl", type="integer")
+     */
+    private $lvl;
+
+    /**
+     * @Gedmo\TreeRight
+     * @ORM\Column(name="rgt", type="integer")
+     */
+    private $rgt;
+
+    /**
+     * @Gedmo\TreeRoot
+     * @ORM\ManyToOne(targetEntity="Comment")
+     * @ORM\JoinColumn(name="tree_root", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $root;
+
+    /**
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="Comment", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="parent")
+     * @ORM\OrderBy({"lft" = "ASC"})
+     */
+    private $children;
 
     /**
      * @return int
@@ -162,5 +201,38 @@ class Comment
         return $this;
     }
 
+    public function getParent()
+    {
+        return $this->parent;
+    }
 
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+    }
+
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
+    public function getLvl()
+    {
+        return $this->lvl;
+    }
+
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    public function getChildren()
+    {
+        return $this->children;
+    }
 }

@@ -28,6 +28,13 @@ viazushki_toy:
 
 viazushki_comment_add:
     path: /comment/add/{toyId}
-    defaults: { _controller: ViazushkiBundle:Comment:add, toyId: 0 }
+    defaults: { _controller: ViazushkiBundle:Comment:add }
     requirements:
         toyId: '\d+'
+
+viazushki_comment_addChild:
+    path: /comment/add_child/{toyId}/{parentId}
+    defaults: { _controller: ViazushkiBundle:Comment:addChild }
+    requirements:
+        toyId: '\d+'
+        parentId: '\d+'

@@ -20,6 +20,20 @@ $(document).ready(function () {
             }
         })
     });
+
+    $('[data-comment-reply]').on('click', function (event) {
+       var currentCommentId = $(event.currentTarget).attr('data-comment-reply');
+
+        $('[data-comment-reply-form]').each(function (i, current) {
+            if ($(current).attr('data-comment-reply-form') === currentCommentId) {
+                $(current).toggle(300);
+            }
+        });
+    });
+
+    $('[data-comment-reply-all]').on('click', function (event) {
+        $(event.currentTarget).closest('li').find('ul').toggle(300);
+    });
 });
 
 // Portfolio

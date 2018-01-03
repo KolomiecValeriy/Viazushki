@@ -50,14 +50,21 @@ class DefaultController extends Controller
         $categories = $em->getRepository('ViazushkiBundle:Category')->findAll();
         $tags = $em->getRepository('ViazushkiBundle:Tag')->findAll();
         $toyRepository = $em->getRepository('ViazushkiBundle:Toy');
+        $toy = $toyRepository->find($toy);
+
+        $commentsForms = [];
+        foreach ($toy->getComments() as $comm) {
+            $commentsForms[$comm->getId()] = $this->createForm(CommentType::class, $comment)->createView();
+        }
 
         $commentForm->handleRequest($request);
         return $this->render('@Viazushki/Default/showToy.html.twig', [
-            'toy' => $toyRepository->find($toy),
+            'toy' => $toy,
             'lastToys' => $toyRepository->findLastAdded(2),
             'categories' => $categories,
             'tags' => $tags,
             'commentForm' => $commentForm->createView(),
+            'commentsForms' => $commentsForms,
         ]);
     }
 
