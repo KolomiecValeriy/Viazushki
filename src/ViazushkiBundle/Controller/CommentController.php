@@ -4,6 +4,7 @@ namespace ViazushkiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use ViazushkiBundle\Entity\Comment;
 use ViazushkiBundle\Form\Type\CommentType;
 
@@ -40,6 +41,34 @@ class CommentController extends Controller
         return $this->forward('ViazushkiBundle:Default:showToy', [
             'toy' => $toy,
         ]);
+    }
+
+    public function editAction(Request $request, $commentId)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $commentRepository = $em->getRepository('ViazushkiBundle:Comment');
+        $comment = $commentRepository->find($commentId);
+
+        $commentForm = $this->createForm(CommentType::class, $comment);
+
+        $commentForm->handleRequest($request);
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $comment
+                ->setMessage($commentForm->get('message')->getData())
+            ;
+            $em->flush();
+
+            return $this->redirectToRoute('viazushki_toy', [
+                'slug' => $comment->getToy()->getSlug(),
+            ]);
+        }
+
+        return new Response(
+            $this->renderView('@Viazushki/Includes/_commentForm.html.twig', [
+                'commentForm' => $commentForm->createView(),
+                'commentId' => $comment->getId(),
+            ])
+        );
     }
 
     public function addChildAction(Request $request, $toyId, $parentId)

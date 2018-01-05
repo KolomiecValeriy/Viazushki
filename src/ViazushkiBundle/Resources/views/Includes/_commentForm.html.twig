@@ -1,0 +1,13 @@
+<div class="comment-edit-form">
+    {{ form_start(commentForm, {'action': path('viazushki_comment_edit', {'commentId': commentId}), 'method': 'POST'}) }}
+    <div class="row margin-bottom-20">
+        <div class="col-md-12 col-md-offset-0 {% if form_errors(commentForm.message) %}has-error{% endif %}">
+            {{ form_errors(commentForm.message) }}
+            {{ form_widget(commentForm.message, { 'attr': {'rows': 4} }) }}
+        </div>
+    </div>
+    <p>
+        {{ form_widget(commentForm.submit, { 'label': 'Сохранить', 'attr': { 'class': 'btn btn-primary', 'update': 'update'} }) }}
+    </p>
+    {{ form_end(commentForm) }}
+</div>

@@ -38,3 +38,9 @@ viazushki_comment_addChild:
     requirements:
         toyId: '\d+'
         parentId: '\d+'
+
+viazushki_comment_edit:
+    path: /comment/edit/{commentId}
+    defaults: { _controller: ViazushkiBundle:Comment:edit }
+    requirements:
+        commentId: '\d+'
