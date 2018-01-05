@@ -108,4 +108,25 @@ class CommentController extends Controller
             'toy' => $toy,
         ]);
     }
+
+    public function deleteAction($commentId)
+    {
+        if (!isset($commentId)) {
+            return $this->redirectToRoute('viazushki_homepage');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $commentRepository = $em->getRepository('ViazushkiBundle:Comment');
+        $comment = $commentRepository->find($commentId);
+        $toy = $comment->getToy();
+
+        $em->remove($comment);
+        $em->flush();
+
+        return $this->redirectToRoute('viazushki_toy', [
+            'slug' => $toy->getSlug(),
+        ]);
+
+
+    }
 }

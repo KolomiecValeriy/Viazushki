@@ -119,3 +119,8 @@ p.site-slogan {
 .comment-footer-right span ~ span {
     margin-left: 5px;
 }
+
+.ctrlSubmit {
+    color: #413344;
+    margin-left: 5px;
+}

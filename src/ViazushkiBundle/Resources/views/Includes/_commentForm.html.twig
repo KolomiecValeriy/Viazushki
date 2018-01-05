@@ -7,7 +7,8 @@
         </div>
     </div>
     <p>
-        {{ form_widget(commentForm.submit, { 'label': 'Сохранить', 'attr': { 'class': 'btn btn-primary', 'update': 'update'} }) }}
+        {{ form_widget(commentForm.submit, { 'label': 'Сохранить', 'attr': { 'class': 'btn btn-primary', 'data-coments': 'toogle'} }) }}
+        <span class="ctrlSubmit">или <b>Ctrl + Enter</b></span>
     </p>
     {{ form_end(commentForm) }}
 </div>

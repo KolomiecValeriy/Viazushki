@@ -30,7 +30,7 @@
                     </div>
                     <!-- End Tags -->
                     <!-- # of Comments -->
-                    <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
+                    <div data-toy-comments-count class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
                         <a href="">
                             <i class="fa fa-comments"></i>
                             {{ toy.comments|length }} Комментария
@@ -61,7 +61,7 @@
                         </div>
                         <ul class="list-group">
                             {% for comment in toy.comments if not comment.parent %}
-                                <li class="list-group-item">
+                                <li class="list-group-item" data-comment-id="{{ comment.id }}">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="comment">
@@ -76,6 +76,7 @@
                                                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                                             <span data-comment-reply="{{ comment.id }}" class="reply"><i class="fa fa-reply"></i>Ответить</span>
                                                             <span data-comment-update="{{ comment.id }}" class="reply"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                                                            <span data-comment-delete="{{ comment.id }}" class="reply"><i class="fa fa-times" aria-hidden="true"></i></span>
                                                         {% endif %}
                                                     </div>
                                                 </div>
@@ -91,14 +92,15 @@
                                             </div>
                                         </div>
                                         <p>
-                                            {{ form_widget(commentsForms[comment.id].submit, { 'label': 'Ответить', 'attr': { 'class': 'btn btn-primary'} }) }}
+                                            {{ form_widget(commentsForms[comment.id].submit, { 'label': 'Ответить', 'attr': { 'class': 'btn btn-primary', 'data-coments': 'toogle'} }) }}
+                                            <span class="ctrlSubmit">или <b>Ctrl + Enter</b></span>
                                         </p>
                                         {{ form_end(commentsForms[comment.id]) }}
                                     </div>
                                     {% if comment.children|length > 0 %}
                                         <ul class="list-group hidd comment-reply">
                                         {% for commentChild in comment.children %}
-                                            <li class="list-group-item">
+                                            <li class="list-group-item" data-comment-id="{{ comment.id }}">
                                                 <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="comment">
@@ -110,6 +112,7 @@
                                                             </div>
                                                             <div class="comment-footer-right">
                                                                 <span data-comment-update="{{ commentChild.id }}" class="reply"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                                                                <span data-comment-delete="{{ commentChild.id }}" class="reply"><i class="fa fa-times" aria-hidden="true"></i></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -143,6 +146,7 @@
                                                 </div>
                                                 <p>
                                                     {{ form_widget(commentForm.submit, { 'label': 'Комментировать', 'attr': { 'class': 'btn btn-primary'} }) }}
+                                                    <span class="ctrlSubmit">или <b>Ctrl + Enter</b></span>
                                                 </p>
                                                 {{ form_end(commentForm) }}
                                             {% else %}

@@ -44,3 +44,9 @@ viazushki_comment_edit:
     defaults: { _controller: ViazushkiBundle:Comment:edit }
     requirements:
         commentId: '\d+'
+
+viazushki_comment_delete:
+    path: /comment/delete/{commentId}
+    defaults: { _controller: ViazushkiBundle:Comment:delete }
+    requirements:
+        commentId: '\d+'
