@@ -61,7 +61,7 @@ class CommentVoter extends Voter
         $now = new \DateTime();
         $time = $now->getTimestamp() - $comment->getCreatedAt()->getTimestamp();
 
-        if ($time < $commentEditTime && $user = $comment->getUser()) {
+        if ($time < $commentEditTime && $user == $comment->getUser()) {
             return true;
         } else {
             return false;
