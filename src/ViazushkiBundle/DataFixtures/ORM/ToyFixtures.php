@@ -32,8 +32,10 @@ class ToyFixtures extends Fixture
                 ->addTag($this->getReference('tag'.$j));
 
             $manager->persist($toy);
-            $manager->flush();
+            $this->setReference('toy'.$i, $toy);
         }
+
+        $manager->flush();
     }
 
     public function getDependencies()

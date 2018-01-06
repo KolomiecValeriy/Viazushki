@@ -206,9 +206,15 @@ class Comment
         return $this->parent;
     }
 
+    /**
+     * @param Comment $parent
+     * @return $this
+     */
     public function setParent($parent)
     {
         $this->parent = $parent;
+
+        return $this;
     }
 
     public function getLft()

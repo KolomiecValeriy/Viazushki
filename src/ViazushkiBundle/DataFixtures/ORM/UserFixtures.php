@@ -54,6 +54,7 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
             ;
 
             $manager->persist($user);
+            $this->setReference('user'.$i, $user);
         }
 
         $manager->flush();
