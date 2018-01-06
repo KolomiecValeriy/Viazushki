@@ -49,6 +49,8 @@ class CommentController extends Controller
         $commentRepository = $em->getRepository('ViazushkiBundle:Comment');
         $comment = $commentRepository->find($commentId);
 
+        $this->denyAccessUnlessGranted('edit', $comment);
+
         $commentForm = $this->createForm(CommentType::class, $comment);
 
         $commentForm->handleRequest($request);
@@ -118,6 +120,11 @@ class CommentController extends Controller
         $em = $this->getDoctrine()->getManager();
         $commentRepository = $em->getRepository('ViazushkiBundle:Comment');
         $comment = $commentRepository->find($commentId);
+
+        if (!$this->isGranted('ROLE_ADMIN', $comment)) {
+            throw $this->createAccessDeniedException();
+        }
+
         $toy = $comment->getToy();
 
         $em->remove($comment);

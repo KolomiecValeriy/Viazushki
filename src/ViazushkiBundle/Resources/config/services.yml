@@ -13,3 +13,11 @@ services:
     viazushki.viazushki_extension:
         class: ViazushkiBundle\Twig\ViazushkiExtenson
         tags: [twig.extension]
+
+    viazushki.comment_voter:
+        class: ViazushkiBundle\Security\CommentVoter
+        arguments:
+            $decisionManager: '@security.access.decision_manager'
+            $commentEditTime: '%comment_edit_time%'
+        tags: [security.voter]
+#        public: false

@@ -75,8 +75,12 @@
                                                         <span data-comment-reply-all class="{% if comment.children|length > 0 %}reply{% endif %}">Ответов: {{ comment.children|length }}</span>
                                                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                                             <span data-comment-reply="{{ comment.id }}" class="reply"><i class="fa fa-reply"></i>Ответить</span>
+                                                            {% if is_granted('edit', comment) %}
                                                             <span data-comment-update="{{ comment.id }}" class="reply"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                                                            {% endif %}
+                                                            {% if is_granted('ROLE_ADMIN') %}
                                                             <span data-comment-delete="{{ comment.id }}" class="reply"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                                            {% endif %}
                                                         {% endif %}
                                                     </div>
                                                 </div>
@@ -111,8 +115,12 @@
                                                                 <span><i class="fa fa-clock-o"></i>&nbsp;{{ commentChild.updatedAt|date('d-m-Y H:i') }}</span>
                                                             </div>
                                                             <div class="comment-footer-right">
+                                                                {% if is_granted('edit', commentChild) %}
                                                                 <span data-comment-update="{{ commentChild.id }}" class="reply"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                                                                {% endif %}
+                                                                {% if is_granted('ROLE_ADMIN') %}
                                                                 <span data-comment-delete="{{ commentChild.id }}" class="reply"><i class="fa fa-times" aria-hidden="true"></i></span>
+                                                                {% endif %}
                                                             </div>
                                                         </div>
                                                     </div>
