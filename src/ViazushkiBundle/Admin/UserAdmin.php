@@ -21,8 +21,8 @@ class UserAdmin extends AbstractAdmin
             ->add('plainPassword', 'text')
             ->add('roles','choice', [
                     'choices'=>[
+                        'Super Admin' => 'ROLE_SUPER_ADMIN',
                         'Admin' => 'ROLE_ADMIN',
-                        'Manager' => 'ROLE_MANAGER',
                         'User' => 'ROLE_USER',
                     ],
                     'multiple'=>true,

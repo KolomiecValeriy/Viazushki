@@ -37,10 +37,10 @@ security:
                 #always_remember_me: true
 
     access_control:
-        - { path: ^/admin/viazushki/user, roles: ROLE_ADMIN }
-        - { path: ^/admin, roles: ROLE_MANAGER }
+        - { path: ^/admin/viazushki/user, roles: ROLE_SUPER_ADMIN }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
     role_hierarchy:
-        ROLE_MANAGER:   ROLE_USER
-        ROLE_ADMIN:     [ROLE_MANAGER, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN:   ROLE_USER
+        ROLE_SUPER_ADMIN:     [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]

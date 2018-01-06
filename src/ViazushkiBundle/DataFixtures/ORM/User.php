@@ -26,21 +26,21 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
 
         $encoder = $factory->getEncoder($admin);
         $admin
-            ->setUsername('admin')
-            ->setEmail('admin@gmail.com')
-            ->setPassword($encoder->encodePassword('admin', $admin))
+            ->setUsername('superAdmin')
+            ->setEmail('superAdmin@gmail.com')
+            ->setPassword($encoder->encodePassword('superAdmin', $admin))
             ->setIsActive(true)
-            ->setRoles(['ROLE_ADMIN'])
+            ->setRoles(['ROLE_SUPER_ADMIN'])
         ;
         $manager->persist($admin);
 
         $userManager = new User();
         $userManager
-            ->setUsername('manager')
-            ->setEmail('manager@gmail.com')
-            ->setPassword($encoder->encodePassword('manager', $userManager))
+            ->setUsername('admin')
+            ->setEmail('admin@gmail.com')
+            ->setPassword($encoder->encodePassword('admin', $userManager))
             ->setIsActive(true)
-            ->setRoles(['ROLE_MANAGER'])
+            ->setRoles(['ROLE_ADMIN'])
         ;
         $manager->persist($userManager);
 
