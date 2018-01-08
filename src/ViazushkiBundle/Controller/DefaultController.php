@@ -52,6 +52,14 @@ class DefaultController extends Controller
         $toyRepository = $em->getRepository('ViazushkiBundle:Toy');
         $toy = $toyRepository->find($toy);
 
+        $commentRepository = $em->getRepository('ViazushkiBundle:Comment');
+        $paginator = $this->get('knp_paginator');
+        $commentPagination = $paginator->paginate(
+            $commentRepository->finByToyQuery($toy),
+            $request->query->getInt('page', 1),
+            5
+        );
+
         $commentsForms = [];
         foreach ($toy->getComments() as $comm) {
             $commentsForms[$comm->getId()] = $this->createForm(CommentType::class, $comment)->createView();
@@ -65,6 +73,7 @@ class DefaultController extends Controller
             'tags' => $tags,
             'commentForm' => $commentForm->createView(),
             'commentsForms' => $commentsForms,
+            'commentPagination' => $commentPagination,
         ]);
     }
 

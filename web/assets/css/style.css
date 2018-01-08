@@ -4,6 +4,11 @@ a {
 .hidd {
     display: none;
 }
+.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 /* Logo */
 .logo {
     position: absolute;

@@ -27,8 +27,8 @@ $(document).ready(function () {
         var current = $(event.currentTarget);
         var currentId = current.attr('data-toy-like');
         var href = current.find('a').attr('href');
-        $.get(href, function (event) {
-            current.html($(event).find('[data-toy-like='+currentId+']'));
+        $.get(href, function (result) {
+            current.html($(result).find('[data-toy-like='+currentId+']'));
         });
     });
 
@@ -116,6 +116,19 @@ function initComments() {
             initComments();
             initSubmitComment();
         });
+    });
+
+    $('.blog-recent-comments .pagination li').on('click', function (event) {
+        event.preventDefault();
+        var current = $(event.currentTarget);
+        var href;
+        if (href = current.find('a').attr('href')) {
+            $.get(href, function (result) {
+                current.closest('.blog-recent-comments').html($(result).find('.blog-recent-comments').html());
+                initComments();
+                initSubmitComment();
+            });
+        }
     });
 }
 

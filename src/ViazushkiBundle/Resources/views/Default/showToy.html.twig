@@ -74,7 +74,7 @@
                             <h3>Коментарии</h3>
                         </div>
                         <ul class="list-group">
-                            {% for comment in toy.comments if not comment.parent %}
+                            {% for comment in commentPagination %}
                                 <li class="list-group-item" data-comment-id="{{ comment.id }}">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -146,6 +146,7 @@
                                     {% endif %}
                                 </li>
                             {% endfor %}
+                            {{ knp_pagination_render(commentPagination) }}
                             <!-- Comment Form -->
                             <li class="list-group-item">
                                 <div class="blog-comment-form">
