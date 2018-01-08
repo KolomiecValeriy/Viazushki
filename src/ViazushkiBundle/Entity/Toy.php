@@ -104,11 +104,17 @@ class Toy
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ViazushkiBundle\Entity\Like", mappedBy="toy")
+     */
+    private $like;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->like = new ArrayCollection();
     }
 
     public function __toString()
@@ -349,6 +355,38 @@ class Toy
     public function removeComment(Comment $comment)
     {
         $this->comments->removeElement($comment);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection|Like[]
+     */
+    public function getLike()
+    {
+        return $this->like;
+    }
+
+    /**
+     * @param Like $like
+     *
+     * @return $this
+     */
+    public function addLike($like)
+    {
+        $this->like[] = $like;
+
+        return $this;
+    }
+
+    /**
+     * @param Like $like
+     *
+     * @return $this
+     */
+    public function removeLike(Like $like)
+    {
+        $this->like->removeElement($like);
 
         return $this;
     }

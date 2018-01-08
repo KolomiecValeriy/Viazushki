@@ -67,11 +67,16 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $comments;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ViazushkiBundle\Entity\Like", mappedBy="user")
+     */
+    private $like;
+
     public function __construct()
     {
         $this->isActive = true;
         $this->comments = new ArrayCollection();
-        // $this->salt = md5(uniqid(null, true));
+        $this->like = new ArrayCollection();
     }
 
     public function __toString()
@@ -284,6 +289,38 @@ class User implements AdvancedUserInterface, \Serializable
     public function removeComment(Comment $comment)
     {
         $this->comments->removeElement($comment);
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection|Like[]
+     */
+    public function getLike()
+    {
+        return $this->like;
+    }
+
+    /**
+     * @param Like $like
+     *
+     * @return $this
+     */
+    public function addLike($like)
+    {
+        $this->like = $like;
+
+        return $this;
+    }
+
+    /**
+     * @param Like $like
+     *
+     * @return $this
+     */
+    public function removeLike(Like $like)
+    {
+        $this->like->removeElement($like);
 
         return $this;
     }

@@ -29,14 +29,28 @@
                         {% endfor %}
                     </div>
                     <!-- End Tags -->
-                    <!-- # of Comments -->
+                    <!-- Comments -->
                     <div data-toy-comments-count class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
                         <a href="">
                             <i class="fa fa-comments"></i>
                             {{ toy.comments|length }} Комментария
                         </a>
                     </div>
-                    <!-- End # of Comments -->
+                    <!-- End of Comments -->
+                    <!-- Likes -->
+                    <div data-toy-like="{{ toy.id }}" class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{% for like in toy.like if like.user == app.user %}{{ path('viazushki_like_delete', {'toyId': toy.id}) }}{% else %}{{ path('viazushki_like_add', {'toyId': toy.id}) }}{% endfor %}">
+                            {% endif %}
+                            <i class="fa fa-thumbs-up"></i>
+                            {% for like in toy.like if like.user == app.user %}
+                                Вы {% if toy.like|length > 1 %} и ещё {{ toy.like|length - 1 }}{% endif %}
+                            {% else %}
+                                {{ toy.like|length }}
+                            {% endfor %}
+                        </a>
+                    </div>
+                    <!-- End of Likes -->
                 </div>
             </div>
             <div class="blog-item">

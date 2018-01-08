@@ -50,3 +50,15 @@ viazushki_comment_delete:
     defaults: { _controller: ViazushkiBundle:Comment:delete }
     requirements:
         commentId: '\d+'
+
+viazushki_like_add:
+    path: /like/add/{toyId}
+    defaults: { _controller: ViazushkiBundle:Like:add }
+    requirements:
+        toyId: '\d+'
+
+viazushki_like_delete:
+    path: /like/delete/{toyId}
+    defaults: { _controller: ViazushkiBundle:Like:delete }
+    requirements:
+        toyId: '\d+'

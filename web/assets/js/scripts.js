@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    //Отправка формы со страницы контактов
+    // Отправка формы со страницы контактов
     $('#contact_form').on('submit', function (event) {
         event.preventDefault();
 
@@ -19,6 +19,17 @@ $(document).ready(function () {
                 alert('Сообщение не отправлено.');
             }
         })
+    });
+
+    // Обработка лайков
+    $('[data-toy-like]').on('click', function (event) {
+        event.preventDefault();
+        var current = $(event.currentTarget);
+        var currentId = current.attr('data-toy-like');
+        var href = current.find('a').attr('href');
+        $.get(href, function (event) {
+            current.html($(event).find('[data-toy-like='+currentId+']'));
+        });
     });
 
     initComments();
