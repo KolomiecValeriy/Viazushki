@@ -20,4 +20,9 @@ services:
             $decisionManager: '@security.access.decision_manager'
             $commentEditTime: '%comment_edit_time%'
         tags: [security.voter]
-#        public: false
+
+    viazushki.menu_builder:
+        class: ViazushkiBundle\Menu\MenuBuilder
+        arguments: ['@knp_menu.factory']
+        tags:
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }

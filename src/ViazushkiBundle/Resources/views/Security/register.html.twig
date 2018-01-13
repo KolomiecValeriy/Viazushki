@@ -1,7 +1,7 @@
 {% extends '@Viazushki/layers.html.twig' %}
 
 {% block topMenu %}
-    {% include '@Viazushki/Includes/_topMenu.html.twig' %}
+    {{ knp_menu_render('main') }}
 {% endblock %}
 
 {% block content %}
