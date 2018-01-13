@@ -11,15 +11,6 @@
         <div class="login-header margin-bottom-30">
             <h2>Войдите</h2>
         </div>
-        <div class="group {% if form_errors(loginForm.username) %}has-error{% endif %}">
-            {{ form_errors(loginForm.username) }}
-            <div class="input-group margin-bottom-20">
-                <span class="input-group-addon">
-                    <i class="fa fa-user"></i>
-                </span>
-                {{ form_widget(loginForm.username, { 'attr': {'placeholder': 'Имя'} }) }}
-            </div>
-        </div>
         <div class="group {% if form_errors(loginForm.email) %}has-error{% endif %}">
             {{ form_errors(loginForm.email) }}
             <div class="input-group margin-bottom-20">
@@ -60,10 +51,3 @@
     <!-- End Login Box -->
 {% endblock %}
 
-{% block footer %}
-    {% include '@Viazushki/Includes/_footer.html.twig' %}
-{% endblock %}
-
-{% block footerMenu %}
-    {% include '@Viazushki/Includes/_footerMenu.html.twig' %}
-{% endblock %}
