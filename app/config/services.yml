@@ -58,3 +58,10 @@ services:
         public: true
         calls:
             - [ setContainer, [ '@service_container' ] ]
+
+    admin.comment:
+        class: ViazushkiBundle\Admin\CommentAdmin
+        arguments: [~, ViazushkiBundle\Entity\Comment, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Comments }
+        public: true
