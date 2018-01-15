@@ -32,7 +32,7 @@ class DefaultController extends Controller
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
-            'lastToys' => $toyRepository->findLastAdded(2),
+            'lastToys' => $toyRepository->findLastAdded(5),
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
         ]);
@@ -68,7 +68,7 @@ class DefaultController extends Controller
         $commentForm->handleRequest($request);
         return $this->render('@Viazushki/Default/showToy.html.twig', [
             'toy' => $toy,
-            'lastToys' => $toyRepository->findLastAdded(2),
+            'lastToys' => $toyRepository->findLastAdded(5),
             'categories' => $categories,
             'tags' => $tags,
             'commentForm' => $commentForm->createView(),

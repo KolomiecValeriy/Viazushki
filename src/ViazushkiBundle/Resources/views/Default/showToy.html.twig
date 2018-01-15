@@ -54,9 +54,9 @@
                 <div class="blog-post-body row margin-top-15">
                     <div class="col-md-5">
                         <img class="pull-left" src="{% if toy.mainImage %}
-                                    {{ asset('assets/images/') }}{{ toy.mainImage }}
+                                    {{- asset('assets/images/') -}}{{- toy.mainImage -}}
                                 {% else %}
-                                    {{ asset('assets/images/no-image.png') }}
+                                    {{- asset('assets/images/no-image.png') -}}
                                 {% endif %}" alt="image1">
                     </div>
                     <div class="col-md-7">
@@ -215,15 +215,15 @@
                         <div class="recent-post">
                             <a href="">
                                 <img class="pull-left" src="
-                                    {% if lastToy.mainImage %}
-                                        {{ asset('assets/images/') }}{{ lastToy.mainImage }}
+                                    {%- if lastToy.mainImage -%}
+                                        {{- asset(lastToy.mainImage.imagePath) | imagine_filter('image_54_54') -}}
                                     {% else %}
-                                        {{ asset('assets/images/no-image.png') }}
+                                        {{- asset('assets/images/no-image.png') | imagine_filter('image_54_54') -}}
                                     {% endif %}" alt="thumb1">
                             </a>
-                            <a href="#" class="posts-list-title">Sidebar post example</a>
+                            <a class="posts-list-title" href="{{ path('viazushki_toy', {'slug': lastToy.slug}) }}">{{ lastToy.name }}</a>
                             <br>
-                            <span class="recent-post-date">July 30, 2013</span>
+                            <span class="recent-post-date">{{ lastToy.createdAt|date('M d, Y') }}</span>
                         </div>
                         <div class="clearfix"></div>
                     </li>

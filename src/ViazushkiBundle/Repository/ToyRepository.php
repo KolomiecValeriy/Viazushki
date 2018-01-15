@@ -10,7 +10,10 @@ class ToyRepository extends EntityRepository
 {
     public function findAllQuery()
     {
-        return $this->createQueryBuilder('t')->getQuery();
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.updatedAt', 'DESC')
+            ->getQuery()
+        ;
     }
 
     public function findLastAdded($limit)

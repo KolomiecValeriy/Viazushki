@@ -169,3 +169,17 @@ knp_paginator:
         distinct: true
     template:
         pagination: '@ViazushkiBundle/Resources/views/pagination.html.twig'
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path:
+            web_root: '%kernel.root_dir%/../web'
+            cache_prefix: 'cache'
+
+    filter_sets:
+        cache: ~
+        image_54_54:
+            quality: 100
+            filters:
+                thumbnail: { size: [54, 54], mode: outbound }

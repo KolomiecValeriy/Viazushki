@@ -58,6 +58,12 @@ class Image
      */
     private $createdAt;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $imagePath;
 
     public function __toString()
     {
@@ -152,4 +158,19 @@ class Image
         $this->toy = $toy;
     }
 
+    /**
+     * @return string
+     */
+    public function getImagePath(): string
+    {
+        return $this->imagePath;
+    }
+
+    /**
+     * @param string $imagePath
+     */
+    public function setImagePath(string $imagePath)
+    {
+        $this->imagePath = $imagePath;
+    }
 }

@@ -14,23 +14,13 @@
                         <a href="{{ path('viazushki_toy', {'slug': toy.slug}) }}">{{ toy.name }}</a>
                     </h2>
                     <div class="blog-post-details">
-                        <div class="blog-post-details-item blog-post-details-item-left user-icon">
-                            <i class="fa fa-user"></i>
-                            <a href="#">{{ toy.author }}</a>
-                        </div>
                         <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
                             <i class="fa fa-tags"></i>
                             {% for tag in toy.tags %}
                                 <a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}">{{ tag.name }}</a>{% if not loop.last %},{% endif %}
                             {% endfor %}
                         </div>
-                        <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
-                            <a href="">
-                                <i class="fa fa-comments"></i>
-                                {{ toy.comments|length }} Комментария
-                            </a>
-                        </div>
-                        <div data-toy-like="{{ toy.id }}" class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
+                        <div data-toy-like="{{ toy.id }}" class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                 <a href="{% for like in toy.like if like.user == app.user %}{{ path('viazushki_like_delete', {'toyId': toy.id}) }}{% else %}{{ path('viazushki_like_add', {'toyId': toy.id}) }}{% endfor %}">
                             {% endif %}
@@ -42,6 +32,12 @@
                                 {% endfor %}
                             </a>
                         </div>
+                        <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
+                            <a href="">
+                                <i class="fa fa-comments"></i>
+                                {{ toy.comments|length }} Комментария
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="blog">
@@ -49,10 +45,10 @@
                     <div class="blog-post-body row margin-top-15">
                         <div class="col-md-5">
                             <img class="pull-left" src="
-                                {% if toy.mainImage %}
-                                    {{ asset('assets/images/') }}{{ toy.mainImage }}
+                                {%- if toy.mainImage -%}
+                                    {{- asset('assets/images/') -}}{{- toy.mainImage -}}
                                 {% else %}
-                                    {{ asset('assets/images/no-image.png') }}
+                                    {{- asset('assets/images/no-image.png') -}}
                                 {% endif %}" alt="thumb1">
                         </div>
                         <div class="col-md-7">
@@ -110,16 +106,15 @@
                     <li>
                         <div class="recent-post">
                             <a href="">
-                                <img class="pull-left" src="
-                                    {% if lastToy.mainImage %}
-                                        {{ asset('assets/images/') }}{{ lastToy.mainImage }}
+                                <img class="pull-left" src="{% if lastToy.mainImage %}
+                                        {{- asset(lastToy.mainImage.imagePath) | imagine_filter('image_54_54') -}}
                                     {% else %}
-                                        {{ asset('assets/images/no-image.png') }}
+                                        {{- asset('assets/images/no-image.png') | imagine_filter('image_54_54') -}}
                                     {% endif %}" alt="thumb1">
                             </a>
-                            <a href="#" class="posts-list-title">Sidebar post example</a>
+                            <a class="posts-list-title" href="{{ path('viazushki_toy', {'slug': lastToy.slug}) }}">{{ lastToy.name }}</a>
                             <br>
-                            <span class="recent-post-date">July 30, 2013</span>
+                            <span class="recent-post-date">{{ lastToy.createdAt|date('M d, Y') }}</span>
                         </div>
                         <div class="clearfix"></div>
                     </li>

@@ -64,6 +64,7 @@ class Toy
      * One Toy have one main Image
      *
      * @ORM\OneToOne(targetEntity="ViazushkiBundle\Entity\Image")
+     * @ORM\JoinColumn(name="main_image_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $mainImage;
 
