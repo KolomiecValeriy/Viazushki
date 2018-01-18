@@ -19,5 +19,6 @@
 /web/cache/*
 !/web/assets/css/
 !/web/assets/js/
+!/web/assets/fonts/
 *~
 bower_components/
