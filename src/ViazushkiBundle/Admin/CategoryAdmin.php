@@ -24,6 +24,6 @@ class CategoryAdmin extends AbstractAdmin
     {
         $list
             ->addIdentifier('name')
-            ->addIdentifier('toys');
+        ;
     }
 }
