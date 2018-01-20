@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use ViazushkiBundle\Entity\Toy;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints;
 
 /**
  * @ORM\Table(name="Tag")
@@ -28,6 +29,7 @@ class Tag
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=100, unique=true)
+     * @Constraints\NotBlank()
      */
     private $name;
 

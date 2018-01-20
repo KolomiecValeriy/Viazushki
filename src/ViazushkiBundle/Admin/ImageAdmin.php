@@ -16,9 +16,10 @@ class ImageAdmin extends AbstractAdmin
         $formMapper
             ->add('imageFile', VichFileType::class,
                 [
-                    'required' => false,
+                    'required' => true,
                 ]
             );
+
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter)
@@ -35,7 +36,10 @@ class ImageAdmin extends AbstractAdmin
 
     public function prePersist($image)
     {
-        $name = $image->getImageFile()->getClientOriginalName();
-        $image->setImagePath('assets/images/'.$name);
+        if ($image) {
+            $name = $image->getImageFile()->getClientOriginalName();
+            $image->setImagePath('assets/images/'.$name);
+            $image->setImageName($name);
+        }
     }
 }
