@@ -7,14 +7,14 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ImageAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('imageFile', VichFileType::class,
+            ->add('imageFile', FileType::class,
                 [
                     'required' => true,
                 ]
@@ -30,7 +30,6 @@ class ImageAdmin extends AbstractAdmin
     {
         $list
             ->addIdentifier('imageName')
-            ->add('toy')
         ;
     }
 

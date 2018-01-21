@@ -152,16 +152,6 @@ sonata_doctrine_orm_admin:
                 choice:     SonataAdminBundle:CRUD:show_choice.html.twig
                 url:        SonataAdminBundle:CRUD:show_url.html.twig
 
-vich_uploader:
-    db_driver: orm
-    mappings:
-        toy_image:
-            uri_prefix:         /images
-            upload_destination: '%kernel.root_dir%/../web/assets/images'
-            inject_on_load:     false
-            delete_on_update:   true
-            delete_on_remove:   true
-
 knp_paginator:
     page_range: 5
     default_options:

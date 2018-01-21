@@ -3,14 +3,11 @@
 namespace ViazushkiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Table(name="Image")
  * @ORM\Entity(repositoryClass="ViazushkiBundle\Repository\ImageRepository")
- * @Vich\Uploadable
  */
 class Image
 {
@@ -20,13 +17,6 @@ class Image
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @Vich\UploadableField(mapping="toy_image", fileNameProperty="imageName", size="imageSize")
-     *
-     * @var File
-     */
-    private $imageFile;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -43,12 +33,11 @@ class Image
     private $imageSize;
 
     /**
-     * Many Images have one Toy
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Toy", inversedBy="images")
-     * @ORM\JoinColumn(name="toy_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\Column(type="string")
      */
-    private $toy;
+    private $imagePath;
 
     /**
      * @var \DateTime
@@ -58,40 +47,17 @@ class Image
      */
     private $createdAt;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     */
-    private $imagePath;
-
     public function __toString()
     {
         return (string)$this->getImageName();
     }
 
     /**
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
-     *
-     * @return Image
+     * @return int
      */
-    public function setImageFile(File $image = null)
+    public function getId()
     {
-        $this->imageFile = $image;
-
-        if ($image) {
-            $this->createdAt = new \DateTimeImmutable();
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return File|null
-     */
-    public function getImageFile()
-    {
-        return $this->imageFile;
+        return $this->id;
     }
 
     /**
@@ -135,30 +101,6 @@ class Image
     }
 
     /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return Toy
-     */
-    public function getToy()
-    {
-        return $this->toy;
-    }
-
-    /**
-     * @param Toy $toy
-     */
-    public function setToy(Toy $toy)
-    {
-        $this->toy = $toy;
-    }
-
-    /**
      * @return string
      */
     public function getImagePath(): string
@@ -173,4 +115,21 @@ class Image
     {
         $this->imagePath = $imagePath;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
 }

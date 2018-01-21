@@ -56,8 +56,8 @@ class Toy
     /**
      * One Toy have many Images
      *
-     * @ORM\OneToMany(targetEntity="ViazushkiBundle\Entity\Image", mappedBy="toy")
      */
+//     * @ORM\OneToMany(targetEntity="ViazushkiBundle\Entity\Image", mappedBy="toy")
     private $images;
 
     /**
