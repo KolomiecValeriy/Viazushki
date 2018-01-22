@@ -21,6 +21,13 @@ class ToyAdmin extends AbstractAdmin
                     'required' => false,
                     'expanded' => true,
                 ])
+                ->add('images', 'sonata_type_model',
+                    [
+                        'required' => false,
+                        'multiple' => true,
+                        'expanded' => true,
+                    ]
+                )
             ->end()
             ->with('Settings', ['class' => 'col-md-4'])
                 ->add('category', 'sonata_type_model',

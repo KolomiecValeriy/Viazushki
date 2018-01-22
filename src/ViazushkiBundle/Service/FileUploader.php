@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class FileUploader
 {
     private $targetDir;
+    private $mimeType;
 
     public function __construct($targetDir)
     {
@@ -17,6 +18,7 @@ class FileUploader
     public function upload(UploadedFile $file)
     {
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
+        $this->mimeType = $file->getMimeType();
 
         $file->move($this->getTargetDir(), $fileName);
 
@@ -34,5 +36,10 @@ class FileUploader
     public function getTargetDir()
     {
         return $this->targetDir;
+    }
+
+    public function getMimeType()
+    {
+        return $this->mimeType;
     }
 }

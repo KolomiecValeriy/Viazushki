@@ -2,8 +2,10 @@
 
 namespace ViazushkiBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints;
 
 /**
  * @ORM\Table(name="Image")
@@ -26,11 +28,11 @@ class Image
     private $imageName;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      *
-     * @var integer
+     * @var string
      */
-    private $imageSize;
+    private $mimeType;
 
     /**
      * @var string
@@ -46,6 +48,22 @@ class Image
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @var array
+     */
+    private $files;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Toy", mappedBy="images", cascade={"persist"})
+     * @ORM\JoinColumn(name="toys", onDelete="SET NULL")
+     */
+    private $toys;
+
+    public function __construct()
+    {
+        $this->toys = new ArrayCollection();
+    }
 
     public function __toString()
     {
@@ -81,23 +99,23 @@ class Image
     }
 
     /**
-     * @param integer $imageSize
+     * @param integer $mimeType
      *
      * @return Image
      */
-    public function setImageSize($imageSize)
+    public function setMimeType($mimeType)
     {
-        $this->imageSize = $imageSize;
+        $this->mimeType = $mimeType;
 
         return $this;
     }
 
     /**
-     * @return integer|null
+     * @return string|null
      */
-    public function getImageSize()
+    public function getMimeType()
     {
-        return $this->imageSize;
+        return $this->mimeType;
     }
 
     /**
@@ -110,10 +128,14 @@ class Image
 
     /**
      * @param string $imagePath
+     *
+     * @return Image
      */
     public function setImagePath(string $imagePath)
     {
         $this->imagePath = $imagePath;
+
+        return $this;
     }
 
     /**
@@ -130,6 +152,50 @@ class Image
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFiles()
+    {
+        return $this->files;
+    }
+
+    /**
+     * @param array $files
+     */
+    public function setFiles($files)
+    {
+        $this->files = $files;
+    }
+
+    /**
+     * @param Toy $toy
+     *
+     * @return Image
+     */
+    public function addToy(Toy $toy)
+    {
+        $this->toys[] = $toy;
+
+        return $this;
+    }
+
+    /**
+     * @param Toy $toy
+     */
+    public function removeToy(Toy $toy)
+    {
+        $this->toys->removeElement($toy);
+    }
+
+    /**
+     * @return ArrayCollection|Toy[]
+     */
+    public function getToys()
+    {
+        return $this->toys;
     }
 
 }

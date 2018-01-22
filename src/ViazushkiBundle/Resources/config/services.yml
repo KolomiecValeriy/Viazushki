@@ -32,8 +32,8 @@ services:
         arguments:
             $targetDir: '%kernel.root_dir%/../web/assets/images'
 
-    viazushki.file_upload_listener:
-        class: ViazushkiBundle\Listeners\FileUploadListener
+    viazushki.image_upload_listener:
+        class: ViazushkiBundle\Listeners\ImageUploadListener
         arguments:
             $uploader: '@viazushki.file_uploader'
         tags:

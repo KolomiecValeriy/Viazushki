@@ -2,7 +2,6 @@
 
 namespace ViazushkiBundle\Admin;
 
-
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -14,9 +13,10 @@ class ImageAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('imageFile', FileType::class,
+            ->add('files', FileType::class,
                 [
                     'required' => true,
+                    'multiple' => true,
                 ]
             );
 
@@ -31,14 +31,5 @@ class ImageAdmin extends AbstractAdmin
         $list
             ->addIdentifier('imageName')
         ;
-    }
-
-    public function prePersist($image)
-    {
-        if ($image) {
-            $name = $image->getImageFile()->getClientOriginalName();
-            $image->setImagePath('assets/images/'.$name);
-            $image->setImageName($name);
-        }
     }
 }

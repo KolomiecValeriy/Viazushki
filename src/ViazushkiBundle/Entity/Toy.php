@@ -2,6 +2,7 @@
 
 namespace ViazushkiBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -56,8 +57,9 @@ class Toy
     /**
      * One Toy have many Images
      *
+     * @ORM\ManyToMany(targetEntity="ViazushkiBundle\Entity\Image", inversedBy="toys", cascade={"persist"})
+     * @ORM\JoinTable(name="ToyImages")
      */
-//     * @ORM\OneToMany(targetEntity="ViazushkiBundle\Entity\Image", mappedBy="toy")
     private $images;
 
     /**
@@ -281,26 +283,6 @@ class Toy
     }
 
     /**
-     * @return ArrayCollection|Image[]
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
-
-    /**
-     * @param Image $images
-     *
-     * @return Toy
-     */
-    public function setImages(Image $images)
-    {
-        $this->images = $images;
-
-        return $this;
-    }
-
-    /**
      * @return $mainImage
      */
     public function getMainImage()
@@ -390,5 +372,33 @@ class Toy
         $this->like->removeElement($like);
 
         return $this;
+    }
+
+    /**
+     * @return Collection|null
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param mixed $images
+     *
+     * @return Toy
+     */
+    public function addImage(Image $images)
+    {
+        $this->images[] = $images;
+
+        return $this;
+    }
+
+    /**
+     * @param Image $image
+     */
+    public function removeImages(Image $image)
+    {
+        $this->images->removeElement($image);
     }
 }
