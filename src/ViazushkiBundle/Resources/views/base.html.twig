@@ -17,7 +17,12 @@
 <div id="body_bg">
     <div id="container_header" class="container">
         <div id="header" class="row">
-            <div class="col-md-12 margin-top-15">
+            <div class="col-md-6 margin-top-25">
+                <div class="locale">
+                    <a href="{{ path('viazushki_homepage', {'_locale': 'en'}) }}">en</a> | <a href="{{ path('viazushki_homepage', {'_locale': 'ru'}) }}">ru</a>
+                </div>
+            </div>
+            <div class="col-md-6 margin-top-15">
                 <div class="authorisation circle pull-right">
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <div class="admin">

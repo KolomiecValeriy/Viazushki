@@ -1,3 +1,7 @@
+/* Settings */
+.margin-top-25 {
+    margin-top: 25px;
+}
 a {
     text-decoration: none !important;
 }
@@ -38,7 +42,17 @@ p.site-slogan {
     z-index: 20;
     white-space: nowrap;
 }
-
+/* Locale */
+.locale {
+    font-size: 14px;
+    color: #000;
+}
+.locale a {
+    color: #000;
+}
+.locale a:hover {
+    color: #fff;
+}
 /* Authorisation */
 .authorisation {
     display: flex;
@@ -61,6 +75,9 @@ p.site-slogan {
     transform: translate(-50%, -50%);
 }
 /* Comments */
+.blog-post-details i {
+    margin-right: 5px;
+}
 .blog-recent-comments li {
 }
 .comment {

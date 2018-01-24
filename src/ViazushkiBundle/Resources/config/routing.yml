@@ -1,30 +1,42 @@
 viazushki_homepage:
-    path: /
-    defaults: { _controller: ViazushkiBundle:Default:index }
+    path: /{_locale}
+    defaults: { _controller: ViazushkiBundle:Default:index, _locale: 'ru' }
+    requirements:
+        _locale: en|ru
 
 viazushki_login:
-    path: /login
+    path: /{_locale}/login
     defaults: { _controller: ViazushkiBundle:Security:login }
+    requirements:
+        _locale: en|ru
 
 viazushki_register:
-    path: /register
+    path: /{_locale}/register
     defaults: { _controller: ViazushkiBundle:Security:register }
+    requirements:
+        _locale: en|ru
 
 viazushki_contacts:
-    path: /contacts
+    path: /{_locale}/contacts
     defaults: { _controller: ViazushkiBundle:Contact:contact }
+    requirements:
+        _locale: en|ru
 
 viazushki_toy_by_tag:
     path: /tag/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByTag, slug: ''}
+    requirements:
+        _locale: en|ru
 
 viazushki_toy_by_category:
     path: /category/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByCategory, slug: ''}
 
 viazushki_toy:
-    path: /{slug}
+    path: /{_locale}/{slug}
     defaults: { _controller: ViazushkiBundle:Default:showToy }
+    requirements:
+        _locale: en|ru
 
 viazushki_comment_add:
     path: /comment/add/{toyId}

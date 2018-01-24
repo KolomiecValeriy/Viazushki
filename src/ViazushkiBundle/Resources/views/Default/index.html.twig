@@ -15,29 +15,28 @@
                     </h2>
                     <div class="blog-post-details">
                         <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
-                            <i class="fa fa-tags"></i>
-                            {% for tag in toy.tags %}
-                                <a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}">{{ tag.name }}</a>{% if not loop.last %},{% endif %}
+                            {% for tag in toy.tags %}<a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}"><i class="fa fa-tags"></i>{{- tag.name -}}</a>{% if not loop.last %},{% endif %}
                             {% endfor %}
                         </div>
                         <div data-toy-like="{{ toy.id }}" class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                 <a href="{% for like in toy.like if like.user == app.user %}{{ path('viazushki_like_delete', {'toyId': toy.id}) }}{% else %}{{ path('viazushki_like_add', {'toyId': toy.id}) }}{% endfor %}">
                             {% endif %}
-                            <i class="fa fa-thumbs-up"></i>
-                                {% for like in toy.like if like.user == app.user %}
-                                    Вы {% if toy.like|length > 1 %} и ещё {{ toy.like|length - 1 }}{% endif %}
+                            <i class="fa fa-thumbs-up"></i>{% for like in toy.like if like.user == app.user %}
+                                    Вы {% if toy.like|length > 1 %} и ещё {{- toy.like|length - 1 -}}{% endif %}
                                 {% else %}
-                                    {{ toy.like|length }}
+                                    {{- toy.like|length -}}
                                 {% endfor %}
                             </a>
                         </div>
-                        <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
-                            <a href="">
-                                <i class="fa fa-comments"></i>
-                                {{ toy.comments|length }} Комментария
-                            </a>
-                        </div>
+                        {% if toy.comments|length > 0 %}
+                            <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
+                                <a href="">
+                                    <i class="fa fa-comments"></i>
+                                    {{- 'comment'|trans -}}: {{ toy.comments|length -}}
+                                </a>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="blog">
@@ -63,7 +62,7 @@
                             <div class="col-md-2">
                                 <div class="blog-post-details-item blog-post-details-item-right pull-right">
                                     <a href="{{ path('viazushki_toy', {'slug': toy.slug}) }}" class="btn btn-primary">
-                                        Просмотреть
+                                        {{ 'view'|trans }}
                                         <i class="icon-chevron-right readmore-icon"></i>
                                     </a>
                                 </div>
@@ -80,7 +79,7 @@
     <!-- Side Column -->
     <div class="col-md-3 margin-top-30">
         <div class="blog-tags">
-            <h3>Категории</h3>
+            <h3>{{ 'categories'|trans }}</h3>
             <ul class="blog-tags">
                 {% for category in categories %}
                     <li>
@@ -90,7 +89,7 @@
             </ul>
         </div>
         <div class="blog-tags">
-            <h3>Теги</h3>
+            <h3>{{ 'tags'|trans }}</h3>
             <ul class="blog-tags">
                 {% for tag in tags %}
                     <li>
@@ -100,7 +99,7 @@
             </ul>
         </div>
         <div class="recent-posts">
-            <h4>Последние добавления</h4>
+            <h4>{{ 'last added'|trans }}</h4>
             <ul class="posts-list margin-top-10">
                 {% for lastToy in lastToys %}
                     <li>
