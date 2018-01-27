@@ -17,6 +17,7 @@ class MenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
+        $menu->setChildrenAttribute('id', 'hornavmenu');
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
         $menu->addChild('home', ['route' => 'viazushki_homepage']);
         $menu->addChild('contacts', ['route' => 'viazushki_contacts']);

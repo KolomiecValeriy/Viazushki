@@ -77,7 +77,10 @@ $(window).load(function () {
 
 // Mobile Menu
 $(function () {
-    $('#hornavmenu').slicknav();
+    $('#hornavmenu').slicknav({
+        label: '',
+        duration: 500
+    });
 });
 
 // Functions
