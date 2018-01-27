@@ -27,9 +27,11 @@ $(document).ready(function () {
         var current = $(event.currentTarget);
         var currentId = current.attr('data-toy-like');
         var href = current.find('a').attr('href');
-        $.get(href, function (result) {
-            current.html($(result).find('[data-toy-like='+currentId+']'));
-        });
+        if (href) {
+            $.post(href, function (result) {
+                current.html($(result).find('[data-toy-like='+currentId+']'));
+            });
+        }
     });
 
     initComments();
