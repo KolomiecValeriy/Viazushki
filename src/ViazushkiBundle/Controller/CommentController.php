@@ -2,25 +2,33 @@
 
 namespace ViazushkiBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use ViazushkiBundle\Entity\Comment;
+use ViazushkiBundle\Entity\Toy;
 use ViazushkiBundle\Form\Type\CommentType;
 
 class CommentController extends Controller
 {
-    public function addAction(Request $request, $toyId)
+
+    /**
+     * @ParamConverter("toy", class="ViazushkiBundle:Toy")
+     */
+    public function addAction(Request $request, Toy $toy)
     {
-        if (!isset($toyId)) {
-            return $this->redirectToRoute('viazushki_homepage');
+        if (!$toy) {
+            return new Response(
+                $this->get('translator')->trans('comment not added'),
+                Response::HTTP_BAD_REQUEST
+            );
         }
 
         $em = $this->getDoctrine()->getManager();
         $comment = new Comment();
         $commentForm = $this->createForm(CommentType::class, $comment);
-
-        $toy = $em->getRepository('ViazushkiBundle:Toy')->find($toyId);
 
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
@@ -43,11 +51,19 @@ class CommentController extends Controller
         ]);
     }
 
-    public function editAction(Request $request, $commentId)
+    /**
+     * @ParamConverter("comment", class="ViazushkiBundle:Comment")
+     */
+    public function editAction(Request $request, $comment)
     {
+        if (!$comment) {
+            return new Response(
+                $this->get('translator')->trans('comment not updated'),
+                Response::HTTP_BAD_REQUEST
+            );
+        }
+
         $em = $this->getDoctrine()->getManager();
-        $commentRepository = $em->getRepository('ViazushkiBundle:Comment');
-        $comment = $commentRepository->find($commentId);
 
         $this->denyAccessUnlessGranted('edit', $comment);
 
@@ -65,34 +81,35 @@ class CommentController extends Controller
             ]);
         }
 
-        return new Response(
-            $this->renderView('@Viazushki/Includes/_commentForm.html.twig', [
+        return $this->render('@Viazushki/Includes/_commentForm.html.twig', [
                 'commentForm' => $commentForm->createView(),
                 'commentId' => $comment->getId(),
-            ])
+            ]
         );
     }
 
-    public function addChildAction(Request $request, $toyId, $parentId)
+    /**
+     * @ParamConverter("toy", class="ViazushkiBundle:Toy")
+     * @ParamConverter("commentParent", class="ViazushkiBundle:Comment")
+     */
+    public function addChildAction(Request $request, $toy, $commentParent)
     {
-        if (!isset($toyId) || !isset($parentId)) {
-            return $this->redirectToRoute('viazushki_homepage');
+        if (!$toy || !$commentParent) {
+            return new Response(
+                $this->get('translator')->trans('comment not added'),
+                Response::HTTP_BAD_REQUEST
+            );
         }
 
         $em = $this->getDoctrine()->getManager();
         $comment = new Comment();
-        $commentForm[$parentId] = $this->createForm(CommentType::class, $comment);
+        $commentForm[$commentParent->getId()] = $this->createForm(CommentType::class, $comment);
 
-        $commentRepository = $em->getRepository('ViazushkiBundle:Comment');
-        $commentParent = $commentRepository->find($parentId);
-
-        $toy = $em->getRepository('ViazushkiBundle:Toy')->find($toyId);
-
-        $commentForm[$parentId]->handleRequest($request);
-        if ($commentForm[$parentId]->isSubmitted() && $commentForm[$parentId]->isValid()) {
+        $commentForm[$commentParent->getId()]->handleRequest($request);
+        if ($commentForm[$commentParent->getId()]->isSubmitted() && $commentForm[$commentParent->getId()]->isValid()) {
 
             $comment
-                ->setMessage($commentForm[$parentId]->get('message')->getData())
+                ->setMessage($commentForm[$commentParent->getId()]->get('message')->getData())
                 ->setToy($toy)
                 ->setUser($this->getUser())
                 ->setParent($commentParent)
@@ -111,15 +128,19 @@ class CommentController extends Controller
         ]);
     }
 
-    public function deleteAction($commentId)
+    /**
+     * @ParamConverter("comment", class="ViazushkiBundle:Comment")
+     */
+    public function deleteAction($comment)
     {
-        if (!isset($commentId)) {
-            return $this->redirectToRoute('viazushki_homepage');
+        if (!$comment) {
+            return new Response(
+                $this->get('translator')->trans('comment not deleted'),
+                Response::HTTP_BAD_REQUEST
+            );
         }
 
         $em = $this->getDoctrine()->getManager();
-        $commentRepository = $em->getRepository('ViazushkiBundle:Comment');
-        $comment = $commentRepository->find($commentId);
 
         if (!$this->isGranted('ROLE_ADMIN', $comment)) {
             throw $this->createAccessDeniedException();

@@ -1,5 +1,5 @@
 <div class="comment-edit-form">
-    {{ form_start(commentForm, {'action': path('viazushki_comment_edit', {'commentId': commentId}), 'method': 'POST'}) }}
+    {{ form_start(commentForm, {'action': path('viazushki_comment_edit', {'comment': commentId}), 'method': 'POST'}) }}
     <div class="row margin-bottom-20">
         <div class="col-md-12 col-md-offset-0 {% if form_errors(commentForm.message) %}has-error{% endif %}">
             {{ form_errors(commentForm.message) }}

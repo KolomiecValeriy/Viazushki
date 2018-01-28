@@ -39,29 +39,20 @@ viazushki_toy:
         _locale: en|ru
 
 viazushki_comment_add:
-    path: /comment/add/{toyId}
+    path: /comment/add/{toy}
     defaults: { _controller: ViazushkiBundle:Comment:add }
-    requirements:
-        toyId: '\d+'
 
 viazushki_comment_addChild:
-    path: /comment/add_child/{toyId}/{parentId}
+    path: /comment/add_child/{toy}/{commentParent}
     defaults: { _controller: ViazushkiBundle:Comment:addChild }
-    requirements:
-        toyId: '\d+'
-        parentId: '\d+'
 
 viazushki_comment_edit:
-    path: /comment/edit/{commentId}
+    path: /comment/edit/{comment}
     defaults: { _controller: ViazushkiBundle:Comment:edit }
-    requirements:
-        commentId: '\d+'
 
 viazushki_comment_delete:
-    path: /comment/delete/{commentId}
+    path: /comment/delete/{comment}
     defaults: { _controller: ViazushkiBundle:Comment:delete }
-    requirements:
-        commentId: '\d+'
 
 viazushki_like_add:
     path: /like/add/{toyId}

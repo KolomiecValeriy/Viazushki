@@ -115,11 +115,21 @@ function initComments() {
         var current = $(event.currentTarget);
         var commentId = current.attr('data-comment-delete');
 
-        $.post('/comment/delete/'+commentId, function (data) {
-            $('.blog-recent-comments').html($(data).find('.blog-recent-comments'));
-            $('[data-toy-comments-count]').html($(data).find('[data-toy-comments-count]'));
-            initComments();
-            initSubmitComment();
+        $.ajax({
+            url: '/comment/delete/'+commentId,
+            method: 'POST',
+            success: function (data) {
+                $('.blog-recent-comments').html($(data).find('.blog-recent-comments'));
+                $('[data-toy-comments-count]').html($(data).find('[data-toy-comments-count]'));
+                initComments();
+                initSubmitComment();
+            },
+            error: function (error) {
+                $('.error-msg').html(error.responseText).fadeIn();
+                setTimeout(function () {
+                    $('.error-msg').fadeOut();
+                }, 3000);
+            }
         });
     });
 
@@ -157,6 +167,13 @@ function initSubmitComment() {
                 if (current.attr('data-coments') === 'toogle') {
                     $('[data-comment-reply-form='+commentId+']').closest('li').find('ul').toggle(300);
                 }
+            },
+            error: function (error) {
+                $('.error-msg').html(error.responseText).fadeIn();
+                form[0].reset();
+                setTimeout(function () {
+                    $('.error-msg').fadeOut();
+                }, 3000);
             }
         });
     });
