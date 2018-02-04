@@ -173,3 +173,7 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [54, 54], mode: outbound }
+
+viazushki:
+    comments:
+        edit_time: 1000
