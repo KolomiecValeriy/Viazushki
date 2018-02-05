@@ -18,7 +18,7 @@ services:
         class: ViazushkiBundle\Security\CommentVoter
         arguments:
             $decisionManager: '@security.access.decision_manager'
-            $commentEditTime: '%comment_edit_time%'
+            $commentEditTime: '%viazushki.comments_edit_time%'
         tags: [security.voter]
 
     viazushki.menu_builder:

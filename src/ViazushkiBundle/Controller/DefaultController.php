@@ -27,12 +27,12 @@ class DefaultController extends Controller
         $pagination = $paginator->paginate(
             $toyRepository->findAllQuery(),
             $request->query->getInt('page', 1),
-            5
+            $this->getToysPerPage()
         );
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
-            'lastToys' => $toyRepository->findLastAdded(5),
+            'lastToys' => $toyRepository->findLastAdded($this->getLastAddedToys()),
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
         ]);
@@ -57,7 +57,7 @@ class DefaultController extends Controller
         $commentPagination = $paginator->paginate(
             $commentRepository->finByToyQuery($toy),
             $request->query->getInt('page', 1),
-            5
+            $this->getCommentsPerPage()
         );
 
         $commentsForms = [];
@@ -68,7 +68,7 @@ class DefaultController extends Controller
         $commentForm->handleRequest($request);
         return $this->render('@Viazushki/Default/showToy.html.twig', [
             'toy' => $toy,
-            'lastToys' => $toyRepository->findLastAdded(5),
+            'lastToys' => $toyRepository->findLastAdded($this->getLastAddedToys()),
             'categories' => $categories,
             'tags' => $tags,
             'commentForm' => $commentForm->createView(),
@@ -96,12 +96,12 @@ class DefaultController extends Controller
         $pagination = $paginator->paginate(
             $toys,
             $request->query->getInt('page', 1),
-            5
+            $this->getToysPerPage()
         );
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
-            'lastToys' => $toyRepository->findLastAdded(2),
+            'lastToys' => $toyRepository->findLastAdded($this->getLastAddedToys()),
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
         ]);
@@ -126,14 +126,29 @@ class DefaultController extends Controller
         $pagination = $paginator->paginate(
             $toys,
             $request->query->getInt('page', 1),
-            5
+            $this->getToysPerPage()
         );
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
-            'lastToys' => $toyRepository->findLastAdded(2),
+            'lastToys' => $toyRepository->findLastAdded($this->getLastAddedToys()),
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
         ]);
+    }
+
+    private function getCommentsPerPage()
+    {
+        return $this->container->getParameter('viazushki.comments_per_page');
+    }
+
+    private function getToysPerPage()
+    {
+        return $this->container->getParameter('viazushki.toys_per_page');
+    }
+
+    private function getLastAddedToys()
+    {
+        return $this->container->getParameter('viazushki.last_added_toys');
     }
 }

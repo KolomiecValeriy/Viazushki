@@ -23,6 +23,3 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
-
-    # Time to edit comments in seconds
-    comment_edit_time: 3600

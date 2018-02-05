@@ -21,8 +21,24 @@ class Configuration implements ConfigurationInterface
                             ->defaultValue(3600)
                             ->min(900)
                         ->end()
+                        ->integerNode('per_page')
+                            ->defaultValue(5)
+//                            ->min(5)
+                        ->end()
                     ->end()
                 ->end() //comments
+                ->arrayNode('toys')
+                    ->children()
+                        ->integerNode('per_page')
+                            ->defaultValue(5)
+//                            ->min(5)
+                        ->end()
+                        ->integerNode('last_added')
+                            ->defaultValue(4)
+//                            ->min(4)
+                        ->end()
+                    ->end()
+                ->end() //toys
             ->end()
         ;
 
