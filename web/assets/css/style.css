@@ -85,6 +85,9 @@ p.site-slogan {
 .blog-post-details i {
     margin-right: 5px;
 }
+.blog-recent-comments {
+    margin-top: 15px;
+}
 .blog-recent-comments li {
 }
 .comment {

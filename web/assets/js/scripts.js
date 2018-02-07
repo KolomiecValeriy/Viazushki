@@ -29,7 +29,7 @@ $(document).ready(function () {
         var href = current.find('a').attr('href');
         if (href) {
             $.post(href, function (result) {
-                current.html($(result).find('[data-toy-like='+currentId+']'));
+                current.html($(result).find('[data-toy-like='+currentId+'] a'));
             });
         }
     });

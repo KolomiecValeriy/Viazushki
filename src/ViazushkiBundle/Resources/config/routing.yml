@@ -23,14 +23,16 @@ viazushki_contacts:
         _locale: en|ru
 
 viazushki_toy_by_tag:
-    path: /tag/{slug}
+    path: /{_locale}/tag/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByTag, slug: ''}
     requirements:
         _locale: en|ru
 
 viazushki_toy_by_category:
-    path: /category/{slug}
+    path: /{_locale}/category/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByCategory, slug: ''}
+    requirements:
+        _locale: en|ru
 
 viazushki_toy:
     path: /{_locale}/{slug}

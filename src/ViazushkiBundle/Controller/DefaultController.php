@@ -43,6 +43,10 @@ class DefaultController extends Controller
      */
     public function showToyAction(Request $request, Toy $toy)
     {
+        if (!$toy) {
+            throw new NotFoundHttpException("Страница не найдена");
+        }
+
         $em = $this->getDoctrine()->getManager();
         $comment = new Comment();
         $commentForm = $this->createForm(CommentType::class, $comment);
@@ -82,6 +86,10 @@ class DefaultController extends Controller
      */
     public function toyByTagAction(Request $request, Tag $tag)
     {
+        if (!$tag) {
+            throw new NotFoundHttpException("Страница не найдена");
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $toyRepository = $em->getRepository('ViazushkiBundle:Toy');
@@ -112,6 +120,10 @@ class DefaultController extends Controller
      */
     public function toyByCategoryAction(Request $request, Category $category)
     {
+        if (!$category) {
+            throw new NotFoundHttpException("Страница не найдена");
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $toyRepository = $em->getRepository('ViazushkiBundle:Toy');

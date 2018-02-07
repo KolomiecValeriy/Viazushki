@@ -31,10 +31,8 @@
                         </div>
                         {% if toy.comments|length > 0 %}
                             <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
-                                <a href="">
-                                    <i class="fa fa-comments"></i>
-                                    {{- 'comment'|trans -}}: {{ toy.comments|length -}}
-                                </a>
+                                <i class="fa fa-comments"></i>
+                                {{- 'comment'|trans -}}: {{ toy.comments|length -}}
                             </div>
                         {% endif %}
                     </div>

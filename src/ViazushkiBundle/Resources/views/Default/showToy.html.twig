@@ -6,35 +6,21 @@
         <div class="blog-post">
             <div class="blog-item-header">
                 <div class="blog-post-date pull-left">
-                    <span class="day">14</span>
-                    <span class="month">Dec</span>
+                    <span class="day">{{ toy.createdAt|date('d') }}</span>
+                    <span class="month">{{ toy.createdAt|date('M') }}</span>
                 </div>
                 <h2>{{ toy.name }}</h2>
                 <div class="blog-post-details">
-                    <!-- Author Name -->
-                    <div class="blog-post-details-item blog-post-details-item-left user-icon">
-                        <i class="fa fa-user"></i>
-                        <a href="#">Admin</a>
-                    </div>
-                    <!-- End Author Name -->
                     <!-- Tags -->
                     <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
-                        <i class="fa fa-tag"></i>
+
                         {% for tag in toy.tags %}
-                            <a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}">{{ tag.name }}</a>{% if not loop.last %},{% endif %}
+                            <a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}"><i class="fa fa-tags"></i>{{ tag.name }}</a>{% if not loop.last %},{% endif %}
                         {% endfor %}
                     </div>
                     <!-- End Tags -->
-                    <!-- Comments -->
-                    <div data-toy-comments-count class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
-                        <a href="">
-                            <i class="fa fa-comments"></i>
-                            {{ toy.comments|length }} Комментария
-                        </a>
-                    </div>
-                    <!-- End of Comments -->
                     <!-- Likes -->
-                    <div data-toy-like="{{ toy.id }}" class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon">
+                    <div data-toy-like="{{ toy.id }}" class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
                         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <a href="{% for like in toy.like if like.user == app.user %}{{ path('viazushki_like_delete', {'toyId': toy.id}) }}{% else %}{{ path('viazushki_like_add', {'toyId': toy.id}) }}{% endfor %}">
                             {% endif %}
@@ -47,6 +33,12 @@
                         </a>
                     </div>
                     <!-- End of Likes -->
+                    <!-- Comments -->
+                    <div data-toy-comments-count class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
+                        <i class="fa fa-comments"></i>
+                        {{- 'comment'|trans -}}: {{ toy.comments|length -}}
+                    </div>
+                    <!-- End of Comments -->
                 </div>
             </div>
             <div class="blog-item">
