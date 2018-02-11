@@ -18,16 +18,14 @@
                             {% for tag in toy.tags %}<a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}"><i class="fa fa-tags"></i>{{- tag.name -}}</a>{% if not loop.last %},{% endif %}
                             {% endfor %}
                         </div>
-                        <div data-toy-like="{{ toy.id }}" class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <a href="{% for like in toy.like if like.user == app.user %}{{ path('viazushki_like_delete', {'toyId': toy.id}) }}{% else %}{{ path('viazushki_like_add', {'toyId': toy.id}) }}{% endfor %}">
-                            {% endif %}
-                            <i class="fa fa-thumbs-up"></i>{% for like in toy.like if like.user == app.user %}
-                                    Вы {% if toy.like|length > 1 %} и ещё {{- toy.like|length - 1 -}}{% endif %}
-                                {% else %}
-                                    {{- toy.like|length -}}
-                                {% endfor %}
-                            </a>
+                        <div {% if is_granted('IS_AUTHENTICATED_FULLY') %}data-toy-like="{{ toy.id }}"{% endif %} class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
+                            <span><i class="fa fa-thumbs-up"></i>
+                                {%- for like in toy.like if like.user == app.user -%}
+                                    Вы {% if toy.like|length > 1 %}и ещё {{ toy.like|length - 1 -}}{% endif %}
+                                {%- else %}{{- toy.like|length -}}
+                                {% endfor %}</span>
+                            {{ form_start(likeForms[toy.id], {'action': path('viazushki_like_update', {'slug': toy.slug}), attr: {'data-like-form': ''}}) }}
+                            {{ form_end(likeForms[toy.id]) }}
                         </div>
                         {% if toy.comments|length > 0 %}
                             <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">

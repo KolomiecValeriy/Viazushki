@@ -56,14 +56,6 @@ viazushki_comment_delete:
     path: /comment/delete/{comment}
     defaults: { _controller: ViazushkiBundle:Comment:delete }
 
-viazushki_like_add:
-    path: /like/add/{toyId}
-    defaults: { _controller: ViazushkiBundle:Like:add }
-    requirements:
-        toyId: '\d+'
-
-viazushki_like_delete:
-    path: /like/delete/{toyId}
-    defaults: { _controller: ViazushkiBundle:Like:delete }
-    requirements:
-        toyId: '\d+'
+viazushki_like_update:
+    path: /like/update/{slug}
+    defaults: { _controller: ViazushkiBundle:Like:update }

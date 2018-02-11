@@ -23,13 +23,18 @@ $(document).ready(function () {
 
     // Обработка лайков
     $('[data-toy-like]').on('click', function (event) {
-        event.preventDefault();
         var current = $(event.currentTarget);
         var currentId = current.attr('data-toy-like');
-        var href = current.find('a').attr('href');
-        if (href) {
-            $.post(href, function (result) {
-                current.html($(result).find('[data-toy-like='+currentId+'] a'));
+        var form = current.find('form');
+
+        if (form.length > 0) {
+            $.ajax({
+                method: 'post',
+                url: form.attr('action'),
+                data: form.serialize(),
+                success: function (result) {
+                    current.find('span').html($(result).find('[data-toy-like=' + currentId + '] span').html());
+                }
             });
         }
     });

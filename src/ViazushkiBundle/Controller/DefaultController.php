@@ -9,9 +9,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use ViazushkiBundle\Entity\Category;
 use ViazushkiBundle\Entity\Comment;
+use ViazushkiBundle\Entity\Like;
 use ViazushkiBundle\Entity\Tag;
 use ViazushkiBundle\Entity\Toy;
 use ViazushkiBundle\Form\Type\CommentType;
+use ViazushkiBundle\Form\Type\LikeType;
 
 class DefaultController extends Controller
 {
@@ -30,11 +32,17 @@ class DefaultController extends Controller
             $this->getToysPerPage()
         );
 
+        $likeForms = [];
+        foreach ($toyRepository->findAll() as $toy) {
+            $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
+        }
+
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
             'lastToys' => $toyRepository->findLastAdded($this->getLastAddedToys()),
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
+            'likeForms' => $likeForms,
         ]);
     }
 
@@ -51,10 +59,11 @@ class DefaultController extends Controller
         $comment = new Comment();
         $commentForm = $this->createForm(CommentType::class, $comment);
 
+        $likeForm = $this->createForm(LikeType::class);
+
         $categories = $em->getRepository('ViazushkiBundle:Category')->findAll();
         $tags = $em->getRepository('ViazushkiBundle:Tag')->findAll();
         $toyRepository = $em->getRepository('ViazushkiBundle:Toy');
-        $toy = $toyRepository->find($toy);
 
         $commentRepository = $em->getRepository('ViazushkiBundle:Comment');
         $paginator = $this->get('knp_paginator');
@@ -78,6 +87,7 @@ class DefaultController extends Controller
             'commentForm' => $commentForm->createView(),
             'commentsForms' => $commentsForms,
             'commentPagination' => $commentPagination,
+            'likeForm' => $likeForm->createView(),
         ]);
     }
 
