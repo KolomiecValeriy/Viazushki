@@ -18,8 +18,8 @@ class ImageAdmin extends AbstractAdmin
                     'required' => true,
                     'multiple' => true,
                 ]
-            );
-
+            )
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $filter)
@@ -29,7 +29,14 @@ class ImageAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list)
     {
         $list
-            ->addIdentifier('imageName')
+            ->addIdentifier('imageName', 'string', [
+                'template' => '@Viazushki/Admin/image_list_field.html.twig'
+            ])
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'delete' => [],
+                ]
+            ])
         ;
     }
 }

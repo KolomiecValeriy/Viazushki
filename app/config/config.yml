@@ -94,6 +94,9 @@ swiftmailer:
 sonata_admin:
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
+    assets:
+        extra_stylesheets:
+            - '/assets/css/admin.css'
 
 sonata_block:
     default_contexts: [cms]

@@ -1,0 +1,5 @@
+{% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
+
+{%- block field %}
+    <img src="{{ asset('assets/images/') }}{{ value }}" class="image-in-list" />
+{% endblock -%}
