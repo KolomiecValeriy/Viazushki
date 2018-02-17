@@ -110,6 +110,11 @@ class DefaultController extends Controller
             throw new NotFoundHttpException("Страница не найдена");
         }
 
+        $likeForms = [];
+        foreach ($toyRepository->findAll() as $toy) {
+            $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
+        }
+
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $toys,
@@ -122,6 +127,7 @@ class DefaultController extends Controller
             'lastToys' => $toyRepository->findLastAdded($this->getLastAddedToys()),
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
+            'likeForms' => $likeForms,
         ]);
     }
 
@@ -151,11 +157,17 @@ class DefaultController extends Controller
             $this->getToysPerPage()
         );
 
+        $likeForms = [];
+        foreach ($toyRepository->findAll() as $toy) {
+            $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
+        }
+
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
             'lastToys' => $toyRepository->findLastAdded($this->getLastAddedToys()),
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
+            'likeForms' => $likeForms,
         ]);
     }
 
