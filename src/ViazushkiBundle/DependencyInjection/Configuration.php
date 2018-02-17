@@ -23,22 +23,30 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->integerNode('per_page')
                             ->defaultValue(5)
-//                            ->min(5)
+                            ->min(5)
                         ->end()
                     ->end()
                 ->end() //comments
+
                 ->arrayNode('toys')
                     ->children()
                         ->integerNode('per_page')
                             ->defaultValue(5)
-//                            ->min(5)
+                            ->min(5)
                         ->end()
                         ->integerNode('last_added')
                             ->defaultValue(4)
-//                            ->min(4)
+                            ->min(4)
                         ->end()
                     ->end()
                 ->end() //toys
+
+                ->arrayNode('header')
+                    ->children()
+                        ->scalarNode('name')->end()
+                        ->scalarNode('value')->end()
+                    ->end()
+                ->end() //header
             ->end()
         ;
 

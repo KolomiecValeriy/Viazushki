@@ -184,3 +184,6 @@ viazushki:
     toys:
         per_page: 6
         last_added: 5
+    header:
+        name: 'PoweredBy'
+        value: 'Wordpress :)'

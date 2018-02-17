@@ -1,7 +1,4 @@
 services:
-#    viazushki.example:
-#        class: ViazushkiBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
 
     viazushki.sending_message:
         class: ViazushkiBundle\Service\SendingMessage
@@ -41,3 +38,9 @@ services:
             - { name: doctrine.event_listener, event: preUpdate }
             - { name: doctrine.event_listener, event: preRemove }
         public: true
+
+    viazushki.response_listener:
+        class: ViazushkiBundle\Listeners\AddHeaderListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.response }
+        arguments: [ '%viazushki.header_name%', '%viazushki.header_value%' ]
