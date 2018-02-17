@@ -1,3 +1,6 @@
+body {
+    background-color: #eae7e7;
+}
 /* Settings */
 .margin-top-25 {
     margin-top: 25px;
@@ -51,7 +54,7 @@ p.site-slogan {
     color: #000;
 }
 .locale a:hover {
-    color: #fff;
+    color: #7d7c7c;
 }
 /* Authorisation */
 .authorisation {
