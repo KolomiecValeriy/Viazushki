@@ -57,10 +57,17 @@ class ToyAdmin extends AbstractAdmin
     {
         $list
             ->addIdentifier('name')
+            ->addIdentifier('mainImage', 'string', [
+                'template' => '@Viazushki/Admin/image_list_field.html.twig',
+            ])
             ->add('author')
             ->add('tags')
             ->add('category')
-            ->add('mainImage')
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'delete' => [],
+                ]
+            ])
         ;
     }
 }

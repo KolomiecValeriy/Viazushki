@@ -42,15 +42,25 @@
             <div class="blog-item">
                 <div class="clearfix"></div>
                 <div class="blog-post-body row margin-top-15">
-                    <div class="col-md-5">
-                        <img class="pull-left" src="{% if toy.mainImage %}
-                                    {{- asset('assets/images/') -}}{{- toy.mainImage -}}
-                                {% else %}
-                                    {{- asset('assets/images/no-image.png') -}}
-                                {% endif %}" alt="image1">
+                    <div class="col-md-12">
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ toy.description }}</p>
                     </div>
-                    <div class="col-md-7">
-                        <p>{{ toy.description }}</p>
+                    <div class="portfolio-group col-md-12 margin-top-30 no-padding">
+                        <div class="row">
+                            {% for image in toy.images %}
+                            <!-- Portfolio Item -->
+                            <div class="portfolio-item col-md-6 video">
+                                <div class="image-hover">
+                                    <a href="#">
+                                        <figure>
+                                            <img src="{{ asset('assets/images/') }}{{ image.imageName }}" alt="{{ toy.name }}">
+                                        </figure>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- End Portfolio Item -->
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
                 <div class="blog-item-footer">
