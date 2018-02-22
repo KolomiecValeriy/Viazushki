@@ -1,3 +1,8 @@
+viazushki_swagger_ui:
+    path: /api/doc
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
 viazushki_homepage:
     path: /{_locale}
     defaults: { _controller: ViazushkiBundle:Default:index, _locale: 'ru' }
