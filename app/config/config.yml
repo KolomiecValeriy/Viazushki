@@ -177,6 +177,21 @@ liip_imagine:
             filters:
                 thumbnail: { size: [54, 54], mode: outbound }
 
+fos_rest:
+    body_listener: true
+    view:
+      view_response_listener: true
+    routing_loader:
+        prefix_methods: false
+    serializer:
+        serialize_null: true
+    body_converter:
+        enabled: true
+    format_listener:
+        rules:
+            prefer_extension: false
+            fallback_format: json
+
 nelmio_api_doc:
     areas:
         path_patterns: # an array of regexps
