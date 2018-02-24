@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 use ViazushkiBundle\Entity\Tag;
 use ViazushkiBundle\Entity\Category;
 use ViazushkiBundle\Entity\Image;
@@ -29,6 +30,7 @@ class Toy
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=100)
+     * @Groups({"toy"})
      */
     private $name;
 
@@ -44,6 +46,7 @@ class Toy
      * @var string
      *
      * @ORM\Column(name="description", type="text", nullable=true)
+     * @Groups({"toy"})
      */
     private $description;
 
@@ -75,6 +78,7 @@ class Toy
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
+     * @Groups({"toy"})
      */
     private $createdAt;
 
