@@ -5,6 +5,7 @@ namespace ViazushkiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @Gedmo\Tree(type="nested")
@@ -28,6 +29,7 @@ class Comment
      * @ORM\Column(type="text")
      * @Constraints\NotBlank(message="Комментарий не может быть пустым.")
      * @Constraints\Length(min="5", minMessage="Комментарий должен быть длиннее 5 -ти символов.")
+     * @Groups({"comment"})
      */
     private $message;
 
@@ -48,6 +50,7 @@ class Comment
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
+     * @Groups({"comment"})
      */
     private $createdAt;
 
