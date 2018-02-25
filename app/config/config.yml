@@ -191,6 +191,8 @@ fos_rest:
         rules:
             prefer_extension: false
             fallback_format: json
+    zone:
+        - { path: ^/api/* }
 
 nelmio_api_doc:
     areas:
@@ -198,8 +200,8 @@ nelmio_api_doc:
             - ^/api(?!/doc$)
     documentation:
         info:
-            title: Test
-            description: Test description for my application
+            title: Viazushki
+            description: Viazushki REST API
             version: 1.0.0
 
 viazushki:
