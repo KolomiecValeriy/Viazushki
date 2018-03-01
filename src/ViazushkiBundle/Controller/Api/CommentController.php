@@ -6,8 +6,13 @@ use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Swagger\Annotations as SWG;
+use Symfony\Component\Routing\Exception\ResourceNotFoundException;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use ViazushkiBundle\Entity\Comment;
 use ViazushkiBundle\Entity\Toy;
 
@@ -77,5 +82,69 @@ class CommentController extends FOSRestController
         $view->setContext($context);
 
         return $this->handleView($view);
+    }
+
+    /**
+     * @param Request $request
+     * @param Toy $id
+     *
+     * @Rest\Post("/toys/{id}/comments",
+     *     name="api_post_comments"
+     * )
+     * @SWG\Parameter(
+     *     name="id",
+     *     in="path",
+     *     type="string",
+     *     description="This parameter used to set Toy"
+     * )
+     * @SWG\Parameter(
+     *     name="message",
+     *     in="body",
+     *     type="string",
+     *     description="Message for comment",
+     *     @SWG\Schema(
+     *         @Model(type=Comment::class, groups={"comment"})
+     *     )
+     * )
+     * @SWG\Response(
+     *     response=200,
+     *     description="Return ok",
+     *     @SWG\Schema(
+     *         type="array",
+     *         @Model(type=Comment::class, groups={"comment"})
+     *     )
+     * )
+     * @return Response
+     */
+    public function postCommentAction(Request $request, Toy $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $encoders = array(new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+        $serializer = new Serializer($normalizers, $encoders);
+        $validator = $this->get('validator');
+
+
+        $body = $serializer->decode($request->getContent(), 'json');
+
+        foreach ($body as $commentRequest) {
+            $comment = new Comment();
+            $comment
+                ->setMessage($commentRequest['message'])
+                ->setToy($id)
+                ->setUser($this->getUser())
+            ;
+            $violations = $validator->validate($comment);
+
+            if (count($violations) > 0) {
+                return new Response($violations->get(0)->getMessage(), 403);
+            }
+
+            $em->persist($comment);
+        }
+        $em->flush();
+
+        return new Response('ok');
     }
 }
