@@ -53,6 +53,13 @@ class ToyController extends FOSRestController
     }
 
     /**
+     * @SWG\Parameter( name="Authorization",
+     *     in="header",
+     *     required=true,
+     *     type="string",
+     *     default="Bearer TOKEN",
+     *     description="Authorization"
+     * )
      * @Rest\Get("/toys",
      *     name="api_get_toys"
      *     )
