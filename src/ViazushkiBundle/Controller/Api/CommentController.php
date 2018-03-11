@@ -120,11 +120,8 @@ class CommentController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $encoders = array(new JsonEncoder());
-        $normalizers = array(new ObjectNormalizer());
-        $serializer = new Serializer($normalizers, $encoders);
+        $serializer = $this->get('serializer');
         $validator = $this->get('validator');
-
 
         $body = $serializer->decode($request->getContent(), 'json');
 
