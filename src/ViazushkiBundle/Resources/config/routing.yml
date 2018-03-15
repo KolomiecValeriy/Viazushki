@@ -21,6 +21,12 @@ viazushki_register:
     requirements:
         _locale: en|ru
 
+viazushki_search_toy:
+    path: /{_locale}/search
+    defaults: { _controller: ViazushkiBundle:Default:search, _locale: 'ru' }
+    requirements:
+        _locale: en|ru
+
 viazushki_contacts:
     path: /{_locale}/contacts
     defaults: { _controller: ViazushkiBundle:Contact:contact }

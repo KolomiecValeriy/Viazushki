@@ -75,6 +75,15 @@
     <!-- Side Column -->
     <div class="col-md-3 margin-top-30">
         <div class="blog-tags">
+            {{ form_start(searchForm, { 'attr': {'id': 'search_form'}, 'action': path('viazushki_search_toy')}) }}
+                {{ form_errors(searchForm.searchText) }}
+                <div class="form-group has-feedback">
+                    {{ form_widget(searchForm.searchText, {'attr': { 'placeholder': 'search'|trans }}) }}
+                    <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+                </div>
+            {{ form_end(searchForm) }}
+        </div>
+        <div class="blog-tags">
             <h3>{{ 'categories'|trans }}</h3>
             <ul class="blog-tags">
                 {% for category in categories %}

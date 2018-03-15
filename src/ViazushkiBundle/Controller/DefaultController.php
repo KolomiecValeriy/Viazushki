@@ -10,10 +10,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use ViazushkiBundle\Entity\Category;
 use ViazushkiBundle\Entity\Comment;
 use ViazushkiBundle\Entity\Like;
+use ViazushkiBundle\Entity\Search;
 use ViazushkiBundle\Entity\Tag;
 use ViazushkiBundle\Entity\Toy;
 use ViazushkiBundle\Form\Type\CommentType;
 use ViazushkiBundle\Form\Type\LikeType;
+use ViazushkiBundle\Form\Type\SearchType;
 
 class DefaultController extends Controller
 {
@@ -36,6 +38,7 @@ class DefaultController extends Controller
         foreach ($toyRepository->findAll() as $toy) {
             $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
         }
+        $searchForm = $this->createForm(SearchType::class);
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
@@ -43,6 +46,7 @@ class DefaultController extends Controller
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
             'likeForms' => $likeForms,
+            'searchForm' => $searchForm->createView(),
         ]);
     }
 
@@ -168,6 +172,46 @@ class DefaultController extends Controller
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
             'likeForms' => $likeForms,
+        ]);
+    }
+
+    public function searchAction(Request $request)
+    {
+        $searchForm = $this->createForm(SearchType::class);
+
+        $searchForm->handleRequest($request);
+        $searchText = '';
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+
+            $searchText = $searchForm->get('searchText')->getData();
+            $searchForm = $this->createForm(SearchType::class, new Search());
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $toyRepository = $em->getRepository('ViazushkiBundle:Toy');
+        $tagRepository = $em->getRepository('ViazushkiBundle:Tag');
+        $categoryRepository = $em->getRepository('ViazushkiBundle:Category');
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $toyRepository->findByText($searchText),
+            $request->query->getInt('page', 1),
+            $this->getToysPerPage()
+        );
+
+        $likeForms = [];
+        foreach ($toyRepository->findAll() as $toy) {
+            $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
+        }
+
+        return $this->render('@Viazushki/Default/index.html.twig', [
+            'pagination' => $pagination,
+            'lastToys' => $toyRepository->findLastAdded($this->getLastAddedToys()),
+            'categories' => $categoryRepository->findAll(),
+            'tags' => $tagRepository->findAll(),
+            'likeForms' => $likeForms,
+            'searchForm' => $searchForm->createView(),
         ]);
     }
 

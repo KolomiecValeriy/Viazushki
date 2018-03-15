@@ -50,4 +50,16 @@ class ToyRepository extends EntityRepository
 
         return $query;
     }
+
+    public function findByText($searchText)
+    {
+        $query = $this->createQueryBuilder('t')
+            ->where('t.name LIKE :searchText')
+            ->orWhere('t.description LIKE :searchText')
+            ->setParameter('searchText', '%'.$searchText.'%')
+            ->getQuery()
+        ;
+
+        return $query;
+    }
 }

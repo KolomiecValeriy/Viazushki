@@ -1,3 +1,4 @@
+//TODO: написать скрипт на отправку формы поиска
 $(document).ready(function () {
     // Отправка формы со страницы контактов
     $('#contact_form').on('submit', function (event) {

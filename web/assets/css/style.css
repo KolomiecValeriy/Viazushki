@@ -163,3 +163,11 @@ p.site-slogan {
     color: #413344;
     margin-left: 5px;
 }
+#search_form .form-control-feedback {
+    position: absolute;
+    line-height: 34px;
+    cursor: pointer;
+}
+#search_form .form-control-feedback:active {
+    color: #6e5f7c;
+}
