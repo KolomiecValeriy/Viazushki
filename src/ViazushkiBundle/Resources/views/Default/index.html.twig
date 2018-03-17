@@ -72,59 +72,7 @@
         {{ knp_pagination_render(pagination) }}
     </div>
     <!-- End Main Column -->
-    <!-- Side Column -->
-    <div class="col-md-3 margin-top-30">
-        <div class="blog-tags">
-            {{ form_start(searchForm, { 'attr': {'id': 'search_form'}, 'action': path('viazushki_search_toy')}) }}
-                {{ form_errors(searchForm.searchText) }}
-                <div class="form-group has-feedback">
-                    {{ form_widget(searchForm.searchText, {'attr': { 'placeholder': 'search'|trans }}) }}
-                    <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
-                </div>
-            {{ form_end(searchForm) }}
-        </div>
-        <div class="blog-tags">
-            <h3>{{ 'categories'|trans }}</h3>
-            <ul class="blog-tags">
-                {% for category in categories %}
-                    <li>
-                        <a href="{{ path('viazushki_toy_by_category', {'slug': category.slug}) }}" class="blog-tag">{{ category.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="blog-tags">
-            <h3>{{ 'tags'|trans }}</h3>
-            <ul class="blog-tags">
-                {% for tag in tags %}
-                    <li>
-                        <a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}" class="blog-tag">{{ tag.name }}</a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-        <div class="recent-posts">
-            <h4>{{ 'last added'|trans }}</h4>
-            <ul class="posts-list margin-top-10">
-                {% for lastToy in lastToys %}
-                    <li>
-                        <div class="recent-post">
-                            <a href="">
-                                <img class="pull-left" src="{% if lastToy.mainImage %}
-                                        {{- asset(lastToy.mainImage.imagePath) | imagine_filter('image_54_54') -}}
-                                    {% else %}
-                                        {{- asset('assets/images/no-image.png') | imagine_filter('image_54_54') -}}
-                                    {% endif %}" alt="thumb1">
-                            </a>
-                            <a class="posts-list-title" href="{{ path('viazushki_toy', {'slug': lastToy.slug}) }}">{{ lastToy.name }}</a>
-                            <br>
-                            <span class="recent-post-date">{{ lastToy.createdAt|date('M d, Y') }}</span>
-                        </div>
-                        <div class="clearfix"></div>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-    <!-- End Side Column -->
+
+    {% include '@Viazushki/Includes/_mainSidebar.html.twig' %}
+
 {% endblock %}

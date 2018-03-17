@@ -81,6 +81,7 @@ class DefaultController extends Controller
         foreach ($toy->getComments() as $comm) {
             $commentsForms[$comm->getId()] = $this->createForm(CommentType::class, $comment)->createView();
         }
+        $searchForm = $this->createForm(SearchType::class);
 
         $commentForm->handleRequest($request);
         return $this->render('@Viazushki/Default/showToy.html.twig', [
@@ -92,6 +93,7 @@ class DefaultController extends Controller
             'commentsForms' => $commentsForms,
             'commentPagination' => $commentPagination,
             'likeForm' => $likeForm->createView(),
+            'searchForm' => $searchForm->createView(),
         ]);
     }
 
@@ -125,6 +127,7 @@ class DefaultController extends Controller
             $request->query->getInt('page', 1),
             $this->getToysPerPage()
         );
+        $searchForm = $this->createForm(SearchType::class);
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
@@ -132,6 +135,7 @@ class DefaultController extends Controller
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
             'likeForms' => $likeForms,
+            'searchForm' => $searchForm->createView(),
         ]);
     }
 
@@ -165,6 +169,7 @@ class DefaultController extends Controller
         foreach ($toyRepository->findAll() as $toy) {
             $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
         }
+        $searchForm = $this->createForm(SearchType::class);
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
@@ -172,6 +177,7 @@ class DefaultController extends Controller
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),
             'likeForms' => $likeForms,
+            'searchForm' => $searchForm->createView(),
         ]);
     }
 
