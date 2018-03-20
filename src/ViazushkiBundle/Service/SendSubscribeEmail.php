@@ -39,6 +39,8 @@ class SendSubscribeEmail
     public function sendNews(string $subject)
     {
         $subscribeUsers = $this->em->getRepository('ViazushkiBundle:User')->findSubscribeUsers();
+        $date = new \DateTime('-1 day');
+        $newToys = $this->em->getRepository('ViazushkiBundle:Toy')->findNewToys($date->format('Y-m-d'));
 
         if (!$subscribeUsers) {
             return false;
@@ -46,12 +48,16 @@ class SendSubscribeEmail
 
         $message = new \Swift_Message();
 
+        $template = $this->templating->render('@Viazushki/Email/newToys.html.twig', [
+            'newToys' => $newToys,
+        ]);
+
         foreach ($subscribeUsers as $user) {
             $message->setContentType('text/html');
             $message->setSubject($subject);
             $message->setFrom($this->viazushkiEmail);
             $message->setTo($user->getEmail());
-            $message->setBody($this->templating->render('@Viazushki/Email/newToys.html.twig'));
+            $message->setBody($template);
 
             $this->mailer->send($message);
         }

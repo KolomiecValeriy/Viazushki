@@ -62,4 +62,15 @@ class ToyRepository extends EntityRepository
 
         return $query;
     }
+
+    public function findNewToys($date)
+    {
+        $query = $this->createQueryBuilder('t')
+            ->where('t.createdAt > :date')
+            ->setParameter('date', $date)
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
 }
