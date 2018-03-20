@@ -18,4 +18,13 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getOneOrNullResult()
         ;
     }
+
+    public function findSubscribeUsers()
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.subscribe = true')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

@@ -16,6 +16,7 @@ use ViazushkiBundle\Entity\Toy;
 use ViazushkiBundle\Form\Type\CommentType;
 use ViazushkiBundle\Form\Type\LikeType;
 use ViazushkiBundle\Form\Type\SearchType;
+use ViazushkiBundle\Form\Type\SubscribeType;
 
 class DefaultController extends Controller
 {
@@ -39,6 +40,7 @@ class DefaultController extends Controller
             $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
         }
         $searchForm = $this->createForm(SearchType::class);
+        $subscribeForm = $this->createForm(SubscribeType::class);
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
@@ -47,6 +49,7 @@ class DefaultController extends Controller
             'tags' => $tagRepository->findAll(),
             'likeForms' => $likeForms,
             'searchForm' => $searchForm->createView(),
+            'subscribeForm' => $subscribeForm->createView(),
         ]);
     }
 
@@ -82,6 +85,7 @@ class DefaultController extends Controller
             $commentsForms[$comm->getId()] = $this->createForm(CommentType::class, $comment)->createView();
         }
         $searchForm = $this->createForm(SearchType::class);
+        $subscribeForm = $this->createForm(SubscribeType::class);
 
         $commentForm->handleRequest($request);
         return $this->render('@Viazushki/Default/showToy.html.twig', [
@@ -94,6 +98,7 @@ class DefaultController extends Controller
             'commentPagination' => $commentPagination,
             'likeForm' => $likeForm->createView(),
             'searchForm' => $searchForm->createView(),
+            'subscribeForm' => $subscribeForm->createView(),
         ]);
     }
 
@@ -128,6 +133,7 @@ class DefaultController extends Controller
             $this->getToysPerPage()
         );
         $searchForm = $this->createForm(SearchType::class);
+        $subscribeForm = $this->createForm(SubscribeType::class);
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
@@ -136,6 +142,7 @@ class DefaultController extends Controller
             'tags' => $tagRepository->findAll(),
             'likeForms' => $likeForms,
             'searchForm' => $searchForm->createView(),
+            'subscribeForm' => $subscribeForm->createView(),
         ]);
     }
 
@@ -170,6 +177,7 @@ class DefaultController extends Controller
             $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
         }
         $searchForm = $this->createForm(SearchType::class);
+        $subscribeForm = $this->createForm(SubscribeType::class);
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
@@ -178,6 +186,7 @@ class DefaultController extends Controller
             'tags' => $tagRepository->findAll(),
             'likeForms' => $likeForms,
             'searchForm' => $searchForm->createView(),
+            'subscribeForm' => $subscribeForm->createView(),
         ]);
     }
 
@@ -210,6 +219,7 @@ class DefaultController extends Controller
         foreach ($toyRepository->findAll() as $toy) {
             $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
         }
+        $subscribeForm = $this->createForm(SubscribeType::class);
 
         return $this->render('@Viazushki/Default/index.html.twig', [
             'pagination' => $pagination,
@@ -218,6 +228,7 @@ class DefaultController extends Controller
             'tags' => $tagRepository->findAll(),
             'likeForms' => $likeForms,
             'searchForm' => $searchForm->createView(),
+            'subscribeForm' => $subscribeForm->createView(),
         ]);
     }
 

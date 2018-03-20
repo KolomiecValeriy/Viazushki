@@ -44,3 +44,16 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.response }
         arguments: [ '%viazushki.header_name%', '%viazushki.header_value%' ]
+
+    viazushki.email_send_news:
+        class: ViazushkiBundle\Service\SendSubscribeEmail
+        arguments:
+            $mailer: '@mailer'
+            $entityManager: '@doctrine.orm.entity_manager'
+            $templating: '@Twig_Environment'
+            $viazushkiEmail: '%viazushki_email%'
+
+    ViazushkiBundle\Command\SendNewsEmailCommand:
+        tags:
+            - { name: 'console.command', command: 'viazushki:email:send-news' }
+        arguments: [ '@viazushki.email_send_news' ]

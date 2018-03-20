@@ -72,6 +72,13 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $like;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $subscribe;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -323,5 +330,21 @@ class User implements AdvancedUserInterface, \Serializable
         $this->like->removeElement($like);
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSubscribe(): bool
+    {
+        return $this->subscribe;
+    }
+
+    /**
+     * @param bool $subscribe
+     */
+    public function setSubscribe(bool $subscribe)
+    {
+        $this->subscribe = $subscribe;
     }
 }

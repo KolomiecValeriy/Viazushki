@@ -33,6 +33,12 @@ viazushki_contacts:
     requirements:
         _locale: en|ru
 
+viazushki_subscribe:
+    path: /{_locale}/subscribe
+    defaults: { _controller: ViazushkiBundle:Subscribe:subscribe }
+    requirements:
+        _locale: en|ru
+
 viazushki_toy_by_tag:
     path: /{_locale}/tag/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByTag, slug: ''}

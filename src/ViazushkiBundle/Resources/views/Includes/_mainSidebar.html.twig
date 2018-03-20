@@ -51,5 +51,15 @@
             {% endfor %}
         </ul>
     </div>
+    <div class="blog-tags">
+        <h3>{{ 'subscription'|trans }}</h3>
+        <p>Подпишисавшись на нашу рассылку, Вы всегда будете уведомлены о появлении новых работ с помощью E-mail!</p>
+        {{ form_start(subscribeForm, {
+            'action': path('viazushki_subscribe'),
+            'attr': {'data-subscribe-form': ''} }) }}
+        {{ form_widget(subscribeForm.submit, { 'attr': { 'class': 'btn-green btn-block' } }) }}
+        {{ form_end(subscribeForm) }}
+    </div>
 </div>
+<div data-success-msg class="alert alert-success subscribe-success-msg" role="alert"></div>
 <!-- End Side Column -->

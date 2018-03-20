@@ -8,6 +8,11 @@ body {
 a {
     text-decoration: none !important;
 }
+h3 {
+    font-size: 18px;
+    color: #9e9e9e;
+    font-family: inherit;
+}
 .hidd {
     display: none;
 }
@@ -170,4 +175,14 @@ p.site-slogan {
 }
 #search_form .form-control-feedback:active {
     color: #6e5f7c;
+}
+.subscribe-success-msg {
+    opacity: 0;
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    transition: opacity 2s;
+}
+.subscribe-success-msg-show {
+    opacity: 0.9;
 }

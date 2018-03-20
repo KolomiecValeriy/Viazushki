@@ -40,6 +40,25 @@ $(document).ready(function () {
         }
     });
 
+    // Подписка
+    $('[data-subscribe-form]').on('submit', function (event) {
+        event.preventDefault();
+        var form = $(event.currentTarget);
+        $.ajax({
+            url: form.attr('action'),
+            method: form.attr('method'),
+            data: form.serialize(),
+            success: function (data) {
+                var msg = $('[data-success-msg]');
+                msg.html(data).addClass('subscribe-success-msg-show');
+                msg.css('margin-left', -msg.width()/2);
+                setTimeout(function () {
+                    msg.removeClass('subscribe-success-msg-show');
+                }, 3600);
+            }
+        });
+    });
+
     initComments();
     initSubmitComment();
 });
