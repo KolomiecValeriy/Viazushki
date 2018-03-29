@@ -1,0 +1,13 @@
+{% extends '@Viazushki/layers.html.twig' %}
+
+{% block content %}
+    <!-- Main Column -->
+    <div class="col-md-12">
+        <div class="error-404-page text-center">
+            <h2>404!</h2>
+            <h3>{{ 'The page cannot be found' | trans }}</h3>
+            <p>{{ '404 description' | trans | raw }}</p>
+        </div>
+    </div>
+    <!-- End Main Column -->
+{% endblock %}
