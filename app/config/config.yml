@@ -41,6 +41,7 @@ twig:
     strict_variables: '%kernel.debug%'
     form_themes:
         - 'bootstrap_3_layout.html.twig'
+        - '@SonataFormatter/Form/formatter.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -95,8 +96,20 @@ sonata_admin:
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
     assets:
+        extra_javascripts:
+            - bundles/ivoryckeditor/ckeditor.js
+            - bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js
         extra_stylesheets:
-            - '/assets/css/admin.css'
+            - assets/css/admin.css
+            - bundles/sonataformatter/markitup/skins/sonata/style.css
+
+sonata_formatter:
+    formatters:
+        richhtml:
+            service: sonata.formatter.text.raw
+            extensions:
+                - sonata.formatter.twig.control_flow
+                - sonata.formatter.twig.gist
 
 sonata_block:
     default_contexts: [cms]

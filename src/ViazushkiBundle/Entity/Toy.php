@@ -116,6 +116,11 @@ class Toy
      */
     private $like;
 
+    /**
+     * @var string
+     */
+    private $contentFormatter;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -404,5 +409,21 @@ class Toy
     public function removeImages(Image $image)
     {
         $this->images->removeElement($image);
+    }
+
+    /**
+     * @return string
+     */
+    public function getContentFormatter()
+    {
+        return $this->contentFormatter;
+    }
+
+    /**
+     * @param string $contentFormatter
+     */
+    public function setContentFormatter(string $contentFormatter)
+    {
+        $this->contentFormatter = $contentFormatter;
     }
 }

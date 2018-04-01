@@ -47,7 +47,7 @@
                                 {% endif %}" alt="thumb1">
                         </div>
                         <div class="col-md-7">
-                            <p>{{ toy.description }}</p>
+                            {{ toy.description | raw }}
                         </div>
                     </div>
                     <div class="blog-item-footer">

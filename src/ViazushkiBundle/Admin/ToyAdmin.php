@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\FormatterBundle\Form\Type\FormatterType;
 
 class ToyAdmin extends AbstractAdmin
 {
@@ -14,7 +15,13 @@ class ToyAdmin extends AbstractAdmin
         $formMapper
             ->with('Default', ['class' => 'col-md-8'])
                 ->add('name', 'text')
-                ->add('description', 'textarea')
+                ->add('Description', FormatterType::class, [
+                    'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
+                    'source_field'         => 'description',
+                    'source_field_options' => ['attr' => ['rows' => 20]],
+                    'format_field'         => 'contentFormatter',
+                    'target_field'         => 'description',
+                ])
                 ->add('author', 'text')
                 ->add('mainImage', 'sonata_type_model', [
                     'class' => 'ViazushkiBundle\Entity\Image',

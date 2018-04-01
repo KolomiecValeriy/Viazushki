@@ -43,7 +43,7 @@
                 <div class="clearfix"></div>
                 <div class="blog-post-body row margin-top-15">
                     <div class="col-md-12">
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp;{{ toy.description }}</p>
+                        {{ toy.description | raw }}
                     </div>
                     <div class="portfolio-group col-md-12 margin-top-30 no-padding">
                         <div class="row">
