@@ -240,6 +240,17 @@ lexik_jwt_authentication:
             enabled: true
             name:    bearer
 
+white_october_breadcrumbs:
+    separator:          ''
+    separatorClass:     'separator'
+    listId:             'breadcrumbs'
+    listClass:          'breadcrumb'
+    itemClass:          'breadcrumb-item'
+    linkRel:            ''
+    locale:             ~ # defaults to null, so the default locale is used
+    translation_domain: ~ # defaults to null, so the default domain is used
+    viewTemplate:       'WhiteOctoberBreadcrumbsBundle::microdata.html.twig'
+
 viazushki:
     comments:
         edit_time: 1800

@@ -21,6 +21,9 @@ h3 {
     display: flex;
     justify-content: center;
 }
+textarea {
+    resize: none;
+}
 /* Logo */
 .logo {
     position: absolute;
@@ -70,6 +73,20 @@ p.site-slogan {
 .authorisation div ~ div{
     margin-left: 15px;
 }
+/* Breadcrumbs */
+#breadcrumbs.breadcrumb > li + li:before {
+ content: "/";
+}
+#breadcrumbs a {
+    color: #473d4f;
+}
+#breadcrumbs a:hover {
+    color: #888;
+}
+#breadcrumbs .breadcrumb-item:last-child span {
+    color: #888;
+}
+
 /* Likes */
 [data-toy-like] {
     cursor: pointer;
@@ -97,11 +114,6 @@ p.site-slogan {
 .blog-post-details i {
     margin-right: 5px;
 }
-.blog-recent-comments {
-    margin-top: 15px;
-}
-.blog-recent-comments li {
-}
 .comment {
     margin-bottom: 10px;
 }
@@ -111,6 +123,7 @@ p.site-slogan {
     border: 1px solid #f5f5f5;
     background-color: #f5f5f5;
     border-radius: 5px;
+    word-wrap: break-word;
 }
 .comment-footer {
     display: flex;

@@ -63,8 +63,28 @@ class DefaultController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
+        $translator = $this->get('translator');
+
         $comment = new Comment();
         $commentForm = $this->createForm(CommentType::class, $comment);
+
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addItem(
+            $translator->trans('home'),
+            $this->generateUrl('viazushki_homepage')
+        );
+        $breadcrumbs->addItem(
+            $toy->getCategory(),
+            $this->generateUrl('viazushki_toy_by_category', [
+                'slug' => $toy->getCategory()->getSlug(),
+            ])
+        );
+        $breadcrumbs->addItem(
+            $toy->getName(),
+            $this->generateUrl('viazushki_toy', [
+                'slug' => $toy->getSlug(),
+            ])
+        );
 
         $likeForm = $this->createForm(LikeType::class);
 
@@ -121,6 +141,20 @@ class DefaultController extends Controller
             throw new NotFoundHttpException("Страница не найдена");
         }
 
+        $translator = $this->get('translator');
+
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addItem(
+            $translator->trans('home'),
+            $this->generateUrl('viazushki_homepage')
+        );
+        $breadcrumbs->addItem(
+            $tag->getName(),
+            $this->generateUrl('viazushki_toy', [
+                'slug' => $tag->getSlug(),
+            ])
+        );
+
         $likeForms = [];
         foreach ($toyRepository->findAll() as $toy) {
             $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
@@ -164,6 +198,20 @@ class DefaultController extends Controller
         if (!$toys = $toyRepository->findByCategory($category)) {
             throw new NotFoundHttpException("Страница не найдена");
         }
+
+        $translator = $this->get('translator');
+
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addItem(
+            $translator->trans('home'),
+            $this->generateUrl('viazushki_homepage')
+        );
+        $breadcrumbs->addItem(
+            $category->getName(),
+            $this->generateUrl('viazushki_toy', [
+                'slug' => $category->getSlug(),
+            ])
+        );
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
