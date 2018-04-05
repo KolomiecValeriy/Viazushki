@@ -1,5 +1,11 @@
 services:
 
+    viazushki.send_email:
+        class: ViazushkiBundle\Emails\SendEmail
+        arguments:
+            $mailer: '@mailer'
+        public: false
+
     viazushki.sending_message:
         class: ViazushkiBundle\Service\SendingMessage
         arguments:
@@ -45,15 +51,22 @@ services:
             - { name: kernel.event_listener, event: kernel.response }
         arguments: [ '%viazushki.header_name%', '%viazushki.header_value%' ]
 
-    viazushki.email_send_news:
-        class: ViazushkiBundle\Service\SendSubscribeEmail
+    viazushki.send_subscribe_email:
+        class: ViazushkiBundle\Emails\SendSubscribeEmail
         arguments:
-            $mailer: '@mailer'
+            $templating: '@Twig_Environment'
+            $sendEmail: '@viazushki.send_email'
+            $viazushkiEmail: '%viazushki_email%'
+
+    viazushki.send_news_email:
+        class: ViazushkiBundle\Emails\SendNewsEmail
+        arguments:
             $entityManager: '@doctrine.orm.entity_manager'
             $templating: '@Twig_Environment'
+            $sendEmail: '@viazushki.send_email'
             $viazushkiEmail: '%viazushki_email%'
 
     ViazushkiBundle\Command\SendNewsEmailCommand:
         tags:
             - { name: 'console.command', command: 'viazushki:email:send-news' }
-        arguments: [ '@viazushki.email_send_news' ]
+        arguments: [ '@viazushki.send_news_email' ]

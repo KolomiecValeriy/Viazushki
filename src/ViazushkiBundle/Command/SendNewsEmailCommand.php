@@ -5,15 +5,15 @@ namespace ViazushkiBundle\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use ViazushkiBundle\Service\SendSubscribeEmail;
+use ViazushkiBundle\Emails\SendNewsEmail;
 
 class SendNewsEmailCommand extends Command
 {
-    private $sendSubscribeEmail;
+    private $sendNewsEmail;
 
-    public function __construct(SendSubscribeEmail $sendSubscribeEmail)
+    public function __construct(SendNewsEmail $SendNewsEmail)
     {
-        $this->sendSubscribeEmail = $sendSubscribeEmail;
+        $this->sendNewsEmail = $SendNewsEmail;
 
         parent::__construct();
     }
@@ -40,7 +40,7 @@ class SendNewsEmailCommand extends Command
             '',
         ]);
 
-        if (!$this->sendSubscribeEmail->sendNews('We have new toys2')) {
+        if (!$this->sendNewsEmail->sendNews('We have new toys2')) {
             $output->writeln([
                 'Error'
             ]);

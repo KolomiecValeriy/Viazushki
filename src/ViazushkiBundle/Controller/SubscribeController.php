@@ -37,7 +37,7 @@ class SubscribeController extends Controller
 
             $em->flush();
 
-            $sendSubscribeEmail = $this->get('viazushki.email_send_news');
+            $sendSubscribeEmail = $this->get('viazushki.send_subscribe_email');
             $sendSubscribeEmail->sendSubscribe($user, 'Subscribe');
 
             return new Response($translator->trans('subscription completed'), 200);

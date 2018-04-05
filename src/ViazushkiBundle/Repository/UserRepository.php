@@ -24,7 +24,6 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
         return $this->createQueryBuilder('u')
             ->where('u.subscribe = true')
             ->getQuery()
-            ->getResult()
         ;
     }
 }
