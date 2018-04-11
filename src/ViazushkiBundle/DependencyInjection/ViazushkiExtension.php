@@ -21,5 +21,7 @@ class ViazushkiExtension extends Extension
 
         $container->setParameter('viazushki.header_name', $config['header']['name']);
         $container->setParameter('viazushki.header_value', $config['header']['value']);
+
+        $container->setParameter('viazushki.email', $config['email']);
     }
 }

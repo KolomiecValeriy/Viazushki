@@ -6,13 +6,6 @@ services:
             $mailer: '@mailer'
         public: false
 
-    viazushki.sending_message:
-        class: ViazushkiBundle\Service\SendingMessage
-        arguments:
-            $viazushkiEmail: '%viazushki_email%'
-            $viazuskiContactEmailSubject: '%viazuski_contact_email_subject%'
-            $mailer: '@mailer'
-
     viazushki.viazushki_extension:
         class: ViazushkiBundle\Twig\ViazushkiExtension
         tags: [twig.extension]
@@ -31,7 +24,7 @@ services:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
 
     viazushki.file_uploader:
-        class: ViazushkiBundle\Service\FileUploader
+        class: ViazushkiBundle\Files\FileUploader
         arguments:
             $targetDir: '%kernel.root_dir%/../web/assets/images'
 
@@ -51,12 +44,19 @@ services:
             - { name: kernel.event_listener, event: kernel.response }
         arguments: [ '%viazushki.header_name%', '%viazushki.header_value%' ]
 
+    viazushki.send_contact_email:
+        class: ViazushkiBundle\Emails\SendContactEmail
+        arguments:
+            $templating: '@Twig_Environment'
+            $sendEmail: '@viazushki.send_email'
+            $viazushkiEmail: '%viazushki.email%'
+
     viazushki.send_subscribe_email:
         class: ViazushkiBundle\Emails\SendSubscribeEmail
         arguments:
             $templating: '@Twig_Environment'
             $sendEmail: '@viazushki.send_email'
-            $viazushkiEmail: '%viazushki_email%'
+            $viazushkiEmail: '%viazushki.email%'
 
     viazushki.send_news_email:
         class: ViazushkiBundle\Emails\SendNewsEmail
@@ -64,7 +64,7 @@ services:
             $entityManager: '@doctrine.orm.entity_manager'
             $templating: '@Twig_Environment'
             $sendEmail: '@viazushki.send_email'
-            $viazushkiEmail: '%viazushki_email%'
+            $viazushkiEmail: '%viazushki.email%'
 
     ViazushkiBundle\Command\SendNewsEmailCommand:
         tags:

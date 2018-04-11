@@ -29,8 +29,10 @@ class SendEmail
         $message->setTo($emailTo);
         $message->setBody($body);
 
-        $this->mailer->send($message);
+        if ($this->mailer->send($message)) {
+            return true;
+        }
 
-        return true;
+        return false;
     }
 }

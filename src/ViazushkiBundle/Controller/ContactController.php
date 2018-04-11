@@ -17,19 +17,13 @@ class ContactController extends Controller
         $contactForm->handleRequest($request);
         if ($contactForm->isSubmitted() && $contactForm->isValid()) {
 
-            $sendingMessage = $this->container->get('viazushki.sending_message');
-            $sendingMessage->setEmail('vel202007@gmail.com');
-            $sendingMessage->setBody(
-                $this->renderView('@Viazushki/Email/contactEmail.html.twig', [
-                    'name' => $contactForm->get('name')->getData(),
-                    'email' => $contactForm->get('email')->getData(),
-                    'message' => $contactForm->get('text')->getData(),
-                ])
+            $contactEmail = $this->container->get('viazushki.send_contact_email');
+            $contactEmail->send(
+                'Сообщение от Viazushki.com',
+                $contactForm->get('name')->getData(),
+                $contactForm->get('email')->getData(),
+                $contactForm->get('text')->getData()
             );
-
-            if ($sendingMessage->send()) {
-                return $this->redirectToRoute('viazushki_contacts');
-            }
         }
 
         return $this->render('@Viazushki/Contact/contact.html.twig', [

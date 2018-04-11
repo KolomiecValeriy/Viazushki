@@ -6,7 +6,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use ViazushkiBundle\Entity\Image;
-use ViazushkiBundle\Service\FileUploader;
+use ViazushkiBundle\Files\FileUploader;
 
 class ImageUploadListener
 {

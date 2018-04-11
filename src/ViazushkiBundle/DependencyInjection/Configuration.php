@@ -47,6 +47,8 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('value')->end()
                     ->end()
                 ->end() //header
+
+                ->scalarNode('email')->end()
             ->end()
         ;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace ViazushkiBundle\Service;
+namespace ViazushkiBundle\Files;
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

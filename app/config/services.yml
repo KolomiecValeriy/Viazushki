@@ -1,9 +1,5 @@
 # Learn more about services, parameters and containers at
 # https://symfony.com/doc/current/service_container.html
-parameters:
-    viazushki_email: 'viazushki@viazushki.com'
-    viazuski_contact_email_subject: 'Сообщение от Viazushki.com'
-
 services:
     # default configuration for services in *this* file
     _defaults:
