@@ -33,10 +33,6 @@ class DefaultController extends Controller
             $this->getToysPerPage()
         );
 
-        if (count($pagination) == 0) {
-            throw $this->createNotFoundException();
-        }
-
         $likeForms = [];
         foreach ($toyRepository->findAll() as $toy) {
             $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
@@ -101,10 +97,6 @@ class DefaultController extends Controller
             $request->query->getInt('page', 1),
             $this->getCommentsPerPage()
         );
-
-        if (count($commentPagination) == 0) {
-            throw $this->createNotFoundException();
-        }
 
         $commentsForms = [];
         foreach ($toy->getComments() as $comm) {
@@ -173,10 +165,6 @@ class DefaultController extends Controller
             $this->getToysPerPage()
         );
 
-        if (count($pagination) == 0) {
-            throw $this->createNotFoundException();
-        }
-
         $searchForm = $this->createForm(SearchType::class);
         $subscribeForm = $this->createForm(SubscribeType::class);
 
@@ -231,10 +219,6 @@ class DefaultController extends Controller
             $this->getToysPerPage()
         );
 
-        if (count($pagination) == 0) {
-            throw $this->createNotFoundException();
-        }
-
         $likeForms = [];
         foreach ($toyRepository->findAll() as $toy) {
             $likeForms[$toy->getId()] = $this->createForm(LikeType::class)->createView();
@@ -277,10 +261,6 @@ class DefaultController extends Controller
             $request->query->getInt('page', 1),
             $this->getToysPerPage()
         );
-
-        if (count($pagination) == 0) {
-            throw $this->createNotFoundException();
-        }
 
         $likeForms = [];
         foreach ($toyRepository->findAll() as $toy) {
