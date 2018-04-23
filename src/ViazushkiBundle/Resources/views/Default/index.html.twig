@@ -3,10 +3,10 @@
 {% block content %}
     <!-- Main Column -->
     <div class="col-md-9">
+        {{ wo_render_breadcrumbs() }}
         {% for toy in pagination %}
             <div class="blog-post">
                 <div class="blog-item-header">
-                    {{ wo_render_breadcrumbs() }}
                     <div class="blog-post-date pull-left">
                         <span class="day">{{ toy.createdAt|date('d') }}</span>
                         <span class="month">{{ toy.createdAt|date('M') }}</span>

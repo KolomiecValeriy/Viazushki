@@ -1,5 +1,10 @@
 {% extends '@Viazushki/layers.html.twig' %}
 
+{% block css %}
+    {{ parent() }}
+    <link  href="{{ asset('assets/lib/fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
     <!-- Main Column -->
     <div class="col-md-9">
@@ -50,12 +55,12 @@
                         <div class="row">
                             {% for image in toy.images %}
                             <!-- Portfolio Item -->
-                            <div class="portfolio-item col-md-6 video">
+                            <div class="portfolio-item col-md-4 video">
                                 <div class="image-hover">
-                                    <a href="#">
-                                        <figure>
+                                    <a data-fancybox="gallery" href="{{ asset('assets/images/') }}{{ image.imageName }}">
+                                        {#<figure>#}
                                             <img src="{{ asset('assets/images/') }}{{ image.imageName }}" alt="{{ toy.name }}">
-                                        </figure>
+                                        {#</figure>#}
                                     </a>
                                 </div>
                             </div>
@@ -189,4 +194,10 @@
 
     {% include '@Viazushki/Includes/_mainSidebar.html.twig' %}
 
+{% endblock %}
+
+{% block scripts %}
+    {{ parent() }}
+    <script src="{{ asset('assets/lib/fancybox/dist/jquery.fancybox.min.js') }}"></script>
+    <script src="{{ asset('assets/js/toys.js') }}"></script>
 {% endblock %}

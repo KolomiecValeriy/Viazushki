@@ -1,6 +1,9 @@
 body {
     background-color: #eae7e7;
 }
+body.fancybox-active {
+    margin-right: 0 !important;
+}
 /* Settings */
 .margin-top-25 {
     margin-top: 25px;
