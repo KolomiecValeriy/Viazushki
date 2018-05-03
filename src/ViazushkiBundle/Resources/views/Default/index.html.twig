@@ -42,9 +42,9 @@
                         <div class="col-md-5">
                             <img class="pull-left" src="
                                 {%- if toy.mainImage -%}
-                                    {{- asset('assets/images/') -}}{{- toy.mainImage -}}
+                                    {{- asset(toy.mainImage.imagePath) | imagine_filter('image_300_400') -}}
                                 {% else %}
-                                    {{- asset('assets/images/no-image.png') -}}
+                                    {{- asset('assets/images/no-image.png') | imagine_filter('image_225_146') -}}
                                 {% endif %}" alt="thumb1">
                         </div>
                         <div class="col-md-7">
