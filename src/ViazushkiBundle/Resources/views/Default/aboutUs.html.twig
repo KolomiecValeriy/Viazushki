@@ -1,0 +1,55 @@
+{% extends '@Viazushki/layers.html.twig' %}
+
+{% block content %}
+    <div class="col-md-12">
+        <h2>{{ 'about us' | trans }}</h2>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Maria<small>- Manager</small></h3>
+                        <p>Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae.</p>
+                        <p>Voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
+                            aut odit aut fugit, sed quia consequuntur magni.</p>
+                    </div>
+                </div>
+                <hr class="margin-bottom-40">
+                <!-- My Work -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>{{ 'our works' | trans }}</h3>
+                        <div class="portfolio-group margin-top-20">
+                            {% for toy in ourWorks %}
+                            <!-- Portfolio Item -->
+                            <div class="portfolio-item col-md-3 col-sm-6 col-xs-6 animate fadeInUp">
+                                <div class="image-hover">
+                                    <a href="{{ path('viazushki_toy', {'slug': toy.slug}) }}">
+                                        <figure>
+                                            {#<img src="{{ asset('assets/images/0edfe10d0c0b8e637925103cb1922677.jpeg') | imagine_filter('image_225_146') }}" alt="image1">#}
+                                            <img src="{% if toy.mainImage %}
+                                        {{- asset(toy.mainImage.imagePath) | imagine_filter('image_225_146') -}}
+                                    {% else %}
+                                        {{- asset('assets/images/no-image.png') | imagine_filter('image_225_146') -}}
+                                    {% endif %}" alt="image1">
+                                            <figcaption>
+                                                <h3>{{ toy.name }}</h3>
+                                            </figcaption>
+                                        </figure>
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- //Portfolio Item// -->
+                            {% endfor %}
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End My Work -->
+            </div>
+
+            {% include '@Viazushki/Includes/_mainSidebar.html.twig' %}
+
+        </div>
+    </div>
+{% endblock %}

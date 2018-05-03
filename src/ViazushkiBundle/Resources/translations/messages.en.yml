@@ -1,5 +1,6 @@
 home: Home
 contacts: Contacts
+about us: About us
 comment: Comments
 tag: Tag
 tags: Tags
@@ -16,4 +17,5 @@ subscription: Subscription
 subscribe: Subscribe
 already subscribed: You are already subscribed to our newsletter!
 subscription completed: Thanks for subscribing!
+our works: Our works
 404 description: The page you are looking for might have been removed,<br>had its name changed or is temporarily unavailable.

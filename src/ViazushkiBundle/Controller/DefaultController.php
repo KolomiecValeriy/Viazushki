@@ -279,6 +279,26 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function aboutUsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $categories = $em->getRepository('ViazushkiBundle:Category')->findAll();
+        $tags = $em->getRepository('ViazushkiBundle:Tag')->findAll();
+        $toyRepository = $em->getRepository('ViazushkiBundle:Toy');
+
+        $searchForm = $this->createForm(SearchType::class);
+        $subscribeForm = $this->createForm(SubscribeType::class);
+
+        return $this->render('@Viazushki/Default/aboutUs.html.twig', [
+            'categories' => $categories,
+            'tags' => $tags,
+            'searchForm' => $searchForm->createView(),
+            'subscribeForm' => $subscribeForm->createView(),
+            'ourWorks' => $toyRepository->findLastAdded(8),
+        ]);
+    }
+
     private function getCommentsPerPage()
     {
         return $this->container->getParameter('viazushki.comments_per_page');

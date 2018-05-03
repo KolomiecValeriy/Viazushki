@@ -33,6 +33,12 @@ viazushki_contacts:
     requirements:
         _locale: en|ru
 
+viazushki_about_us:
+    path: /{_locale}/about-us
+    defaults: { _controller: ViazushkiBundle:Default:aboutUs }
+    requirements:
+        _locale: en|ru
+
 viazushki_subscribe:
     path: /{_locale}/subscribe
     defaults: { _controller: ViazushkiBundle:Subscribe:subscribe }

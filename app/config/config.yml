@@ -189,6 +189,10 @@ liip_imagine:
             quality: 100
             filters:
                 thumbnail: { size: [54, 54], mode: outbound }
+        image_225_146:
+            quality: 100
+            filters:
+                thumbnail: { size: [225, 146], mode: outbound }
 
 fos_rest:
     body_listener: true

@@ -29,6 +29,7 @@
             {% endfor %}
         </ul>
     </div>
+    {% if lastToys is defined %}
     <div class="recent-posts">
         <h4>{{ 'last added'|trans }}</h4>
         <ul class="posts-list margin-top-10">
@@ -51,6 +52,7 @@
             {% endfor %}
         </ul>
     </div>
+    {% endif %}
     <div class="blog-tags">
         <h3>{{ 'subscription'|trans }}</h3>
         <p>Подпишисавшись на нашу рассылку, Вы всегда будете уведомлены о появлении новых работ с помощью E-mail!</p>
