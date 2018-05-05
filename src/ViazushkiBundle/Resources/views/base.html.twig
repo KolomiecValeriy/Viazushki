@@ -2,16 +2,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}{% endblock %}</title>
+    <title>Viazushki</title>
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-    <link href="favicon.ico" rel="shortcut icon">
-    {% block css %}{% endblock %}
-    {% block fonts %}{% endblock %}
+    <link href="{{ asset('favicon.ico') }}" rel="shortcut icon">
+    {% block css %}
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/nexus.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    {% endblock %}
+    {% block fonts %}
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open Sans:300,400"/>
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Source Sans Pro:300,400"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rouge+Script">
+    {% endblock %}
 </head>
 <body>
 <div id="body_bg">
@@ -54,12 +67,16 @@
         <div class="primary-container">
             <!-- === BEGIN HEADER === -->
             <div id="container_hornav" class="container no-padding">
-                {% block logo %}{% endblock %}
-                {% block slogan %}{% endblock %}
+                <div class="logo">
+                    <a href="{{ url('viazushki_homepage') }}">Viazushki</a>
+                </div>
+                <p class="site-slogan">{{ 'handmade toys'|trans }}</p>
                 <div class="row">
                     <div class="hornav-block">
                         <div id="hornav" class="pull-right">
-                            {% block topMenu %}{% endblock %}
+                            {% block topMenu %}
+                            {{ knp_menu_render('main') }}
+                            {% endblock %}
                         </div>
                     </div>
                     <div class="clearfix"></div>
@@ -81,14 +98,14 @@
             </div>
             <!-- === END CONTENT === -->
             <!-- === BEGIN FOOTER === -->
-            <div id="base" class="container padding-vert-30">
-                <div class="row">
-                    {% block footer %}{% endblock %}
-                </div>
-            </div>
+            {#<div id="base" class="container padding-vert-30">#}
+                {#<div class="row">#}
+                    {#{% include '@Viazushki/Includes/_footer.html.twig' %}#}
+                {#</div>#}
+            {#</div>#}
             <div id="footermenu" class="container">
                 <div class="row">
-                    {% block footerMenu %}{% endblock %}
+                    {% include '@Viazushki/Includes/_footerMenu.html.twig' %}
                 </div>
             </div>
             <!-- === END FOOTER === -->
@@ -97,12 +114,24 @@
     <div class="container padding-vert-30">
         <div class="row">
             <div id="copyright">
-                {% block copyright %}{% endblock %}
+                <p>&copy; 2018 <a href="{{ url('viazushki_homepage') }}">viazushki.com</a></p>
             </div>
         </div>
     </div>
 </div>
 <div class="alert alert-danger error-msg" role="alert"></div>
-{% block scripts %}{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="{{ asset('assets/js/jquery.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ asset('assets/js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ asset('assets/js/scripts.js') }}"></script>
+<!-- Isotope - Portfolio Sorting -->
+<script type="text/javascript" src="{{ asset('assets/js/jquery.isotope.js') }}" type="text/javascript"></script>
+<!-- Mobile Menu - Slicknav -->
+<script type="text/javascript" src="{{ asset('assets/js/jquery.slicknav.js') }}" type="text/javascript"></script>
+<!-- Animate on Scroll-->
+<script type="text/javascript" src="{{ asset('assets/js/jquery.visible.js') }}" charset="utf-8"></script>
+<!-- Modernizr -->
+<script src="{{ asset('assets/js/modernizr.custom.js') }}" type="text/javascript"></script>
+{% endblock %}
 </body>
 </html>

@@ -24,6 +24,15 @@ h3 {
     display: flex;
     justify-content: center;
 }
+.btn-green:hover {
+    border-color: #6aa518;
+    background-color: #6aa518 !important;
+    background-image: none;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+    border-color: #61536b;
+    background-color: #61536b;
+}
 textarea {
     resize: none;
 }
@@ -42,6 +51,9 @@ textarea {
     font-size: 80px;
     color: #ffffff;
     text-decoration: none;
+}
+.blog-post-details-tags a {
+    color: #000;
 }
 p.site-slogan {
     color: #ffffff;
