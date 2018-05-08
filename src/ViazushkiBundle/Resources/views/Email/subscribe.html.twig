@@ -8,6 +8,6 @@ w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <body>
     <h3>Спасибо за подписку</h3>
     <p style="color: #ff1a23;">Мы будем высылать Вам уведомления о новых добавлениях на нашем сайте.</p>
-    <a href="{{ url('viazushki_homepage') }}">Отписатся</a>
+    <a href="{{ url('viazushki_unsubscribe', {'unsubscribeKey': unsubscribeKey}) }}">Отписатся</a>
 </body>
 </html>

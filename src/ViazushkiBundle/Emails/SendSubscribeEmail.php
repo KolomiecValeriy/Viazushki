@@ -35,7 +35,9 @@ class SendSubscribeEmail
             $subject,
             $this->viazushkiEmail,
             $user->getEmail(),
-            $this->templating->render('@Viazushki/Email/subscribe.html.twig')
+            $this->templating->render('@Viazushki/Email/subscribe.html.twig', [
+                'unsubscribeKey' => $user->getUnsubscribeKey(),
+            ])
         );
     }
 }

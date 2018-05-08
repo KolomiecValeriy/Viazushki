@@ -1,0 +1,22 @@
+{% extends '@Viazushki/base.html.twig' %}
+
+{% block content %}
+    <!-- Main Column -->
+    <div class="col-md-9">
+        <div class="text-center unsubscribe-block">
+            <h2>{{ 'Would you like to unsubscribe from our newsletters?' | trans }}</h2>
+            <p>{{ 'We will not send you any more news of our project.' | trans }}</p>
+        </div>
+        <div class="unsubscribe-form">
+            {{ form_start(unsubscribeForm, {
+                'action': path('viazushki_unsubscribe', {'unsubscribeKey': unsubscribeKey}),
+                'attr': {'data-unsubscribe-form': ''} }) }}
+            {{ form_widget(unsubscribeForm.submit, { 'attr': { 'class': 'btn-green col-md-4 col-md-offset-4' } }) }}
+            {{ form_end(unsubscribeForm) }}
+        </div>
+    </div>
+    <!-- End Main Column -->
+
+    {% include '@Viazushki/Includes/_mainSidebar.html.twig' %}
+
+{% endblock %}

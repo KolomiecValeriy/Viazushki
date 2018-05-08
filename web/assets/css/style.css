@@ -214,3 +214,15 @@ p.site-slogan {
 .subscribe-success-msg-show {
     opacity: 0.9;
 }
+.unsubscribe-block {
+    margin: 100px 0 50px;
+}
+.unsubscribe-form {
+    margin-bottom: 50px;
+}
+.unsubscribe-form form {
+    height: 34px;
+}
+#copyright {
+    color: #b9b9b9;
+}

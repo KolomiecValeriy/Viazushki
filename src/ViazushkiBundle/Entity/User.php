@@ -79,6 +79,13 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $subscribe;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    private $unsubscribeKey;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -178,7 +185,7 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function getSalt()
     {
-        return null;
+        return "trxVva7R52Vm";
     }
 
     public function eraseCredentials()
@@ -208,13 +215,12 @@ class User implements AdvancedUserInterface, \Serializable
 
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             $this->id,
             $this->username,
             $this->password,
             $this->isActive,
-            // $this->salt,
-        ));
+        ]);
     }
 
     public function unserialize($serialized)
@@ -224,7 +230,6 @@ class User implements AdvancedUserInterface, \Serializable
             $this->username,
             $this->password,
             $this->isActive,
-            // $this->salt
             ) = unserialize($serialized);
     }
 
@@ -259,7 +264,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @param string $plainPassword
      *
-     * @return User
+     * @return $this
      */
     public function setPlainPassword($plainPassword)
     {
@@ -313,7 +318,7 @@ class User implements AdvancedUserInterface, \Serializable
      *
      * @return $this
      */
-    public function addLike($like)
+    public function addLike(Like $like)
     {
         $this->like = $like;
 
@@ -335,7 +340,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @return bool
      */
-    public function isSubscribe(): bool
+    public function isSubscribe()
     {
         return $this->subscribe;
     }
@@ -346,5 +351,25 @@ class User implements AdvancedUserInterface, \Serializable
     public function setSubscribe(bool $subscribe)
     {
         $this->subscribe = $subscribe;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUnsubscribeKey()
+    {
+        return $this->unsubscribeKey;
+    }
+
+    /**
+     * @param string $unsubscribeKey
+     *
+     * @return $this
+     */
+    public function setUnsubscribeKey($unsubscribeKey)
+    {
+        $this->unsubscribeKey = $unsubscribeKey;
+
+        return $this;
     }
 }

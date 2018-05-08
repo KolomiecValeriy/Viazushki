@@ -45,6 +45,12 @@ viazushki_subscribe:
     requirements:
         _locale: en|ru
 
+viazushki_unsubscribe:
+    path: /{_locale}/unsubscribe/{unsubscribeKey}
+    defaults: { _controller: ViazushkiBundle:Subscribe:unsubscribe, unsubscribeKey: '' }
+    requirements:
+        _locale: en|ru
+
 viazushki_toy_by_tag:
     path: /{_locale}/tag/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByTag, slug: ''}

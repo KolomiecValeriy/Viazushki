@@ -9,6 +9,7 @@
         </div>
         {{ form_end(searchForm) }}
     </div>
+    {% if categories is defined %}
     <div class="blog-tags">
         <h3>{{ 'categories'|trans }}</h3>
         <ul class="blog-tags">
@@ -19,6 +20,8 @@
             {% endfor %}
         </ul>
     </div>
+    {% endif %}
+    {% if tags is defined %}
     <div class="blog-tags">
         <h3>{{ 'tags'|trans }}</h3>
         <ul class="blog-tags">
@@ -29,6 +32,7 @@
             {% endfor %}
         </ul>
     </div>
+    {% endif %}
     {% if lastToys is defined %}
     <div class="recent-posts">
         <h4>{{ 'last added'|trans }}</h4>
@@ -53,6 +57,7 @@
         </ul>
     </div>
     {% endif %}
+    {% if subscribeForm is defined %}
     <div class="blog-tags">
         <h3>{{ 'subscription'|trans }}</h3>
         <p>Подпишисавшись на нашу рассылку, Вы всегда будете уведомлены о появлении новых работ с помощью E-mail!</p>
@@ -62,6 +67,7 @@
         {{ form_widget(subscribeForm.submit, { 'attr': { 'class': 'btn-green btn-block' } }) }}
         {{ form_end(subscribeForm) }}
     </div>
+    {% endif %}
 </div>
 <div data-success-msg class="alert alert-success subscribe-success-msg" role="alert"></div>
 <!-- End Side Column -->

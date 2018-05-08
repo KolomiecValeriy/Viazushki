@@ -7,7 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use ViazushkiBundle\Entity\User;
+use ViazushkiBundle\Form\Type\SearchType;
 use ViazushkiBundle\Form\Type\SubscribeType;
+use ViazushkiBundle\Form\Type\UnsubscribeType;
 
 class SubscribeController extends Controller
 {
@@ -34,6 +36,7 @@ class SubscribeController extends Controller
             }
 
             $user->setSubscribe(true);
+            $user->setUnsubscribeKey($this->generateKey($user->getEmail(), $user->getSalt()));
 
             $em->flush();
 
@@ -44,5 +47,67 @@ class SubscribeController extends Controller
         }
 
         return new Response('Subscription failed', 403);
+    }
+
+    /**
+     * @param Request $request
+     * @param string $unsubscribeKey
+     * @return Response|\Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
+     * @Security("is_granted('IS_AUTHENTICATED_ANONYMOUSLY')")
+     */
+    public function unsubscribeAction(Request $request, $unsubscribeKey)
+    {
+        if (!$unsubscribeKey) {
+            throw $this->createNotFoundException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $toyRepository = $em->getRepository('ViazushkiBundle:Toy');
+        $categoryRepository = $em->getRepository('ViazushkiBundle:Category');
+
+        $unsubscribeForm = $this->createForm(UnsubscribeType::class);
+        $searchForm = $this->createForm(SearchType::class);
+
+        $unsubscribeForm->handleRequest($request);
+        if ($unsubscribeForm->isSubmitted() && $unsubscribeForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository(User::class)->finUserByUnsubscribeKey($unsubscribeKey);
+
+            if (!$user) {
+                throw $this->createNotFoundException();
+            }
+
+            if ($user->isSubscribe()) {
+                $user->setSubscribe(false);
+                $em->flush();
+            }
+
+            return $this->redirectToRoute('viazushki_homepage');
+        }
+
+        return $this->render('@Viazushki/Subscribe/unsubscribe.html.twig', [
+            'unsubscribeKey' => $unsubscribeKey,
+            'unsubscribeForm' => $unsubscribeForm->createView(),
+            'searchForm' => $searchForm->createView(),
+            'lastToys' => $toyRepository->findLastAdded($this->getLastAddedToys()),
+            'categories' => $categoryRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @param string $firstString
+     * @param string $secondString
+     *
+     * @return string
+     */
+    private function generateKey($firstString, $secondString) {
+        return md5($firstString.$secondString);
+    }
+
+    private function getLastAddedToys()
+    {
+        return $this->container->getParameter('viazushki.last_added_toys');
     }
 }

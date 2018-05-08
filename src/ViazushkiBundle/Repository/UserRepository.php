@@ -26,4 +26,14 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getQuery()
         ;
     }
+
+    public function finUserByUnsubscribeKey($unsubscribeKey)
+    {
+        return $this->createQueryBuilder('u')
+            ->where('u.unsubscribeKey = :unsubscribeKey')
+            ->setParameter('unsubscribeKey', $unsubscribeKey)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }
