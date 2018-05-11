@@ -11,8 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="ViazushkiBundle\Repository\UserRepository")
  * @ORM\Table(name="User")
- * @UniqueEntity("username", message="Пользователь с таким именем уже существует")
- * @UniqueEntity("email", message="Пользователь с таким Email уже существует")
+ * @UniqueEntity("email", message="User with this email already exists!")
  */
 class User implements AdvancedUserInterface, \Serializable
 {
@@ -57,7 +56,7 @@ class User implements AdvancedUserInterface, \Serializable
     private $isActive;
 
     /**
-     * @Constraints\NotBlank(message="Пароль не может быть пустым"))
+     * @Constraints\NotBlank(message="Password can not be empty!"))
      * @Constraints\Length(max="60", min="5", maxMessage="Пароль не должен превышать 60 символов", minMessage="Пероль должен быть больше 5-ти символов")
      */
     private $plainPassword;
@@ -82,7 +81,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $unsubscribeKey;
 

@@ -66,7 +66,19 @@ services:
             $sendEmail: '@viazushki.send_email'
             $viazushkiEmail: '%viazushki.email%'
 
+    viazushki.user_create:
+        class: ViazushkiBundle\User\UserCreator
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $factory: '@security.encoder_factory'
+            $validator: '@validator'
+
     ViazushkiBundle\Command\SendNewsEmailCommand:
         tags:
             - { name: 'console.command', command: 'viazushki:email:send-news' }
         arguments: [ '@viazushki.send_news_email' ]
+
+    ViazushkiBundle\Command\CreateUserCommand:
+        tags:
+            - { name: 'console.command', command: 'viazushki:user:create' }
+        arguments: [ '@viazushki.user_create' ]
