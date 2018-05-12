@@ -27,6 +27,7 @@ services:
         class: ViazushkiBundle\Files\FileUploader
         arguments:
             $targetDir: '%kernel.root_dir%/../web/assets/images'
+            $cacheDir: '%kernel.root_dir%/../web/cache'
 
     viazushki.image_upload_listener:
         class: ViazushkiBundle\Listeners\ImageUploadListener
