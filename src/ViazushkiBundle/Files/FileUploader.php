@@ -3,16 +3,19 @@
 namespace ViazushkiBundle\Files;
 
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileUploader
 {
     private $targetDir;
+    private $cacheDir;
     private $mimeType;
 
-    public function __construct($targetDir)
+    public function __construct($targetDir, $cacheDir)
     {
         $this->targetDir = $targetDir;
+        $this->cacheDir = $cacheDir;
     }
 
     public function upload(UploadedFile $file)
@@ -20,7 +23,7 @@ class FileUploader
         $fileName = md5(uniqid()).'.'.$file->guessExtension();
         $this->mimeType = $file->getMimeType();
 
-        $file->move($this->getTargetDir(), $fileName);
+        $file->move($this->targetDir, $fileName);
 
         return $fileName;
     }
@@ -28,14 +31,16 @@ class FileUploader
     public function remove($fileName)
     {
         $fileSystem = new Filesystem();
-        $fileSystem->remove($this->getTargetDir().'/'.$fileName);
+        $fileSystem->remove($this->targetDir.'/'.$fileName);
+
+        $finder = new Finder();
+        $finder->name($fileName);
+
+        foreach ($finder->in($this->cacheDir) as $file) {
+            $fileSystem->remove($file);
+        }
 
         return true;
-    }
-
-    public function getTargetDir()
-    {
-        return $this->targetDir;
     }
 
     public function getMimeType()
