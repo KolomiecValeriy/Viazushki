@@ -38,6 +38,8 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: Content, label: Toys }
         public: true
+        calls:
+            - [ setTemplate, [edit, ViazushkiBundle:Admin:toy_edit_form.html.twig]]
 
     admin.image:
         class: ViazushkiBundle\Admin\ImageAdmin

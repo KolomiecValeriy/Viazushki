@@ -99,6 +99,7 @@ sonata_admin:
         extra_javascripts:
             - bundles/ivoryckeditor/ckeditor.js
             - bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js
+            - assets/js/admin.js
         extra_stylesheets:
             - assets/css/admin.css
             - bundles/sonataformatter/markitup/skins/sonata/style.css
@@ -188,7 +189,7 @@ liip_imagine:
         image_54_54:
             quality: 100
             filters:
-                thumbnail: { size: [54, 54], mode: outbound }
+                thumbnail: { size: [100, 100], mode: outbound }
         image_225_146:
             quality: 100
             filters:

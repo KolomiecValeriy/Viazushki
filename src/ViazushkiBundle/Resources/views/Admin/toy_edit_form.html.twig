@@ -1,0 +1,13 @@
+{% extends '@SonataAdmin/CRUD/base_edit.html.twig' %}
+
+{% block sonata_tab_content %}
+    {{ parent() }}
+    <div data-mainImage-preview-block style="display: none;" class="images-block">
+        <div class="row"></div>
+    </div>
+    <div data-images-preview-block style="display: none;" class="images-block">
+        <div class="row"></div>
+    </div>
+    <div id="image-mainImage-block" class="col-xs-3 image-block cloned-block"><img class="" src=""></div>
+    <div id="image-images-block" class="col-xs-3 image-block cloned-block"><img class="" src=""></div>
+{% endblock %}

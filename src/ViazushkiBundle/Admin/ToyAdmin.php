@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
+use ViazushkiBundle\Form\Type\ImageFieldType;
 
 class ToyAdmin extends AbstractAdmin
 {
@@ -27,6 +28,9 @@ class ToyAdmin extends AbstractAdmin
                     'class' => 'ViazushkiBundle\Entity\Image',
                     'required' => false,
                     'expanded' => true,
+                    'attr' => [
+                        'class' => 'test',
+                    ]
                 ])
                 ->add('images', 'sonata_type_model',
                     [
