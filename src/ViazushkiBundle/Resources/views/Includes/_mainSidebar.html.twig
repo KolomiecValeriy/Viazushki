@@ -40,7 +40,7 @@
             {% for lastToy in lastToys %}
                 <li>
                     <div class="recent-post">
-                        <a href="">
+                        <a href="{{ path('viazushki_toy', {'slug': lastToy.slug}) }}">
                             <img class="pull-left" src="{% if lastToy.mainImage %}
                                         {{- asset(lastToy.mainImage.imagePath) | imagine_filter('image_54_54') -}}
                                     {% else %}
