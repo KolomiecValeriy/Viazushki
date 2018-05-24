@@ -2,29 +2,13 @@
 
 namespace ViazushkiBundle\Emails;
 
-
 use Doctrine\ORM\EntityManager;
 
 class SendNewsEmail
 {
-    /**
-     * @var SendEmail
-     */
     private $sendEmail;
-
-    /**
-     * @var EntityManager
-     */
     private $em;
-
-    /**
-     * @var \Twig_Environment
-     */
     private $templating;
-
-    /**
-     * @var string
-     */
     private $viazushkiEmail;
 
     public function __construct(EntityManager $entityManager, \Twig_Environment $templating, $viazushkiEmail, SendEmail $sendEmail)
@@ -35,6 +19,11 @@ class SendNewsEmail
         $this->templating = $templating;
     }
 
+    /**
+     * @param string $subject
+     *
+     * @return bool
+     */
     public function sendNews(string $subject)
     {
         $subscribers = $this->em->getRepository('ViazushkiBundle:User')->findSubscribeUsers();

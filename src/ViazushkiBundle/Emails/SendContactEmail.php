@@ -2,24 +2,10 @@
 
 namespace ViazushkiBundle\Emails;
 
-
-use Twig_Environment;
-
 class SendContactEmail
 {
-    /**
-     * @var SendEmail
-     */
     private $sendEmail;
-
-    /**
-     * @var Twig_Environment
-     */
     private $templating;
-
-    /**
-     * @var string
-     */
     private $viazushkiEmail;
 
     public function __construct(\Twig_Environment $templating, SendEmail $sendEmail, $viazushkiEmail)
@@ -30,7 +16,6 @@ class SendContactEmail
     }
 
     /**
-     * Sending message
      * @param string $subject
      * @param string $name
      * @param string $email

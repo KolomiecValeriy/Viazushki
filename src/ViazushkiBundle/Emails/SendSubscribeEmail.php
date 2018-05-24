@@ -2,24 +2,12 @@
 
 namespace ViazushkiBundle\Emails;
 
-use Twig_Environment;
 use ViazushkiBundle\Entity\User;
 
 class SendSubscribeEmail
 {
-    /**
-     * @var SendEmail
-     */
     private $sendEmail;
-
-    /**
-     * @var Twig_Environment
-     */
     private $templating;
-
-    /**
-     * @var string
-     */
     private $viazushkiEmail;
 
     public function __construct(\Twig_Environment $templating, $viazushkiEmail, SendEmail $sendEmail)
@@ -29,6 +17,12 @@ class SendSubscribeEmail
         $this->templating = $templating;
     }
 
+    /**
+     * @param User $user
+     * @param string $subject
+     *
+     * @return bool
+     */
     public function sendSubscribe(User $user, string $subject)
     {
         return $this->sendEmail->send(

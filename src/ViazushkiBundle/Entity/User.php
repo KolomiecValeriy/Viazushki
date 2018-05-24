@@ -74,7 +74,7 @@ class User implements AdvancedUserInterface, \Serializable
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $subscribe;
 
