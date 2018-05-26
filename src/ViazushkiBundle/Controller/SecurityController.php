@@ -4,8 +4,12 @@ namespace ViazushkiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use ViazushkiBundle\Emails\SendForgotPasswordEmail;
 use ViazushkiBundle\Entity\User;
+use ViazushkiBundle\Form\Type\ChangePasswordType;
+use ViazushkiBundle\Form\Type\EmailsType;
 use ViazushkiBundle\Form\Type\LoginType;
 use ViazushkiBundle\Form\Type\RegisterType;
 
@@ -61,6 +65,66 @@ class SecurityController extends Controller
         ]);
     }
 
+    public function resetPasswordAction(Request $request)
+    {
+        $form = $this->createForm(EmailsType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository(User::class)->findOneBy([
+               'email' => $form->get('email')->getData(),
+            ]);
+
+            if (!$user) {
+                return new Response('Произошла ошибка в отправке сообщения!', 404);
+            }
+
+            $forgotKey = md5($user->getSalt() . $user->getEmail());
+
+            $user->setForgotPasswordKey($forgotKey);
+            $em->flush();
+
+            $sendForgotPasswordEmail = $this->get('viazushki.send_forgot_password_email');
+
+            if ($sendForgotPasswordEmail->send($user, 'Восстановление пароля', $forgotKey)) {
+                return new Response('На Вашу почту отправлено сообщение.');
+            } else {
+                return new Response('Произошла ошибка в отправке сообщения!', 404);
+            }
+        }
+
+        return $this->render('@Viazushki/Security/resetPassword.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    public function forgotPasswordAction(Request $request, $forgotKey)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->findOneBy([
+           'forgotPasswordKey' => $forgotKey,
+        ]);
+
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
+        $form = $this->createForm(ChangePasswordType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword($this->encodePassword($user, $form->get('plainPassword')->getData()));
+            $em->flush();
+
+            return new Response('Пароль успешно изменен.');
+        }
+
+        return $this->render('@Viazushki/Security/changePassword.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
     private function encodePassword(User $user, $plainPassword)
     {
         $encoder = $this->container->get('security.encoder_factory')
@@ -72,7 +136,7 @@ class SecurityController extends Controller
 
     private function authenticateUser(User $user)
     {
-        $providerKey = 'secured_area'; // your firewall name
+        $providerKey = 'secured_area';
         $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
 
         $this->container->get('security.token_storage')->setToken($token);

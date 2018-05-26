@@ -21,6 +21,18 @@ viazushki_register:
     requirements:
         _locale: en|ru
 
+viazushki_reset_password:
+    path: /{_locale}/reset-password
+    defaults: { _controller: ViazushkiBundle:Security:resetPassword }
+    requirements:
+        _locale: en|ru
+
+viazushki_forgot_password:
+    path: /{_locale}/forgot/{forgotKey}
+    defaults: { _controller: ViazushkiBundle:Security:forgotPassword }
+    requirements:
+        _locale: en|ru
+
 viazushki_search_toy:
     path: /{_locale}/search
     defaults: { _controller: ViazushkiBundle:Default:search, _locale: 'ru' }

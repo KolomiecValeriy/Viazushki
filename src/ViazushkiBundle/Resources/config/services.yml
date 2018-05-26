@@ -59,6 +59,13 @@ services:
             $sendEmail: '@viazushki.send_email'
             $viazushkiEmail: '%viazushki.email%'
 
+    viazushki.send_forgot_password_email:
+        class: ViazushkiBundle\Emails\SendForgotPasswordEmail
+        arguments:
+            $templating: '@Twig_Environment'
+            $sendEmail: '@viazushki.send_email'
+            $viazushkiEmail: '%viazushki.email%'
+
     viazushki.send_news_email:
         class: ViazushkiBundle\Emails\SendNewsEmail
         arguments:

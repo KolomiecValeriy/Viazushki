@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="group {% if form_errors(loginForm.password) %}has-error{% endif %}">
-            {{ form_errors(loginForm.email) }}
+            {{ form_errors(loginForm.password) }}
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon">
                     <i class="fa fa-lock"></i>
@@ -41,7 +41,7 @@
         <hr>
         <h4>Забыли пароль ?</h4>
         <p>
-            <a class="color-green" href="#">Кликните здесь</a> для восстановления пароля.</p>
+            <a class="color-green" href="{{ path('viazushki_reset_password') }}">Кликните здесь</a> для восстановления пароля.</p>
         <hr>
         <h4>Не зарегестрированы?</h4>
         <p>

@@ -85,6 +85,13 @@ class User implements AdvancedUserInterface, \Serializable
      */
     private $unsubscribeKey;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $forgotPasswordKey;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -370,5 +377,21 @@ class User implements AdvancedUserInterface, \Serializable
         $this->unsubscribeKey = $unsubscribeKey;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getForgotPasswordKey()
+    {
+        return $this->forgotPasswordKey;
+    }
+
+    /**
+     * @param string $forgotPasswordKey
+     */
+    public function setForgotPasswordKey($forgotPasswordKey)
+    {
+        $this->forgotPasswordKey = $forgotPasswordKey;
     }
 }
