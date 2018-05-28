@@ -3,10 +3,10 @@
 namespace ViazushkiBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use ViazushkiBundle\Emails\SendForgotPasswordEmail;
 use ViazushkiBundle\Entity\User;
 use ViazushkiBundle\Form\Type\ChangePasswordType;
 use ViazushkiBundle\Form\Type\EmailsType;
@@ -77,7 +77,11 @@ class SecurityController extends Controller
             ]);
 
             if (!$user) {
-                return new Response('Произошла ошибка в отправке сообщения!', 404);
+                $this->addFlash(
+                    'error',
+                    'Произошла ошибка в отправке сообщения. Повторите попытку позже!'
+                );
+                return $this->redirectToRoute('viazushki_reset_password');
             }
 
             $forgotKey = md5($user->getSalt() . $user->getEmail());
@@ -88,9 +92,17 @@ class SecurityController extends Controller
             $sendForgotPasswordEmail = $this->get('viazushki.send_forgot_password_email');
 
             if ($sendForgotPasswordEmail->send($user, 'Восстановление пароля', $forgotKey)) {
-                return new Response('На Вашу почту отправлено сообщение.');
+                $this->addFlash(
+                    'success',
+                    'На Вашу почту отправлено сообщение.'
+                );
+                return $this->redirectToRoute('viazushki_homepage');
             } else {
-                return new Response('Произошла ошибка в отправке сообщения!', 404);
+                $this->addFlash(
+                    'error',
+                    'Произошла ошибка в отправке сообщения. Повторите попытку позже!'
+                );
+                return $this->redirectToRoute('viazushki_reset_password');
             }
         }
 
@@ -117,7 +129,12 @@ class SecurityController extends Controller
             $user->setPassword($this->encodePassword($user, $form->get('plainPassword')->getData()));
             $em->flush();
 
-            return new Response('Пароль успешно изменен.');
+            $this->addFlash(
+                'success',
+                'Пароль успешно изменен!'
+            );
+
+            return $this->redirectToRoute('viazushki_login');
         }
 
         return $this->render('@Viazushki/Security/changePassword.html.twig', [

@@ -9,15 +9,12 @@ $(document).ready(function () {
             url: form.attr('action'),
             method: "POST",
             data: form.serialize(),
-            success: function (result) {
-                $('.success-msg').fadeIn();
+            success: function (data) {
                 form[0].reset();
-                setTimeout(function () {
-                    $('.success-msg').fadeOut();
-                }, 3000);
+                toastr.success(data.message);
             },
-            error: function (error) {
-                alert('Сообщение не отправлено.');
+            error: function () {
+                toastr.error('Сообщение не отправлено.');
             }
         })
     });
@@ -48,17 +45,22 @@ $(document).ready(function () {
             url: form.attr('action'),
             method: form.attr('method'),
             data: form.serialize(),
+            dataType: 'json',
             success: function (data) {
-                var msg = $('[data-success-msg]');
-                msg.html(data).addClass('subscribe-success-msg-show');
-                msg.css('margin-left', -msg.width()/2);
-                setTimeout(function () {
-                    msg.removeClass('subscribe-success-msg-show');
-                }, 3600);
+                toastr.success(data.message);
+            },
+            error: function (data) {
+                if (data.message === undefined) {
+                    toastr.warning(data.responseJSON.message);
+                } else {
+                    toastr.error(data.message);
+                }
+
             }
         });
     });
 
+    initNotifications();
     initComments();
     initSubmitComment();
 });
@@ -67,11 +69,10 @@ $(document).ready(function () {
 $(window).load(function () {
     var $cont = $('.portfolio-group');
 
-
     $cont.isotope({
         itemSelector: '.portfolio-group .portfolio-item',
         masonry: {columnWidth: $('.isotope-item:first').width(), gutterWidth: 20, isFitWidth: true},
-        filter: '*',
+        filter: '*'
     });
 
     $('.portfolio-filter-container a').click(function () {
@@ -150,10 +151,7 @@ function initComments() {
                 initSubmitComment();
             },
             error: function (error) {
-                $('.error-msg').html(error.responseText).fadeIn();
-                setTimeout(function () {
-                    $('.error-msg').fadeOut();
-                }, 3000);
+                toastr.error(error.responseText);
             }
         });
     });
@@ -194,11 +192,8 @@ function initSubmitComment() {
                 }
             },
             error: function (error) {
-                $('.error-msg').html(error.responseText).fadeIn();
                 form[0].reset();
-                setTimeout(function () {
-                    $('.error-msg').fadeOut();
-                }, 3000);
+                toastr.error(error.responseText);
             }
         });
     });
@@ -228,4 +223,25 @@ function initSubmitComment() {
             });
         }
     });
+}
+
+//Flash нотификации
+function initNotifications() {
+    var notifications = $('[data-notification]');
+    if (notifications.length > 0) {
+        notifications.each(function (index, element) {
+            var message = $(element).html();
+            switch($(element).attr('data-notification')) {
+                case 'success':
+                    toastr.success(message);
+                    break;
+                case 'error':
+                    toastr.error(message);
+                    break;
+                case 'warning':
+                    toastr.warning(message);
+                    break;
+            }
+        });
+    }
 }
