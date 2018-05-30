@@ -255,12 +255,14 @@ class DefaultController extends Controller
         $tagRepository = $em->getRepository('ViazushkiBundle:Tag');
         $categoryRepository = $em->getRepository('ViazushkiBundle:Category');
 
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $toyRepository->findByText($searchText),
-            $request->query->getInt('page', 1),
-            $this->getToysPerPage()
-        );
+        if ($toyRepository->findByText($searchText)->getResult()) {
+            $paginator = $this->get('knp_paginator');
+            $pagination = $paginator->paginate(
+                $toyRepository->findByText($searchText),
+                $request->query->getInt('page', 1),
+                $this->getToysPerPage()
+            );
+        }
 
         $likeForms = [];
         foreach ($toyRepository->findAll() as $toy) {
@@ -269,7 +271,7 @@ class DefaultController extends Controller
         $subscribeForm = $this->createForm(SubscribeType::class);
 
         return $this->render('@Viazushki/Default/index.html.twig', [
-            'pagination' => $pagination,
+            isset($pagination) ? 'pagination' : 'searchText' => isset($pagination) ? $pagination : $searchText,
             'lastToys' => $toyRepository->findLastAdded($this->getLastAddedToys()),
             'categories' => $categoryRepository->findAll(),
             'tags' => $tagRepository->findAll(),

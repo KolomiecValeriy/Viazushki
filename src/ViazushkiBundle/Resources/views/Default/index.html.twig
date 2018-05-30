@@ -4,73 +4,79 @@
     <!-- Main Column -->
     <div class="col-md-9">
         {{ wo_render_breadcrumbs() }}
-        {% for toy in pagination %}
-            <div class="blog-post">
-                <div class="blog-item-header">
-                    <div class="blog-post-date pull-left">
-                        <span class="day">{{ toy.createdAt|date('d') }}</span>
-                        <span class="month">{{ toy.createdAt|date('M') }}</span>
-                    </div>
-                    <h2>
-                        <a href="{{ path('viazushki_toy', {'slug': toy.slug}) }}">{{ toy.name }}</a>
-                    </h2>
-                    <div class="blog-post-details">
-                        <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
-                            {% for tag in toy.tags %}<a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}"><i class="fa fa-tags"></i>{{- tag.name -}}</a>{% if not loop.last %},{% endif %}
-                            {% endfor %}
+        {% if searchText is defined %}
+            <div class="not-search-found">По запросу "<b>{{ searchText }}</b>" результатов не найдено.</div>
+        {% endif %}
+        {% if pagination is defined %}
+            {% for toy in pagination %}
+                <div class="blog-post">
+                    <div class="blog-item-header">
+                        <div class="blog-post-date pull-left">
+                            <span class="day">{{ toy.createdAt|date('d') }}</span>
+                            <span class="month">{{ toy.createdAt|date('M') }}</span>
                         </div>
-                        <div {% if is_granted('IS_AUTHENTICATED_FULLY') %}data-toy-like="{{ toy.id }}"{% endif %} class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
-                            <span><i class="fa fa-thumbs-up"></i>
-                                {%- for like in toy.like if like.user == app.user -%}
-                                    Вы {% if toy.like|length > 1 %}и ещё {{ toy.like|length - 1 -}}{% endif %}
-                                {%- else %}{{- toy.like|length -}}
-                                {% endfor %}</span>
-                            {{ form_start(likeForms[toy.id], {'action': path('viazushki_like_update', {'slug': toy.slug}), attr: {'data-like-form': ''}}) }}
-                            {{ form_end(likeForms[toy.id]) }}
-                        </div>
-                        {% if toy.comments|length > 0 %}
-                            <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
-                                <i class="fa fa-comments"></i>
-                                {{- 'comment'|trans -}}: {{ toy.comments|length -}}
+                        <h2>
+                            <a href="{{ path('viazushki_toy', {'slug': toy.slug}) }}">{{ toy.name }}</a>
+                        </h2>
+                        <div class="blog-post-details">
+                            <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
+                                {% for tag in toy.tags %}<a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}"><i class="fa fa-tags"></i>{{- tag.name -}}</a>{% if not loop.last %},{% endif %}
+                                {% endfor %}
                             </div>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="blog">
-                    <div class="clearfix"></div>
-                    <div class="blog-post-body row margin-top-15">
-                        <div class="col-md-5">
-                            <img class="pull-left" src="
-                                {%- if toy.mainImage -%}
-                                    {{- asset(toy.mainImage.imagePath) | imagine_filter('image_300_400') -}}
-                                {% else %}
-                                    {{- asset('assets/images/no-image.png') | imagine_filter('image_225_146') -}}
-                                {% endif %}" alt="thumb1">
-                        </div>
-                        <div class="col-md-7">
-                            {{ toy.description | raw }}
-                        </div>
-                    </div>
-                    <div class="blog-item-footer">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <hr>
+                            <div {% if is_granted('IS_AUTHENTICATED_FULLY') %}data-toy-like="{{ toy.id }}"{% endif %} class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
+                                <span><i class="fa fa-thumbs-up"></i>
+                                    {%- for like in toy.like if like.user == app.user -%}
+                                        Вы {% if toy.like|length > 1 %}и ещё {{ toy.like|length - 1 -}}{% endif %}
+                                    {%- else %}{{- toy.like|length -}}
+                                    {% endfor %}</span>
+                                {{ form_start(likeForms[toy.id], {'action': path('viazushki_like_update', {'slug': toy.slug}), attr: {'data-like-form': ''}}) }}
+                                {{ form_end(likeForms[toy.id]) }}
                             </div>
-                            <div class="col-md-2">
-                                <div class="blog-post-details-item blog-post-details-item-right pull-right">
-                                    <a href="{{ path('viazushki_toy', {'slug': toy.slug}) }}" class="btn btn-primary">
-                                        {{ 'view'|trans }}
-                                        <i class="icon-chevron-right readmore-icon"></i>
-                                    </a>
+                            {% if toy.comments|length > 0 %}
+                                <div class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
+                                    <i class="fa fa-comments"></i>
+                                    {{- 'comment'|trans -}}: {{ toy.comments|length -}}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="blog">
+                        <div class="clearfix"></div>
+                        <div class="blog-post-body row margin-top-15">
+                            <div class="col-md-5">
+                                <img class="pull-left" src="
+                                    {%- if toy.mainImage -%}
+                                        {{- asset(toy.mainImage.imagePath) | imagine_filter('image_300_400') -}}
+                                    {% else %}
+                                        {{- asset('assets/images/no-image.png') | imagine_filter('image_225_146') -}}
+                                    {% endif %}" alt="thumb1">
+                            </div>
+                            <div class="col-md-7">
+                                {{ toy.description | raw }}
+                            </div>
+                        </div>
+                        <div class="blog-item-footer">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <hr>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="blog-post-details-item blog-post-details-item-right pull-right">
+                                        <a href="{{ path('viazushki_toy', {'slug': toy.slug}) }}" class="btn btn-primary">
+                                            {{ 'view'|trans }}
+                                            <i class="icon-chevron-right readmore-icon"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-
+            {% endfor %}
+        {% endif %}
+        {% if pagination is defined %}
         {{ knp_pagination_render(pagination) }}
+        {% endif %}
     </div>
     <!-- End Main Column -->
 

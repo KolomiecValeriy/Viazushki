@@ -201,6 +201,11 @@ p.site-slogan {
 #search_form .form-control-feedback:active {
     color: #6e5f7c;
 }
+.not-search-found {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 16px;
+}
 .subscribe-success-msg {
     opacity: 0;
     position: fixed;

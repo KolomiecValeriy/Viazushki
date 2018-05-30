@@ -60,6 +60,11 @@ $(document).ready(function () {
         });
     });
 
+    $('[data-search-button]').on('click', function (event) {
+         var form = $(event.currentTarget).closest('form');
+        form.submit();
+    });
+
     initNotifications();
     initComments();
     initSubmitComment();
