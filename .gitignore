@@ -17,6 +17,8 @@
 /web/bundles/
 /web/assets/*
 /web/cache/*
+/web/.htaccess
+/web/.htpasswd
 !/web/assets/css/
 !/web/assets/js/
 !/web/assets/fonts/
