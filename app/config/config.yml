@@ -96,7 +96,8 @@ sonata_admin:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
     assets:
         extra_javascripts:
-            - bundles/ivoryckeditor/ckeditor.js
+#            - bundles/ivoryckeditor/ckeditor.js
+            - bundles/sonataformatter/vendor/ckeditor/ckeditor.js
             - bundles/sonataformatter/vendor/markitup-markitup/markitup/jquery.markitup.js
             - assets/js/admin.js
         extra_stylesheets:
