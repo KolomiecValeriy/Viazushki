@@ -19,6 +19,9 @@
 /web/cache/*
 /web/.htaccess
 /web/.htpasswd
+/cgi-bin/
+/document_errors/
+/public_html/
 !/web/assets/css/
 !/web/assets/js/
 !/web/assets/fonts/
