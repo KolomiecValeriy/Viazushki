@@ -5,17 +5,29 @@
     <link  href="{{ asset('assets/lib/fancybox/dist/jquery.fancybox.min.css') }}" rel="stylesheet">
 {% endblock %}
 
+{% block meta %}
+    <meta property="og:url"           content="{{ url('viazushki_toy', {'slug': toy.slug}) }}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="{{ toy.name }}" />
+    <meta property="og:description"   content="{{ toy.description }}" />
+    <meta property="og:image"         content="{{- asset(toy.mainImage.imagePath) | imagine_filter('image_300_400') -}}" />
+{% endblock %}
+
 {% block content %}
     <!-- Main Column -->
     <div class="col-md-9">
         <div class="blog-post">
             <div class="blog-item-header">
                 {{ wo_render_breadcrumbs() }}
-                <div class="blog-post-date pull-left">
-                    <span class="day">{{ toy.createdAt|date('d') }}</span>
-                    <span class="month">{{ toy.createdAt|date('M') }}</span>
+                {#<div class="blog-post-date pull-left">#}
+                    {#<span class="day">{{ toy.createdAt|date('d') }}</span>#}
+                    {#<span class="month">{{ toy.createdAt|date('M') }}</span>#}
+                {#</div>#}
+                <div class="toy-header">
+                    <div class="toy-header-name">
+                        <h1>{{ toy.name }}</h1>
+                    </div>
                 </div>
-                <h2>{{ toy.name }}</h2>
                 <div class="blog-post-details">
                     <!-- Tags -->
                     <div class="blog-post-details-item blog-post-details-item-left blog-post-details-tags tags-icon">
@@ -26,7 +38,7 @@
                     </div>
                     <!-- End Tags -->
                     <!-- Likes -->
-                    <div {% if is_granted('IS_AUTHENTICATED_FULLY') %}data-toy-like="{{ toy.id }}"{% endif %} class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
+                    <div {% if is_granted('IS_AUTHENTICATED_FULLY') %}data-toy-like="{{ toy.id }}"{% endif %} class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right toy-like">
                         <span>
                             <i class="fa fa-thumbs-up"></i>{% for like in toy.like if like.user == app.user %}
                                 Вы {% if toy.like|length > 1 %}и ещё {{ toy.like|length - 1 }}{% endif %}
@@ -51,6 +63,8 @@
                     <div class="col-md-12">
                         {{ toy.description | raw }}
                     </div>
+                </div>
+                <div class="blog-post-body row">
                     <div class="portfolio-group col-md-12 margin-top-30 no-padding">
                         <div class="row">
                             {% for image in toy.images %}
@@ -69,7 +83,16 @@
                         </div>
                     </div>
                 </div>
-                <div class="blog-item-footer">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="toy-share-container">
+                            <div class="fb-share-button" data-href="{{ url('viazushki_toy', {'slug': toy.slug}) }}" data-layout="button" data-size="large" data-mobile-iframe="false">
+                                Поделиться
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="blog-item-footer margin-top-30">
                     <!-- Comments -->
                     <div class="blog-recent-comments panel panel-default margin-bottom-30">
                         <div class="panel-heading">

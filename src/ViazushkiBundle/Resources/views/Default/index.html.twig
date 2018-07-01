@@ -23,7 +23,7 @@
                                 {% for tag in toy.tags %}<a href="{{ path('viazushki_toy_by_tag', {'slug': tag.slug}) }}"><i class="fa fa-tags"></i>{{- tag.name -}}</a>{% if not loop.last %},{% endif %}
                                 {% endfor %}
                             </div>
-                            <div {% if is_granted('IS_AUTHENTICATED_FULLY') %}data-toy-like="{{ toy.id }}"{% endif %} class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
+                            <div {% if is_granted('IS_AUTHENTICATED_FULLY') %}data-toy-like="{{ toy.id }}"{% endif %} class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right toy-like">
                                 <span><i class="fa fa-thumbs-up"></i>
                                     {%- for like in toy.like if like.user == app.user -%}
                                         Вы {% if toy.like|length > 1 %}и ещё {{ toy.like|length - 1 -}}{% endif %}
@@ -61,7 +61,7 @@
                                     <hr>
                                 </div>
                                 <div class="col-md-2">
-                                    <div class="blog-post-details-item blog-post-details-item-right pull-right">
+                                    <div class="blog-post-details-item-right pull-right">
                                         <a href="{{ path('viazushki_toy', {'slug': toy.slug}) }}" class="btn btn-primary">
                                             {{ 'view'|trans }}
                                             <i class="icon-chevron-right readmore-icon"></i>

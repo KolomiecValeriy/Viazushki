@@ -89,6 +89,12 @@ p.site-slogan {
     list-style: none;
     margin: 0;
 }
+.authorisation a {
+    color: #000;
+}
+.authorisation a:hover {
+    color: #9e9e9e;
+}
 .authorisation div ~ div{
     margin-left: 15px;
 }
@@ -107,7 +113,11 @@ p.site-slogan {
 }
 
 /* Likes */
-[data-toy-like] {
+.blog-post-details .toy-like:hover,
+.blog-post-details a:hover {
+    color: #9e9e9e;
+}
+.toy-like {
     cursor: pointer;
 }
 /* Contacts */
@@ -228,3 +238,14 @@ p.site-slogan {
 #copyright {
     color: #b9b9b9;
 }
+/* Facebook */
+.toy-header-name>h1 {
+    margin: 20px 0;
+}
+.toy-share-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+/* End Facebook */
