@@ -8,95 +8,113 @@ viazushki_homepage:
     defaults: { _controller: ViazushkiBundle:Default:index, _locale: 'ru' }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_login:
     path: /{_locale}/login
     defaults: { _controller: ViazushkiBundle:Security:login }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_register:
     path: /{_locale}/register
     defaults: { _controller: ViazushkiBundle:Security:register }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_reset_password:
     path: /{_locale}/reset-password
     defaults: { _controller: ViazushkiBundle:Security:resetPassword }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_forgot_password:
     path: /{_locale}/forgot/{forgotKey}
     defaults: { _controller: ViazushkiBundle:Security:forgotPassword }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_search_toy:
     path: /{_locale}/search
     defaults: { _controller: ViazushkiBundle:Default:search, _locale: 'ru' }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_contacts:
     path: /{_locale}/contacts
     defaults: { _controller: ViazushkiBundle:Contact:contact }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_about_us:
     path: /{_locale}/about-us
     defaults: { _controller: ViazushkiBundle:Default:aboutUs }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_subscribe:
     path: /{_locale}/subscribe
     defaults: { _controller: ViazushkiBundle:Subscribe:subscribe }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_unsubscribe:
     path: /{_locale}/unsubscribe/{unsubscribeKey}
     defaults: { _controller: ViazushkiBundle:Subscribe:unsubscribe, unsubscribeKey: '' }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_toy_by_tag:
     path: /{_locale}/tag/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByTag, slug: ''}
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_toy_by_category:
     path: /{_locale}/category/{slug}
     defaults: { _controller: ViazushkiBundle:Default:toyByCategory, slug: ''}
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_toy:
     path: /{_locale}/{slug}
     defaults: { _controller: ViazushkiBundle:Default:showToy }
     requirements:
         _locale: en|ru
+    schemes:  ['%httpProtocol%']
 
 viazushki_comment_add:
     path: /comment/add/{toy}
     defaults: { _controller: ViazushkiBundle:Comment:add }
+    schemes:  ['%httpProtocol%']
 
 viazushki_comment_addChild:
     path: /comment/add_child/{toy}/{commentParent}
     defaults: { _controller: ViazushkiBundle:Comment:addChild }
+    schemes:  ['%httpProtocol%']
 
 viazushki_comment_edit:
     path: /comment/edit/{comment}
     defaults: { _controller: ViazushkiBundle:Comment:edit }
+    schemes:  ['%httpProtocol%']
 
 viazushki_comment_delete:
     path: /comment/delete/{comment}
     defaults: { _controller: ViazushkiBundle:Comment:delete }
+    schemes:  ['%httpProtocol%']
 
 viazushki_like_update:
     path: /like/update/{slug}
     defaults: { _controller: ViazushkiBundle:Like:update }
+    schemes:  ['%httpProtocol%']
