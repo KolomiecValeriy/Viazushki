@@ -42,9 +42,9 @@
                     <div class="recent-post">
                         <a href="{{ path('viazushki_toy', {'slug': lastToy.slug}) }}">
                             <img class="pull-left" src="{% if lastToy.mainImage %}
-                                        {{- asset(lastToy.mainImage.imagePath) | imagine_filter('image_54_54') -}}
+                                        {{- asset(lastToy.mainImage.imagePath) | imagine_filter('image_54_54') | httpToHttps() -}}
                                     {% else %}
-                                        {{- asset('assets/images/no-image.png') | imagine_filter('image_54_54') -}}
+                                        {{- asset('assets/images/no-image.png') | imagine_filter('image_54_54') | httpToHttps() -}}
                                     {% endif %}" alt="thumb1">
                         </a>
                         <a class="posts-list-title" href="{{ path('viazushki_toy', {'slug': lastToy.slug}) }}">{{ lastToy.name }}</a>

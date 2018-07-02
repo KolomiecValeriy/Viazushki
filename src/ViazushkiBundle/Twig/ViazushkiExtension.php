@@ -5,12 +5,29 @@ namespace ViazushkiBundle\Twig;
 
 class ViazushkiExtension extends \Twig_Extension
 {
+    private $env;
+
+    public function __construct($env)
+    {
+        $this->env = $env;
+    }
+
     public function getFilters()
     {
         return [
           new \Twig_SimpleFilter('header', [$this, 'headerFilter']),
           new \Twig_SimpleFilter('modifyDate', [$this, 'modifyDate']),
+          new \Twig_SimpleFilter('httpToHttps', [$this, 'httpToHttps']),
         ];
+    }
+
+    public function httpToHttps($url)
+    {
+        if ($this->env = 'dev') {
+            return $url;
+        }
+
+        return preg_replace('/^http:\/\//i', 'https://', $url);
     }
 
     public function headerFilter($string, $size = 3)

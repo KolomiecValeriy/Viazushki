@@ -8,6 +8,8 @@ services:
 
     viazushki.viazushki_extension:
         class: ViazushkiBundle\Twig\ViazushkiExtension
+        arguments:
+            $env: '%kernel.environment%'
         tags: [twig.extension]
 
     viazushki.comment_voter:

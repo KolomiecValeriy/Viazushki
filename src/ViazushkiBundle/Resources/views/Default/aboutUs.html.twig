@@ -28,9 +28,9 @@
                                         <figure>
                                             {#<img src="{{ asset('assets/images/0edfe10d0c0b8e637925103cb1922677.jpeg') | imagine_filter('image_225_146') }}" alt="image1">#}
                                             <img src="{% if toy.mainImage %}
-                                        {{- asset(toy.mainImage.imagePath) | imagine_filter('image_225_146') -}}
+                                        {{- asset(toy.mainImage.imagePath) | imagine_filter('image_225_146') | httpToHttps() -}}
                                     {% else %}
-                                        {{- asset('assets/images/no-image.png') | imagine_filter('image_225_146') -}}
+                                        {{- asset('assets/images/no-image.png') | imagine_filter('image_225_146') | httpToHttps() -}}
                                     {% endif %}" alt="image1">
                                             <figcaption>
                                                 <h3>{{ toy.name }}</h3>
