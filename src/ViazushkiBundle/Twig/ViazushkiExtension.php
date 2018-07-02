@@ -23,7 +23,7 @@ class ViazushkiExtension extends \Twig_Extension
 
     public function httpToHttps($url)
     {
-        if ($this->env = 'dev') {
+        if ($this->env == 'dev') {
             return $url;
         }
 
