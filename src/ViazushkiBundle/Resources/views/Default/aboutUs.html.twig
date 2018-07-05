@@ -26,7 +26,6 @@
                                 <div class="image-hover">
                                     <a href="{{ path('viazushki_toy', {'slug': toy.slug}) }}">
                                         <figure>
-                                            {#<img src="{{ asset('assets/images/0edfe10d0c0b8e637925103cb1922677.jpeg') | imagine_filter('image_225_146') }}" alt="image1">#}
                                             <img src="{% if toy.mainImage %}
                                         {{- asset(toy.mainImage.imagePath) | imagine_filter('image_225_146') | httpToHttps() -}}
                                     {% else %}

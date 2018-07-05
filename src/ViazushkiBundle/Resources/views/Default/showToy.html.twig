@@ -10,7 +10,7 @@
     <meta property="og:type"          content="website" />
     <meta property="og:title"         content="{{ toy.name }}" />
     <meta property="og:description"   content="{{ toy.description }}" />
-    <meta property="og:image"         content="{{- asset(toy.mainImage.imagePath) | imagine_filter('image_300_400') -}}" />
+    <meta property="og:image"         content="{{- asset(toy.mainImage.imagePath) | imagine_filter('image_300_400') | httpToHttps() -}}" />
 {% endblock %}
 
 {% block content %}
