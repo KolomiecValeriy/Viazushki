@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\FormatterBundle\Form\Type\FormatterType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use ViazushkiBundle\Form\Type\ImageFieldType;
 
 class ToyAdmin extends AbstractAdmin
@@ -16,6 +17,11 @@ class ToyAdmin extends AbstractAdmin
         $formMapper
             ->with('Default', ['class' => 'col-md-8'])
                 ->add('name', 'text')
+                ->add('shortDescription', TextareaType::class, [
+                    'attr' => [
+                        'rows' => 5,
+                    ]
+                ])
                 ->add('Description', FormatterType::class, [
                     'event_dispatcher'     => $formMapper->getFormBuilder()->getEventDispatcher(),
                     'source_field'         => 'description',

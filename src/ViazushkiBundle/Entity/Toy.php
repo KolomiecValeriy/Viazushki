@@ -53,6 +53,14 @@ class Toy
     /**
      * @var string
      *
+     * @ORM\Column(name="short_description", type="text", nullable=true)
+     * @Groups({"toy"})
+     */
+    private $shortDescription;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="author", type="string", length=50, nullable=true)
      */
     private $author;
@@ -425,5 +433,21 @@ class Toy
     public function setContentFormatter(string $contentFormatter)
     {
         $this->contentFormatter = $contentFormatter;
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * @param string $shortDescription
+     */
+    public function setShortDescription(string $shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
     }
 }
