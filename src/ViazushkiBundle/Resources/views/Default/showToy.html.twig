@@ -68,12 +68,18 @@
                     <div class="portfolio-group col-md-12 margin-top-30 no-padding">
                         <div class="row">
                             {% for image in toy.images %}
+                                {% if (image.imagePath | imageOrientation() == 'vertical') %}
+                                    {% set filterName = 'image_400_600' %}
+                                {% else %}
+                                    {% set filterName = 'image_600_400' %}
+                                {% endif %}
+                                {% set imageUrl = image.imagePath | imagine_filter(filterName) %}
                             <!-- Portfolio Item -->
                             <div class="portfolio-item col-md-4 video">
                                 <div class="image-hover">
-                                    <a data-fancybox="gallery" href="{{ asset('assets/images/') }}{{ image.imageName }}">
+                                    <a data-fancybox="gallery" href="{{ imageUrl }}">
                                         {#<figure>#}
-                                            <img src="{{ asset('assets/images/') }}{{ image.imageName }}" alt="{{ toy.name }}">
+                                            <img src="{{ imageUrl }}" alt="{{ toy.name }}">
                                         {#</figure>#}
                                     </a>
                                 </div>

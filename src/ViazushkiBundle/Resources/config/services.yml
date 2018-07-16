@@ -10,6 +10,8 @@ services:
         class: ViazushkiBundle\Twig\ViazushkiExtension
         arguments:
             $env: '%kernel.environment%'
+            $filesystem: '@filesystem'
+            $projectDir: '%kernel.project_dir%'
         tags: [twig.extension]
 
     viazushki.comment_voter:

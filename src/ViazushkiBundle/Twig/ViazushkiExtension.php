@@ -3,13 +3,19 @@
 namespace ViazushkiBundle\Twig;
 
 
+use Symfony\Component\Filesystem\Filesystem;
+
 class ViazushkiExtension extends \Twig_Extension
 {
     private $env;
+    private $filesystem;
+    private $projectDir;
 
-    public function __construct($env)
+    public function __construct($env, Filesystem $filesystem, $projectDir)
     {
         $this->env = $env;
+        $this->filesystem = $filesystem;
+        $this->projectDir = $projectDir;
     }
 
     public function getFilters()
@@ -18,7 +24,29 @@ class ViazushkiExtension extends \Twig_Extension
           new \Twig_SimpleFilter('header', [$this, 'headerFilter']),
           new \Twig_SimpleFilter('modifyDate', [$this, 'modifyDate']),
           new \Twig_SimpleFilter('httpToHttps', [$this, 'httpToHttps']),
+          new \Twig_SimpleFilter('imageOrientation', [$this, 'imageOrientation']),
         ];
+    }
+
+    /**
+     * @param string $image Full path to image
+     *
+     * @return string
+     */
+    public function imageOrientation($image)
+    {
+        $fs = $this->filesystem;
+        $dir = $this->projectDir;
+        if ($fs->exists($dir.'/web/'.$image)) {
+            $imageSize = getimagesize($dir.'/web/'.$image);
+            if ($imageSize[0] >= $imageSize[1]) {
+                return 'horizontal';
+            }
+
+            return 'vertical';
+        }
+
+        return $image;
     }
 
     public function httpToHttps($url)
