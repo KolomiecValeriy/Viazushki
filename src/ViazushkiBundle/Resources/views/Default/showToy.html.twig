@@ -52,7 +52,7 @@
                     <!-- Comments -->
                     <div data-toy-comments-count class="blog-post-details-item blog-post-details-item-left blog-post-details-item-last comments-icon pull-right">
                         <i class="fa fa-comments"></i>
-                        {{- 'comment'|trans -}}: {{ toy.comments|length -}}
+                        <span>{{- 'comment'|trans -}}: {{ toy.comments|length -}}</span>
                     </div>
                     <!-- End of Comments -->
                 </div>
@@ -110,7 +110,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="comment">
-                                                <div data-comment-body class="comment-body">{{ comment.message }}</div>
+                                                <div data-comment-body class="comment-body"><p>{{ comment.message }}</p></div>
                                                 <div class="comment-footer">
                                                     <div class="comment-footer-left">
                                                         <span><i class="fa fa-user"></i>&nbsp;{{ comment.user.username }}</span>
