@@ -9,7 +9,7 @@
         {% endif %}
         {% if pagination is defined %}
             {% for toy in pagination %}
-                <div class="blog-post">
+                <div class="blog-post blog-post-main">
                     <div class="blog-item-header">
                         <div class="blog-post-date pull-left">
                             <span class="day">{{ toy.createdAt|date('d') }}</span>
@@ -43,15 +43,17 @@
                     <div class="blog">
                         <div class="clearfix"></div>
                         <div class="blog-post-body row margin-top-15">
-                            <div class="col-md-5">
-                                <img class="pull-left" src="
-                                    {%- if toy.mainImage -%}
-                                        {{- asset(toy.mainImage.imagePath) | imagine_filter('image_300_400') | httpToHttps() -}}
-                                    {% else %}
-                                        {{- asset('assets/images/no-image.png') | imagine_filter('image_225_146') | httpToHttps() -}}
-                                    {% endif %}" alt="thumb1">
+                            <div class="col-sm-5">
+                                <div class="blog-post-image">
+                                    <img src="
+                                        {%- if toy.mainImage -%}
+                                            {{- asset(toy.mainImage.imagePath) | imagine_filter('image_300_400') | httpToHttps() -}}
+                                        {% else %}
+                                            {{- asset('assets/images/no-image.png') | imagine_filter('image_225_146') | httpToHttps() -}}
+                                        {% endif %}" alt="thumb1">
+                                </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-sm-7">
                                 {{ toy.description | raw }}
                             </div>
                         </div>

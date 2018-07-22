@@ -111,7 +111,11 @@ p.site-slogan {
 #breadcrumbs .breadcrumb-item:last-child span {
     color: #888;
 }
-
+.blog-post-main .blog-post-image {
+    /*height: 400px;*/
+    margin-bottom: 20px;
+    text-align: center;
+}
 /* Likes */
 .blog-post-details .toy-like:hover,
 .blog-post-details a:hover {
@@ -235,9 +239,6 @@ p.site-slogan {
 .unsubscribe-form form {
     height: 34px;
 }
-#copyright {
-    color: #b9b9b9;
-}
 /* Facebook */
 .toy-header-name>h1 {
     margin: 20px 0;
@@ -249,3 +250,6 @@ p.site-slogan {
     align-items: center;
 }
 /* End Facebook */
+#footermenu, #footermenu a, #footermenu a:hover {
+    color: #fff;
+}
