@@ -271,7 +271,7 @@ white_october_breadcrumbs:
 viazushki:
     comments:
         edit_time: 1800
-        per_page: 7
+        per_page: 5
     toys:
         per_page: 6
         last_added: 5
