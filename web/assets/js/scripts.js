@@ -150,13 +150,14 @@ function initComments() {
             url: '/comment/delete/'+commentId,
             method: 'POST',
             success: function (data) {
-                $('.blog-recent-comments').html($(data).find('.blog-recent-comments'));
-                $('[data-toy-comments-count]').html($(data).find('[data-toy-comments-count]'));
+                $('.blog-recent-comments').html($(data).find('.blog-recent-comments').html());
+                $('[data-toy-comments-count]').html($(data).find('[data-toy-comments-count]').html());
                 initComments();
                 initSubmitComment();
             },
             error: function (error) {
-                toastr.error(error.responseText);
+                // toastr.error(error.responseText);
+                toastr.error('Ошибка удаления комментария');
             }
         });
     });
