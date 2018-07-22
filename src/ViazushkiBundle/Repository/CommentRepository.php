@@ -14,6 +14,7 @@ class CommentRepository extends NestedTreeRepository
             ->andWhere('c.lvl = :lvl')
             ->setParameter('toy', $toy)
             ->setParameter('lvl', 0)
+            ->orderBy('c.createdAt', 'DESC')
             ->getQuery()
             ;
     }

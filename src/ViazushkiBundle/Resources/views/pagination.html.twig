@@ -1,6 +1,6 @@
 {% if pageCount > 1 %}
-    <ul class="pagination">
-
+    <ul data-pagination-link class="pagination">
+{#
         {% if previous is defined %}
             <li>
                 <a rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}">&laquo;</a>
@@ -55,14 +55,12 @@
                 <a href="{{ path(route, query|merge({(pageParameterName): pageCount})) }}">{{ pageCount }}</a>
             </li>
         {% endif %}
-
+#}
         {% if next is defined %}
             <li>
-                <a rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">&raquo;</a>
-            </li>
-        {% else %}
-            <li class="disabled">
-                <span>&raquo;</span>
+                {#<a data-next-comment rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}">&raquo;</a>#}
+                <a data-next-comment="{{ path(route, query|merge({(pageParameterName): next})) }}" href="#">{{ 'Show more' | trans }}</a>
+                <i class="fa fa-spinner fa-pulse fa-3x fa-fw hide"></i>
             </li>
         {% endif %}
     </ul>

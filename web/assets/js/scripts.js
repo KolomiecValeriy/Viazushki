@@ -161,18 +161,38 @@ function initComments() {
         });
     });
 
-    $('.blog-recent-comments .pagination li').on('click', function (event) {
+    // Pagination
+    $('[data-next-comment]').click(function (event) {
         event.preventDefault();
         var current = $(event.currentTarget);
-        var href;
-        if (href = current.find('a').attr('href')) {
-            $.get(href, function (result) {
-                current.closest('.blog-recent-comments').html($(result).find('.blog-recent-comments').html());
+        var comments = $('[data-comments-list]');
+        var pagination = $('[data-pagination-link]');
+
+        current.hide();
+        current.next().removeClass('hide');
+        $.ajax({
+            url: current.data('next-comment'),
+            success: function (response) {
+                comments.append($(response).find('[data-comments-list]').html());
+                pagination.html($(response).find('[data-pagination-link]').html());
+
                 initComments();
                 initSubmitComment();
-            });
-        }
+            }
+        });
     });
+    // $('.blog-recent-comments .pagination li').on('click', function (event) {
+    //     event.preventDefault();
+    //     var current = $(event.currentTarget);
+    //     var href;
+    //     if (href = current.find('a').attr('href')) {
+    //         $.get(href, function (result) {
+    //             current.closest('.blog-recent-comments').html($(result).find('.blog-recent-comments').html());
+    //             initComments();
+    //             initSubmitComment();
+    //         });
+    //     }
+    // });
 }
 
 function initSubmitComment() {

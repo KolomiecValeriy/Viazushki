@@ -105,6 +105,45 @@
                             <h3>Коментарии</h3>
                         </div>
                         <ul class="list-group">
+                            <!-- Comment Form -->
+                            <li class="list-group-item">
+                                <div class="blog-comment-form">
+                                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <div class="row margin-top-20">
+                                        <div class="col-md-12">
+                                            <div class="pull-left">
+                                                <h3>Оставте комментарий</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row margin-top-20">
+                                        <div class="col-md-12">
+                                                {{ form_start(commentForm, {'action': path('viazushki_comment_add', {'toy': toy.id}), 'method': 'POST'}) }}
+                                                <div class="row margin-bottom-20">
+                                                    <div class="col-md-12 col-md-offset-0 {% if form_errors(commentForm.message) %}has-error{% endif %}">
+                                                        {{ form_errors(commentForm.message) }}
+                                                        {{ form_widget(commentForm.message, { 'attr': {'rows': 4} }) }}
+                                                    </div>
+                                                </div>
+                                                <p>
+                                                    {{ form_widget(commentForm.submit, { 'label': 'Комментировать', 'attr': { 'class': 'btn btn-primary'} }) }}
+                                                    <span class="ctrlSubmit">или <b>Ctrl + Enter</b></span>
+                                                </p>
+                                                {{ form_end(commentForm) }}
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                        <div class="row margin-vert-20">
+                                            <div class="col-md-12 text-center">
+                                                Чтоб иметь возможность оставить комментарий необходимо <a href="{{ path('viazushki_login') }}">авторизироватся</a>.
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </li>
+                            <!-- End Comment Form -->
+                        </ul>
+                        <ul data-comments-list class="list-group">
                             {% for comment in commentPagination %}
                                 <li class="list-group-item" data-comment-id="{{ comment.id }}">
                                     <div class="row">
@@ -177,41 +216,9 @@
                                     {% endif %}
                                 </li>
                             {% endfor %}
-                            {{ knp_pagination_render(commentPagination) }}
-                            <!-- Comment Form -->
-                            <li class="list-group-item">
-                                <div class="blog-comment-form">
-                                    <div class="row margin-top-20">
-                                        <div class="col-md-12">
-                                            <div class="pull-left">
-                                                <h3>Оставте комментарий</h3>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row margin-top-20">
-                                        <div class="col-md-12">
-                                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                                {{ form_start(commentForm, {'action': path('viazushki_comment_add', {'toy': toy.id}), 'method': 'POST'}) }}
-                                                <div class="row margin-bottom-20">
-                                                    <div class="col-md-12 col-md-offset-0 {% if form_errors(commentForm.message) %}has-error{% endif %}">
-                                                    {{ form_errors(commentForm.message) }}
-                                                    {{ form_widget(commentForm.message, { 'attr': {'rows': 4} }) }}
-                                                    </div>
-                                                </div>
-                                                <p>
-                                                    {{ form_widget(commentForm.submit, { 'label': 'Комментировать', 'attr': { 'class': 'btn btn-primary'} }) }}
-                                                    <span class="ctrlSubmit">или <b>Ctrl + Enter</b></span>
-                                                </p>
-                                                {{ form_end(commentForm) }}
-                                            {% else %}
-                                                <a href="{{ path('viazushki_login') }}">Войдите</a> чтоб оставить комментарий.
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- End Comment Form -->
+
                         </ul>
+                            {{ knp_pagination_render(commentPagination) }}
                     </div>
                     <!-- End Comments -->
                 </div>
