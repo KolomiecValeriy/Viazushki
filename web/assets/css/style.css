@@ -111,6 +111,9 @@ p.site-slogan {
 #breadcrumbs .breadcrumb-item:last-child span {
     color: #888;
 }
+.blog-post-date {
+    display: none;
+}
 .blog-post-main .blog-post-image {
     /*height: 400px;*/
     margin-bottom: 20px;
