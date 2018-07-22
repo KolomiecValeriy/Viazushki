@@ -82,12 +82,16 @@ viazushki_toy:
         _locale: en|ru
 
 viazushki_comment_add:
-    path: /comment/add/{toy}
+    path: /{_locale}/comment/add/{toy}
     defaults: { _controller: ViazushkiBundle:Comment:add }
+    requirements:
+        _locale: en|ru
 
 viazushki_comment_addChild:
-    path: /comment/add_child/{toy}/{commentParent}
+    path: /{_locale}/comment/add_child/{toy}/{commentParent}
     defaults: { _controller: ViazushkiBundle:Comment:addChild }
+    requirements:
+        _locale: en|ru
 
 viazushki_comment_edit:
     path: /comment/edit/{comment}

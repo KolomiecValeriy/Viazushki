@@ -208,8 +208,8 @@ function initSubmitComment() {
             method: 'POST',
             data: form.serialize(),
             success: function (data) {
-                $('.blog-recent-comments').html($(data).find('.blog-recent-comments'));
-                $('[data-toy-comments-count]').html($(data).find('[data-toy-comments-count]'));
+                $('.blog-recent-comments').html($(data).find('.blog-recent-comments').html());
+                $('[data-toy-comments-count]').html($(data).find('[data-toy-comments-count]').html());
                 initComments();
                 initSubmitComment();
                 if (current.attr('data-coments') === 'toogle') {
@@ -237,8 +237,8 @@ function initSubmitComment() {
                 method: 'POST',
                 data: form.serialize(),
                 success: function (data) {
-                    $('.blog-recent-comments').html($(data).find('.blog-recent-comments'));
-                    $('[data-toy-comments-count]').html($(data).find('[data-toy-comments-count]'));
+                    $('.blog-recent-comments').html($(data).find('.blog-recent-comments').html());
+                    $('[data-toy-comments-count]').html($(data).find('[data-toy-comments-count]').html());
                     initComments();
                     initSubmitComment();
                     if (button.attr('data-coments') === 'toogle') {
