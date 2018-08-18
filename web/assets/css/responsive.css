@@ -10,8 +10,6 @@
 .hornav-block, #footermenu {
     border-radius: 0;
 }
-/* Hide default hornav menu */
-#hornav {display:none !important;}
 /* Show mobile hornav menu */
 .slicknav_menu {display:block;}
 /* Disable CSS animations */
@@ -27,6 +25,10 @@
 /* #Tablet (Portrait)
 ================================================== */
     
+@media only screen and (max-width: 991px) {
+    /* Hide default hornav menu */
+    #hornav {display:none !important;}
+}
 @media only screen and (max-width: 959px) {
 
 

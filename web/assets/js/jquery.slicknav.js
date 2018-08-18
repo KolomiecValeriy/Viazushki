@@ -70,7 +70,7 @@
 		
 		// create menu bar
 		jQuerythis.mobileNav.attr('class', prefix+'_nav');
-		var menuBar = jQuery('<div class="'+prefix+'_menu hidden-lg"></div>');
+		var menuBar = jQuery('<div class="'+prefix+'_menu hidden-md hidden-lg"></div>');
 		jQuerythis.btn = jQuery('<'+settings.parentTag+' aria-haspopup="true" tabindex="0" class="'+prefix+'_btn '+prefix+'_collapsed"><span class="'+prefix+'_menutxt">'+settings.label+'</span><span class="'+iconClass+'"><span class="'+prefix+'_icon-bar"></span><span class="'+prefix+'_icon-bar"></span><span class="'+prefix+'_icon-bar"></span></span></a>');
 		jQuery(menuBar).append(jQuerythis.btn);		
 		jQuery(settings.prependTo).prepend(menuBar);
