@@ -92,6 +92,7 @@ swiftmailer:
     spool: { type: memory }
 
 sonata_admin:
+    title:      Viazushki
     templates:
         dashboard: SonataAdminBundle:Core:dashboard.html.twig
     assets:
