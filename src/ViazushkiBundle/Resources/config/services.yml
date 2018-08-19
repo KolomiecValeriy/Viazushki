@@ -54,21 +54,21 @@ services:
         arguments:
             $templating: '@Twig_Environment'
             $sendEmail: '@viazushki.send_email'
-            $viazushkiEmail: '%viazushki.email%'
+            $viazushkiEmail: '%mailer_user%'
 
     viazushki.send_subscribe_email:
         class: ViazushkiBundle\Emails\SendSubscribeEmail
         arguments:
             $templating: '@Twig_Environment'
             $sendEmail: '@viazushki.send_email'
-            $viazushkiEmail: '%viazushki.email%'
+            $viazushkiEmail: '%mailer_user%'
 
     viazushki.send_forgot_password_email:
         class: ViazushkiBundle\Emails\SendForgotPasswordEmail
         arguments:
             $templating: '@Twig_Environment'
             $sendEmail: '@viazushki.send_email'
-            $viazushkiEmail: '%viazushki.email%'
+            $viazushkiEmail: '%mailer_user%'
 
     viazushki.send_news_email:
         class: ViazushkiBundle\Emails\SendNewsEmail
@@ -76,7 +76,7 @@ services:
             $entityManager: '@doctrine.orm.entity_manager'
             $templating: '@Twig_Environment'
             $sendEmail: '@viazushki.send_email'
-            $viazushkiEmail: '%viazushki.email%'
+            $viazushkiEmail: '%mailer_user%'
 
     viazushki.user_create:
         class: ViazushkiBundle\User\UserCreator

@@ -21,7 +21,7 @@ class ContactController extends Controller
 
             $contactEmail = $this->container->get('viazushki.send_contact_email');
             $contactEmail->send(
-                'Сообщение от Viazushki.com',
+                'Сообщение от Viazushki.in.ua',
                 $contactForm->get('name')->getData(),
                 $contactForm->get('email')->getData(),
                 $contactForm->get('text')->getData()
